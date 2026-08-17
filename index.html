@@ -923,6 +923,7 @@
     if (!s.physicsLog) s.physicsLog = [];
     if (!s.atcLog) s.atcLog = [];
     if (!s.threedState) s.threedState = {};
+    if (!s.cursors) s.cursors = { weekday: 0, math: 0, physics: 0, threed: 0 };
     return s;
   }
   function save() {
@@ -964,6 +965,16 @@
     return { pos: pos, cycle: cycle };
   }
 
+  // Progress-based pacing: cursor is a 0-based count of lessons actually
+  // completed (or rested through) - NOT tied to the calendar. Skipping a day
+  // without completing/resting it just leaves the cursor where it is, so the
+  // same lesson is still "next up" whenever you come back to it.
+  function cursorPos(cursor, len) {
+    var pos = ((cursor % len) + len) % len;
+    var cycle = Math.floor(cursor / len) + 1;
+    return { pos: pos, cycle: cycle };
+  }
+
   // ================= VOCAB PICKING =================
   function vocabRank(word) {
     var vs = state.vocabState[word];
@@ -991,7 +1002,7 @@
     var pickA = poolA[0] || VOCAB_SEED.filter(function(v){ return v[2]==="B1"||v[2]==="B2"; })[0];
     var pickC1 = poolC1[0] || VOCAB_SEED.filter(function(v){ return v[2]==="C1"; })[0];
     var picks = [pickA, pickC1].filter(Boolean);
-    if (weekdayIndexFor(dateStr) % 2 === 0) {
+    if (state.cursors.weekday % 2 === 0) {
       var poolC2 = eligible(["C2"]);
       var pickC2 = poolC2[0] || VOCAB_SEED.filter(function(v){ return v[2]==="C2"; })[0];
       if (pickC2) picks.push(pickC2);
@@ -1022,17 +1033,17 @@
     var d = parseD(dateStr);
     var dow = d.getDay();
     var ds = dayState(dateStr);
-    var wn = weekNumberFor(dateStr);
     var tired = ds.dayType === "tired";
     var sections = [];
-    var meta = { weekNumber: wn };
+    var meta = {};
 
     if (dow >= 1 && dow <= 5) {
-      var wi = weekdayIndexFor(dateStr);
-      var cp = cyclePos(wi, 28);
+      var wIdx = (ds.weekdayIdx !== undefined) ? ds.weekdayIdx : state.cursors.weekday;
+      var cp = cursorPos(wIdx, 28);
       var cn = CHINESE_DAYS[cp.pos];
       var en = ENGLISH_DAYS[cp.pos];
       meta.chineseDay = cn; meta.englishDay = en; meta.cycle = cp.cycle;
+      meta.planLabel = "Lesson day " + cn.d + (cp.cycle > 1 ? " (cycle " + cp.cycle + ")" : "");
 
       var cnTasks = [];
       if (cn.vocab.length) cnTasks.push({ id:"cn-vocab", label:"Learn new vocabulary (" + cn.vocab.length + " words)", required:true, min:"15" });
@@ -1057,8 +1068,8 @@
       sections.push(enSection);
 
       var optTasks = [];
-      var mcp = cyclePos(wn, MATH_WEEKS.length);
-      var pcp = cyclePos(wn, PHYSICS_WEEKS.length);
+      var mcp = cursorPos(state.cursors.math, MATH_WEEKS.length);
+      var pcp = cursorPos(state.cursors.physics, PHYSICS_WEEKS.length);
       var mw0 = MATH_WEEKS[mcp.pos], pw0 = PHYSICS_WEEKS[pcp.pos];
       var mDayText = mw0.weekday && DOW_KEY[dow] ? mw0.weekday[DOW_KEY[dow]] : ("Practice: " + mw0.title + ".");
       var pDayText = pw0.weekday && DOW_KEY[dow] ? pw0.weekday[DOW_KEY[dow]] : ("Practice: " + pw0.title + ".");
@@ -1069,8 +1080,10 @@
       sections.push({ title:"Optional, if energy allows", optional:true, tasks:optTasks });
 
     } else if (dow === 6) {
-      var mcp2 = cyclePos(wn, MATH_WEEKS.length);
+      var mIdx = (ds.mathIdx !== undefined) ? ds.mathIdx : state.cursors.math;
+      var mcp2 = cursorPos(mIdx, MATH_WEEKS.length);
       var mw = MATH_WEEKS[mcp2.pos];
+      meta.planLabel = "Week " + (mcp2.pos + 1) + (mcp2.cycle > 1 ? " (cycle " + mcp2.cycle + ")" : "");
       var mLearnText = (mw.topics ? mw.topics.join(" · ") + " — " : "") + mw.learn.join(" · ") + (mw.formula ? " — " + mw.formula : "");
       sections.push({
         title:"Math · 60 min — Week " + (mcp2.pos+1) + ": " + mw.title + (mcp2.cycle>1?" (cycle "+mcp2.cycle+")":""),
@@ -1081,7 +1094,8 @@
           { id:"math-summary", label:"Mistake summary", required:true, min:"5" }
         ]
       });
-      var tcp = cyclePos(wn, THREED_WEEKS.length);
+      var tIdx = (ds.threedIdx !== undefined) ? ds.threedIdx : state.cursors.threed;
+      var tcp = cursorPos(tIdx, THREED_WEEKS.length);
       var tw = THREED_WEEKS[tcp.pos];
       sections.push({
         title:"3D Modeling · 1.5–2h — Week " + (tcp.pos+1) + (tcp.cycle>1?" (cycle "+tcp.cycle+")":"") + ": " + tw.learn.join(", "),
@@ -1092,8 +1106,10 @@
         ]
       });
     } else {
-      var pcp2 = cyclePos(wn, PHYSICS_WEEKS.length);
+      var pIdx = (ds.physicsIdx !== undefined) ? ds.physicsIdx : state.cursors.physics;
+      var pcp2 = cursorPos(pIdx, PHYSICS_WEEKS.length);
       var pw = PHYSICS_WEEKS[pcp2.pos];
+      meta.planLabel = "Week " + (pcp2.pos + 1) + (pcp2.cycle > 1 ? " (cycle " + pcp2.cycle + ")" : "");
       var pLearnText = (pw.topics ? pw.topics.join(" · ") + " — " : "") + (pw.learn?pw.learn.join(" · "):"") + (pw.formula?" — " + pw.formula:"") + (pw.example?" (e.g. " + pw.example + ")":"");
       sections.push({
         title:"Physics · 60 min — Week " + (pcp2.pos+1) + ": " + pw.title + (pcp2.cycle>1?" (cycle "+pcp2.cycle+")":""),
@@ -1104,7 +1120,8 @@
           { id:"phy-summary", label:"Mistake summary", required:true, min:"5" }
         ]
       });
-      var tcp2 = cyclePos(wn, THREED_WEEKS.length);
+      var tIdx2 = (ds.threedIdx !== undefined) ? ds.threedIdx : state.cursors.threed;
+      var tcp2 = cursorPos(tIdx2, THREED_WEEKS.length);
       var tw2 = THREED_WEEKS[tcp2.pos];
       sections.push({
         title:"3D Modeling · 1–2h — apply Saturday's technique",
@@ -1115,6 +1132,57 @@
     }
 
     return { dow: dow, sections: sections, meta: meta, dateStr: dateStr };
+  }
+
+  // Call after any checkbox/rest/day-type change so pending lessons only
+  // advance once that day's plan is actually finished (or rested through).
+  function isGroupComplete(ds, plan, prefix) {
+    var any = false, allDone = true;
+    plan.sections.forEach(function (sec) {
+      if (sec.optional) return;
+      sec.tasks.forEach(function (t) {
+        if (t.id.indexOf(prefix) !== 0) return;
+        if (t.required) { any = true; if (!ds.checks[t.id]) allDone = false; }
+      });
+    });
+    return any && allDone;
+  }
+  function checkAdvance(dateStr) {
+    var ds = dayState(dateStr);
+    var dow = parseD(dateStr).getDay();
+
+    if (dow >= 1 && dow <= 5) {
+      if (ds.weekdayIdx === undefined) ds.weekdayIdx = state.cursors.weekday;
+    } else if (dow === 6) {
+      if (ds.mathIdx === undefined) ds.mathIdx = state.cursors.math;
+      if (ds.threedIdx === undefined) ds.threedIdx = state.cursors.threed;
+    } else {
+      if (ds.physicsIdx === undefined) ds.physicsIdx = state.cursors.physics;
+      if (ds.threedIdx === undefined) ds.threedIdx = state.cursors.threed;
+    }
+
+    var plan = ds.rest ? null : buildPlan(dateStr);
+
+    if (dow >= 1 && dow <= 5) {
+      if (!ds.weekdayAdvanced) {
+        var doneWeekday = ds.rest || isGroupComplete(ds, plan, "cn-") && isGroupComplete(ds, plan, "en-");
+        if (doneWeekday) { state.cursors.weekday++; ds.weekdayAdvanced = true; }
+      }
+    } else if (dow === 6) {
+      if (!ds.mathAdvanced) {
+        var doneMath = ds.rest || isGroupComplete(ds, plan, "math-");
+        if (doneMath) { state.cursors.math++; ds.mathAdvanced = true; }
+      }
+    } else {
+      if (!ds.physicsAdvanced) {
+        var donePhysics = ds.rest || isGroupComplete(ds, plan, "phy-");
+        if (donePhysics) { state.cursors.physics++; ds.physicsAdvanced = true; }
+      }
+      if (!ds.threedAdvanced) {
+        var done3d = ds.rest || isGroupComplete(ds, plan, "3d-");
+        if (done3d) { state.cursors.threed++; ds.threedAdvanced = true; }
+      }
+    }
   }
 
   function dayStatus(dateStr) {
@@ -1210,7 +1278,7 @@
     var label = d.toLocaleDateString(undefined, { weekday:"long", month:"long", day:"numeric" });
 
     var html = '<div class="card-head">' +
-      '<div><h2>' + label + '</h2><div class="sub">Week ' + plan.meta.weekNumber + ' of your plan' + (selectedDate === todayStr ? " · Today" : "") + '</div></div>';
+      '<div><h2>' + label + '</h2><div class="sub">' + plan.meta.planLabel + (selectedDate === todayStr ? " · Today" : "") + '</div></div>';
 
     if (plan.dow >= 1 && plan.dow <= 5) {
       html += '<div class="daytype-toggle" role="group" aria-label="Day type">' +
@@ -1277,6 +1345,7 @@
         var dsx = dayState(selectedDate);
         if (type === "rest") { dsx.rest = !dsx.rest; }
         else { dsx.rest = false; dsx.dayType = type; }
+        checkAdvance(selectedDate);
         save(); renderToday();
       });
     });
@@ -1284,6 +1353,7 @@
       cb.addEventListener("change", function(){
         var dsx = dayState(selectedDate);
         dsx.checks[cb.getAttribute("data-task")] = cb.checked;
+        checkAdvance(selectedDate);
         save(); renderToday();
       });
     });
@@ -1317,10 +1387,10 @@
 
   // ================= DASHBOARD =================
   function renderDashboard() {
-    var wi = weekdayIndexFor(todayStr <= state.startDate ? state.startDate : (todayD.getDay()>=1&&todayD.getDay()<=5 ? todayStr : (function(){ var c=new Date(todayD); while(c.getDay()===0||c.getDay()===6) c=addDays(c,-1); return fmt(c); })()));
-    var cnCp = cyclePos(wi, 28), enCp = cyclePos(wi, 28);
-    var wn = weekNumberFor(todayStr);
-    var mCp = cyclePos(wn, MATH_WEEKS.length), pCp = cyclePos(wn, PHYSICS_WEEKS.length), tCp = cyclePos(wn, THREED_WEEKS.length);
+    var cnCp = cursorPos(state.cursors.weekday, 28), enCp = cursorPos(state.cursors.weekday, 28);
+    var mCp = cursorPos(state.cursors.math, MATH_WEEKS.length);
+    var pCp = cursorPos(state.cursors.physics, PHYSICS_WEEKS.length);
+    var tCp = cursorPos(state.cursors.threed, THREED_WEEKS.length);
 
     var vocabCounts = { "new":0, "learning":0, "mastered":0, "review":0 };
     VOCAB_SEED.forEach(function(v){
@@ -1392,8 +1462,7 @@
 
   // ================= CHINESE / ENGLISH CURRICULUM BROWSERS =================
   function renderCurriculum(panelId, days, kind) {
-    var wi = (function(){ var c=new Date(todayD); while(c.getDay()===0||c.getDay()===6) c=addDays(c,-1); return weekdayIndexFor(fmt(c)); })();
-    var cp = cyclePos(wi, 28);
+    var cp = cursorPos(state.cursors.weekday, 28);
     var html = '';
     var byWeek = {};
     days.forEach(function(day){ (byWeek[day.w] = byWeek[day.w] || []).push(day); });
@@ -1569,9 +1638,8 @@
   }
 
   // ================= MATH / PHYSICS LOG PANELS =================
-  function renderTopicPanel(panelId, weeks, log, subjectLabel) {
-    var wn = weekNumberFor(todayStr);
-    var cp = cyclePos(wn, weeks.length);
+  function renderTopicPanel(panelId, weeks, log, subjectLabel, cursorKey) {
+    var cp = cursorPos(state.cursors[cursorKey], weeks.length);
     var byMonth = {};
     weeks.forEach(function(w,i){ (byMonth[w.m] = byMonth[w.m] || []).push({ w:w, idx:i }); });
     var html = '';
@@ -1704,8 +1772,7 @@
 
   // ================= 3D ROADMAP =================
   function renderThreed() {
-    var wn = weekNumberFor(todayStr);
-    var cp = cyclePos(wn, THREED_WEEKS.length);
+    var cp = cursorPos(state.cursors.threed, THREED_WEEKS.length);
     var byMonth = {};
     THREED_WEEKS.forEach(function(w,i){ (byMonth[w.m] = byMonth[w.m] || []).push({ w:w, idx:i }); });
     var html = '';
@@ -1776,6 +1843,7 @@
       cb.addEventListener("change", function(){
         var dsx = dayState(todayStr);
         dsx.checks[cb.getAttribute("data-wtask")] = cb.checked;
+        checkAdvance(todayStr);
         save();
         renderWidgetView();
       });
@@ -1798,8 +1866,8 @@
     if (name === "english") renderCurriculum("panel-english", ENGLISH_DAYS, "en");
     if (name === "vocab") renderVocab();
     if (name === "interview") renderInterview();
-    if (name === "math") renderTopicPanel("panel-math", MATH_WEEKS, state.mathLog, "Math");
-    if (name === "physics") renderTopicPanel("panel-physics", PHYSICS_WEEKS, state.physicsLog, "Physics");
+    if (name === "math") renderTopicPanel("panel-math", MATH_WEEKS, state.mathLog, "Math", "math");
+    if (name === "physics") renderTopicPanel("panel-physics", PHYSICS_WEEKS, state.physicsLog, "Physics", "physics");
     if (name === "atc") renderAtc();
     if (name === "threed") renderThreed();
   }
