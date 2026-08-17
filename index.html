@@ -12,6 +12,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Flight Plan">
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 </head>
 <body>
 <style>
@@ -136,6 +138,33 @@
   }
   .stat .n { font-size: 19px; font-weight: 700; color: var(--runway-deep); display:block; }
   .stat .l { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); }
+
+  .sync-btn {
+    display: flex; align-items: center; gap: 6px;
+    background: var(--paper-raised); border: 1px solid var(--line); border-radius: 10px;
+    padding: 0 14px; height: 100%; min-width: 74px; cursor: pointer;
+    font-size: 11.5px; font-weight: 600; color: var(--ink-soft);
+  }
+  .sync-btn:hover { border-color: var(--ink-faint); }
+  .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--skip); flex-shrink: 0; }
+  .sync-dot.on { background: var(--done); }
+  .sync-dot.err { background: var(--danger); }
+  .sync-dot.busy { background: var(--amber); }
+
+  .sync-panel { display: none; margin-bottom: 18px; }
+  .sync-panel.open { display: block; }
+  .sync-panel .card { margin-bottom: 0; }
+  .sync-panel .sp-row { margin-bottom: 14px; }
+  .sync-panel .sp-row:last-child { margin-bottom: 0; }
+  .sync-panel .sp-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); margin-bottom: 6px; }
+  .sync-panel .sp-code-row { display: flex; gap: 8px; }
+  .sync-panel input[type="text"] {
+    flex: 1; background: var(--mist); border: 1px solid var(--line); border-radius: 8px;
+    padding: 9px 11px; font-size: 14px; font-family: ui-monospace, monospace; color: var(--ink);
+    letter-spacing: 0.03em;
+  }
+  .sync-panel .sp-note { font-size: 12px; color: var(--ink-faint); margin-top: 8px; line-height: 1.5; }
+  .sync-panel .sp-status { font-size: 12.5px; color: var(--ink-soft); display: flex; align-items: center; gap: 7px; }
 
   /* ---- Tabs ---- */
   .tabbar {
@@ -512,8 +541,11 @@
     <div class="stat-row">
       <div class="stat"><span class="n num" id="streakStat">0</span><span class="l">Day Streak</span></div>
       <div class="stat"><span class="n num" id="weekStat">0%</span><span class="l">This Week</span></div>
+      <button class="sync-btn" id="syncBtn"><span class="sync-dot" id="syncDot"></span><span id="syncBtnLabel">Sync</span></button>
     </div>
   </div>
+
+  <div class="sync-panel" id="syncPanel"></div>
 
   <div class="tabbar" id="tabbar">
     <button data-tab="today" class="active">Today</button>
@@ -875,6 +907,7 @@
   if (isWidget) { document.body.classList.add("widget-mode"); document.title = "Flight Plan Widget"; }
 
   // ================= STATE =================
+  var syncPush = function () {}; // reassigned once the sync module initializes below
   var state = load();
   function load() {
     var s = null;
@@ -894,6 +927,7 @@
   }
   function save() {
     try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
+    syncPush();
   }
   function dayState(dateStr) {
     if (!state.days[dateStr]) state.days[dateStr] = { dayType: "good", rest: false, checks: {}, reflection: {} };
@@ -1771,6 +1805,141 @@
   }
   document.querySelectorAll(".tabbar button").forEach(function(btn){
     btn.addEventListener("click", function(){ activateTab(btn.getAttribute("data-tab")); });
+  });
+
+  function refreshCurrentView() {
+    if (isWidget) { renderWidgetView(); return; }
+    renderToday();
+    var activeBtn = document.querySelector(".tabbar button.active");
+    var name = activeBtn ? activeBtn.getAttribute("data-tab") : "today";
+    if (name !== "today") activateTab(name);
+  }
+
+  // ================= CROSS-DEVICE SYNC (Firestore) =================
+  // No login system - devices are paired by sharing a random code. Only the
+  // curriculum progress (checkboxes, streak, logs) syncs; see firestore.rules.
+  var FIREBASE_CONFIG = {
+    projectId: "flight-plan-sync-fp",
+    appId: "1:191766324792:web:156b99f1722c41b45d28cd",
+    storageBucket: "flight-plan-sync-fp.firebasestorage.app",
+    apiKey: "AIzaSyDJKlJ4k4CZ1EDx5jbTDMMQlTMSZ4RN4Kk",
+    authDomain: "flight-plan-sync-fp.firebaseapp.com",
+    messagingSenderId: "191766324792"
+  };
+  var SYNC_CODE_KEY = "flightplan-synccode";
+  var syncCode = localStorage.getItem(SYNC_CODE_KEY);
+  function genCode() {
+    var chars = "abcdefghijklmnopqrstuvwxyz0123456789", out = "";
+    for (var i = 0; i < 16; i++) out += chars[Math.floor(Math.random() * chars.length)];
+    return out;
+  }
+  if (!syncCode) { syncCode = genCode(); localStorage.setItem(SYNC_CODE_KEY, syncCode); }
+
+  var db = null, unsubscribeSnapshot = null, lastAppliedUpdatedAt = 0, pushTimer = null, applyingRemote = false;
+  try {
+    firebase.initializeApp(FIREBASE_CONFIG);
+    db = firebase.firestore();
+  } catch (e) {}
+
+  function setSyncStatus(kind, text) {
+    var dot = document.getElementById("syncDot");
+    var label = document.getElementById("syncBtnLabel");
+    if (!dot) return;
+    dot.className = "sync-dot" + (kind ? " " + kind : "");
+    if (label && text) label.textContent = text;
+    var sp = document.getElementById("spStatus");
+    if (sp) sp.textContent = text || "";
+  }
+
+  function docRef(code) { return db.collection("syncs").doc(code); }
+
+  function applyRemote(data) {
+    if (!data || !data.json) return;
+    var remoteUpdatedAt = data.updatedAt || 0;
+    if (remoteUpdatedAt <= lastAppliedUpdatedAt) return;
+    try {
+      state = JSON.parse(data.json);
+      lastAppliedUpdatedAt = remoteUpdatedAt;
+      applyingRemote = true;
+      try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
+      refreshCurrentView();
+    } catch (e) {} finally { applyingRemote = false; }
+  }
+
+  function startListening(code) {
+    if (unsubscribeSnapshot) { unsubscribeSnapshot(); unsubscribeSnapshot = null; }
+    unsubscribeSnapshot = docRef(code).onSnapshot(function (snap) {
+      if (snap.exists) applyRemote(snap.data());
+      setSyncStatus("on", "Synced");
+    }, function () {
+      setSyncStatus("err", "Offline");
+    });
+  }
+
+  function syncPull(code) {
+    if (!db) return;
+    setSyncStatus("busy", "Syncing");
+    docRef(code).get().then(function (snap) {
+      if (snap.exists) applyRemote(snap.data());
+      setSyncStatus("on", "Synced");
+      startListening(code);
+    }).catch(function () {
+      setSyncStatus("err", "Offline");
+    });
+  }
+
+  syncPush = function () {
+    if (!db || applyingRemote) return;
+    clearTimeout(pushTimer);
+    pushTimer = setTimeout(function () {
+      var now = Date.now();
+      lastAppliedUpdatedAt = now;
+      setSyncStatus("busy", "Syncing");
+      docRef(syncCode).set({ json: JSON.stringify(state), updatedAt: now })
+        .then(function () { setSyncStatus("on", "Synced"); })
+        .catch(function () { setSyncStatus("err", "Offline"); });
+    }, 500);
+  };
+
+  if (db) syncPull(syncCode);
+  else setSyncStatus("err", "No sync");
+
+  function renderSyncPanel() {
+    var panel = document.getElementById("syncPanel");
+    panel.innerHTML =
+      '<div class="card">' +
+        '<div class="sp-row"><div class="sp-label">This device\'s code</div>' +
+          '<div class="sp-code-row"><input type="text" id="spMyCode" readonly value="' + syncCode + '"><button class="btn-sm" id="spCopy">Copy</button></div>' +
+          '<div class="sp-note">Enter this exact code on your other device to connect it to the same saved progress. Anyone with this code can read or change this data, so don’t share it publicly.</div>' +
+        '</div>' +
+        '<div class="sp-row"><div class="sp-label">Connect to a different code</div>' +
+          '<div class="sp-code-row"><input type="text" id="spOtherCode" placeholder="paste code from other device"><button class="btn-sm" id="spConnect">Connect</button></div>' +
+        '</div>' +
+        '<div class="sp-row sp-status" id="spStatus"></div>' +
+      '</div>';
+    document.getElementById("spCopy").addEventListener("click", function () {
+      navigator.clipboard.writeText(syncCode).then(function () {
+        var btn = document.getElementById("spCopy");
+        btn.textContent = "Copied";
+        setTimeout(function () { btn.textContent = "Copy"; }, 1500);
+      });
+    });
+    document.getElementById("spConnect").addEventListener("click", function () {
+      var v = document.getElementById("spOtherCode").value.trim().toLowerCase().replace(/\s+/g, "");
+      var status = document.getElementById("spStatus");
+      if (v.length < 12) { status.textContent = "Enter the full code from your other device."; return; }
+      syncCode = v;
+      localStorage.setItem(SYNC_CODE_KEY, syncCode);
+      lastAppliedUpdatedAt = 0;
+      renderSyncPanel();
+      if (db) syncPull(syncCode);
+    });
+  }
+
+  document.getElementById("syncBtn").addEventListener("click", function () {
+    var panel = document.getElementById("syncPanel");
+    panel.classList.toggle("open");
+    if (panel.classList.contains("open")) renderSyncPanel();
   });
 
   if (isWidget) renderWidgetView(); else renderToday();

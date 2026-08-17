@@ -1,0 +1,13 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // No login system - access is controlled by knowing the exact sync code
+    // (generated client-side, meant to be copied between your own devices).
+    // Anyone who guesses a code could read/write that one document, so this
+    // is only appropriate for low-sensitivity personal data like this app's
+    // study progress - not for anything truly private.
+    match /syncs/{code} {
+      allow read, write: if code.size() >= 12;
+    }
+  }
+}
