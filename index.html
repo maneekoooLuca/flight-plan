@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flight Plan</title>
+<meta name="description" content="A weekly study and career-prep dashboard covering Chinese, English, interview prep, ATC, math, physics, and 3D modeling.">
+<meta name="theme-color" content="#2E6F63">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Flight Plan">
+</head>
+<body>
+<style>
+  :root {
+    --paper: #F6F3EA;
+    --paper-raised: #FFFFFF;
+    --mist: #ECE7DA;
+    --line: #DCD3BE;
+    --ink: #211E1A;
+    --ink-soft: #5B5648;
+    --ink-faint: #8A8371;
+    --runway: #2E6F63;
+    --runway-deep: #1F4D45;
+    --runway-tint: #E3EEEB;
+    --amber: #C97A2B;
+    --amber-tint: #F5E6D3;
+    --done: #4C8B5C;
+    --done-tint: #E4EFDF;
+    --skip: #9B927E;
+    --skip-tint: #EFEAE0;
+    --danger: #B5533F;
+    --danger-tint: #F4E1DC;
+    --focus-ring: #2E6F63;
+    --shadow: 0 1px 2px rgba(33,30,26,0.06), 0 4px 16px rgba(33,30,26,0.06);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #14120F;
+      --paper-raised: #1C1A15;
+      --mist: #221F19;
+      --line: #35311F;
+      --ink: #EFEAE0;
+      --ink-soft: #B6AF9C;
+      --ink-faint: #857D68;
+      --runway: #6FBBA9;
+      --runway-deep: #8FD1C0;
+      --runway-tint: #1A2E29;
+      --amber: #E3A45C;
+      --amber-tint: #2E2413;
+      --done: #7FBB8B;
+      --done-tint: #1B2A1C;
+      --skip: #8A8371;
+      --skip-tint: #211F17;
+      --danger: #D4796A;
+      --danger-tint: #2E1C17;
+      --focus-ring: #6FBBA9;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #14120F;
+    --paper-raised: #1C1A15;
+    --mist: #221F19;
+    --line: #35311F;
+    --ink: #EFEAE0;
+    --ink-soft: #B6AF9C;
+    --ink-faint: #857D68;
+    --runway: #6FBBA9;
+    --runway-deep: #8FD1C0;
+    --runway-tint: #1A2E29;
+    --amber: #E3A45C;
+    --amber-tint: #2E2413;
+    --done: #7FBB8B;
+    --done-tint: #1B2A1C;
+    --skip: #8A8371;
+    --skip-tint: #211F17;
+    --danger: #D4796A;
+    --danger-tint: #2E1C17;
+    --focus-ring: #6FBBA9;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .display {
+    font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
+    text-wrap: balance;
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .num { font-family: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace; font-variant-numeric: tabular-nums; }
+
+  .wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 28px 20px 80px;
+  }
+
+  /* ---- Top bar ---- */
+  .topbar {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .topbar .brand { display: flex; align-items: baseline; gap: 10px; }
+  .topbar h1 { font-size: 26px; margin: 0; letter-spacing: -0.01em; }
+  .topbar .tagline { color: var(--ink-faint); font-size: 13px; }
+  .stat-row { display: flex; gap: 10px; }
+  .stat {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 8px 14px;
+    text-align: center;
+    min-width: 74px;
+  }
+  .stat .n { font-size: 19px; font-weight: 700; color: var(--runway-deep); display:block; }
+  .stat .l { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); }
+
+  /* ---- Tabs ---- */
+  .tabbar {
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 20px;
+    scrollbar-width: thin;
+  }
+  .tabbar button {
+    background: none; border: none; cursor: pointer;
+    padding: 9px 13px; font-size: 12.5px; font-weight: 600;
+    color: var(--ink-faint); white-space: nowrap;
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+  }
+  .tabbar button:hover { color: var(--ink); }
+  .tabbar button.active { color: var(--runway-deep); border-bottom-color: var(--runway); }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ---- Week strip ---- */
+  .weeknav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .weeknav button.arrow {
+    background: none; border: 1px solid var(--line); color: var(--ink-soft);
+    border-radius: 8px; width: 30px; height: 30px; cursor: pointer; font-size: 14px;
+  }
+  .weeknav button.arrow:hover { background: var(--mist); }
+  .weeknav .range { font-size: 12.5px; color: var(--ink-faint); flex: 1; text-align: center; }
+  .weeknav .today-btn {
+    background: none; border: 1px solid var(--line); color: var(--runway-deep);
+    border-radius: 8px; padding: 5px 11px; font-size: 12.5px; cursor: pointer; font-weight: 600;
+  }
+  .weeknav .today-btn:hover { background: var(--runway-tint); }
+
+  .strip {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-bottom: 26px;
+  }
+  .day-chip {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 9px 4px 10px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+  }
+  .day-chip:hover { border-color: var(--ink-faint); }
+  .day-chip.selected { border-color: var(--runway); box-shadow: 0 0 0 1px var(--runway); }
+  .day-chip.is-today .dnum { color: var(--runway-deep); }
+  .day-chip .dow { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); display: block; }
+  .day-chip .dnum { font-size: 16px; font-weight: 700; margin-top: 1px; display: block; }
+  .day-chip .dots { display: flex; justify-content: center; gap: 3px; margin-top: 6px; height: 6px; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--line); }
+  .dot.done { background: var(--done); }
+  .dot.rest { background: var(--skip); }
+  .dot.partial { background: var(--amber); }
+
+  /* ---- Card ---- */
+  .card {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 24px 26px 22px;
+    margin-bottom: 20px;
+  }
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .card-head h2 { font-size: 21px; margin: 0 0 2px; }
+  .card-head .sub { color: var(--ink-faint); font-size: 13px; }
+
+  .daytype-toggle {
+    display: flex;
+    background: var(--mist);
+    border-radius: 9px;
+    padding: 3px;
+    gap: 2px;
+    flex-shrink: 0;
+  }
+  .daytype-toggle button {
+    border: none; background: none; padding: 6px 11px; border-radius: 7px;
+    font-size: 12.5px; font-weight: 600; color: var(--ink-soft); cursor: pointer;
+  }
+  .daytype-toggle button.active { background: var(--paper-raised); color: var(--runway-deep); box-shadow: var(--shadow); }
+
+  .progress-ring-wrap { display: flex; align-items: center; gap: 10px; margin: 14px 0 18px; }
+  .progress-ring-wrap .plabel { font-size: 12.5px; color: var(--ink-faint); }
+  .progress-ring-wrap .plabel b { color: var(--ink); font-family: ui-monospace, monospace; }
+
+  .rest-banner {
+    background: var(--skip-tint);
+    border: 1px dashed var(--skip);
+    border-radius: 12px;
+    padding: 16px 18px;
+    color: var(--ink-soft);
+    font-size: 13.5px;
+    text-align: center;
+  }
+  .rest-banner b { color: var(--ink); }
+
+  .section { margin-top: 18px; }
+  .section:first-of-type { margin-top: 0; }
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--ink-faint);
+    margin-bottom: 9px;
+  }
+  .section-title .line { flex: 1; height: 1px; background: var(--line); }
+  .section-title.optional { color: var(--amber); }
+
+  .info-banner {
+    background: var(--runway-tint);
+    border-radius: 10px;
+    padding: 9px 12px;
+    font-size: 12.5px;
+    color: var(--runway-deep);
+    margin-bottom: 10px;
+  }
+  .info-banner b { color: var(--ink); }
+  .info-banner.amber { background: var(--amber-tint); color: var(--amber); }
+  .info-banner.amber b { color: var(--ink); }
+
+  .task {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    padding: 8px 4px;
+    border-radius: 8px;
+  }
+  .task:hover { background: var(--mist); }
+  .task input[type="checkbox"] {
+    appearance: none;
+    width: 19px; height: 19px;
+    border: 1.5px solid var(--ink-faint);
+    border-radius: 6px;
+    margin-top: 1px;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    background: var(--paper-raised);
+  }
+  .task input[type="checkbox"]:checked {
+    background: var(--done);
+    border-color: var(--done);
+  }
+  .task input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 5px; top: 1px;
+    width: 5px; height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(40deg);
+  }
+  .task input[type="checkbox"]:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+  .task .tlabel { flex: 1; font-size: 14px; }
+  .task .tlabel .tsub { display: block; color: var(--ink-faint); font-size: 12.5px; margin-top: 2px; }
+  .task.done .tlabel { color: var(--ink-faint); text-decoration: line-through; text-decoration-color: var(--line); }
+  .task.done .tlabel .tsub { text-decoration: none; }
+  .task .tmin { font-size: 11.5px; color: var(--ink-faint); font-family: ui-monospace, monospace; white-space: nowrap; margin-top: 2px; }
+  .task .topt-badge {
+    font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.04em;
+    background: var(--amber-tint); color: var(--amber); border-radius: 5px;
+    padding: 1px 5px; margin-left: 6px; font-weight: 700; vertical-align: 1px;
+  }
+
+  .vocab-chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 2px; }
+  .vocab-chip { background: var(--mist); border-radius: 7px; padding: 5px 9px; font-size: 12.5px; }
+  .vocab-chip b { font-family: ui-serif, serif; font-size: 14px; }
+  .vocab-chip .vl { font-size: 9.5px; color: var(--ink-faint); text-transform: uppercase; margin-left: 4px; }
+
+  .freetime-note {
+    display: flex; align-items: center; gap: 8px;
+    margin-top: 16px; padding: 10px 12px;
+    background: var(--amber-tint); border-radius: 10px;
+    font-size: 12.5px; color: var(--ink-soft);
+  }
+
+  /* ---- Reflection ---- */
+  .reflect { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
+  .reflect-title { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-faint); margin-bottom: 10px; }
+  .reflect-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+  .reflect-row .rlabel { font-size: 13px; color: var(--ink-soft); min-width: 100px; }
+  .scale { display: flex; gap: 4px; }
+  .scale button {
+    width: 26px; height: 26px; border-radius: 7px; border: 1px solid var(--line);
+    background: var(--paper-raised); cursor: pointer; font-size: 11.5px;
+    font-family: ui-monospace, monospace; color: var(--ink-soft);
+  }
+  .scale button.active { background: var(--runway); color: #fff; border-color: var(--runway); }
+  .reflect textarea {
+    width: 100%; background: var(--paper-raised); border: 1px solid var(--line);
+    border-radius: 8px; padding: 8px 10px; font-size: 13px; color: var(--ink);
+    font-family: inherit; resize: vertical; min-height: 40px; margin-bottom: 8px;
+  }
+  .reflect textarea::placeholder { color: var(--ink-faint); }
+
+  /* ---- Dashboard ---- */
+  .dash-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .dash-tile { background: var(--paper-raised); border: 1px solid var(--line); border-radius: 14px; padding: 15px 16px; }
+  .dash-tile .dtitle { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); margin-bottom: 8px; }
+  .dash-tile .dval { font-size: 21px; font-weight: 700; font-family: ui-monospace, monospace; color: var(--ink); }
+  .dash-tile .dsub { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+  .pbar { height: 6px; border-radius: 4px; background: var(--mist); overflow: hidden; margin-top: 9px; }
+  .pbar > div { height: 100%; background: var(--runway); }
+  .weak-list { list-style: none; margin: 0; padding: 0; }
+  .weak-list li { padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 13px; display: flex; justify-content: space-between; gap: 10px; }
+  .weak-list li:last-child { border-bottom: none; }
+  .weak-list .wtag { font-size: 10px; text-transform: uppercase; color: var(--danger); background: var(--danger-tint); padding: 2px 6px; border-radius: 5px; font-weight: 700; white-space: nowrap; }
+
+  /* ---- Curriculum browsers ---- */
+  .day-card {
+    background: var(--paper-raised); border: 1px solid var(--line); border-radius: 12px;
+    padding: 13px 16px; margin-bottom: 8px; cursor: pointer;
+  }
+  .day-card.current { border-color: var(--runway); box-shadow: 0 0 0 1px var(--runway); }
+  .day-card-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .day-card .dbadge {
+    font-family: ui-monospace, monospace; font-size: 10.5px; color: var(--runway-deep);
+    background: var(--runway-tint); padding: 2px 8px; border-radius: 6px; font-weight: 700; white-space: nowrap;
+  }
+  .day-card .dtitlex { font-weight: 600; font-size: 14px; flex: 1; }
+  .day-card .chev { color: var(--ink-faint); font-size: 12px; transition: transform 0.15s; }
+  .day-card.open .chev { transform: rotate(90deg); }
+  .day-card-body { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--line); font-size: 13.5px; color: var(--ink-soft); }
+  .day-card.open .day-card-body { display: block; }
+  .day-card-body .dl-row { margin-bottom: 9px; }
+  .day-card-body .dl-label { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); margin-bottom: 3px; }
+  .day-card-body .dl-out { background: var(--done-tint); border-radius: 8px; padding: 8px 10px; margin-top: 6px; }
+  .day-card-body .dl-out .dl-label { color: var(--done); }
+
+  /* ---- Bank items ---- */
+  .bank-toolbar { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  .bank-toolbar select {
+    background: var(--paper-raised); border: 1px solid var(--line); border-radius: 8px;
+    padding: 6px 10px; font-size: 12.5px; color: var(--ink); font-family: inherit;
+  }
+  .bank-item { background: var(--paper-raised); border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px; margin-bottom: 8px; }
+  .bank-item-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; cursor: pointer; }
+  .bank-item .word { font-family: ui-serif, "Iowan Old Style", Georgia, serif; font-size: 16px; font-weight: 700; }
+  .bank-item .pos { font-size: 11.5px; color: var(--ink-faint); font-style: italic; margin-left: 6px; }
+  .bank-item .qtext { font-size: 13.5px; font-weight: 500; flex: 1; }
+  .bank-item-tags { display: flex; gap: 5px; align-items: center; flex-shrink: 0; }
+  .pill { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.03em; padding: 2px 7px; border-radius: 6px; font-weight: 700; white-space: nowrap; }
+  .pill.lvl-b1, .pill.lvl-b2 { background: var(--runway-tint); color: var(--runway-deep); }
+  .pill.lvl-c1, .pill.lvl-c2 { background: var(--amber-tint); color: var(--amber); }
+  .pill.st-new { background: var(--mist); color: var(--ink-faint); }
+  .pill.st-learning { background: var(--amber-tint); color: var(--amber); }
+  .pill.st-mastered { background: var(--done-tint); color: var(--done); }
+  .pill.st-review { background: var(--danger-tint); color: var(--danger); }
+  .pill.diff-easy { background: var(--done-tint); color: var(--done); }
+  .pill.diff-medium { background: var(--amber-tint); color: var(--amber); }
+  .pill.diff-hard { background: var(--danger-tint); color: var(--danger); }
+  .bank-item-body { display: none; margin-top: 11px; padding-top: 11px; border-top: 1px dashed var(--line); font-size: 13px; color: var(--ink-soft); }
+  .bank-item.open .bank-item-body { display: block; }
+  .bank-item-body div.brow { margin-bottom: 5px; }
+  .bank-item-body b { color: var(--ink); }
+  .bank-actions { display: flex; gap: 8px; margin-top: 10px; align-items: center; flex-wrap: wrap; }
+  .btn-sm {
+    background: var(--runway); color: #fff; border: none; border-radius: 7px;
+    padding: 6px 12px; font-size: 12px; font-weight: 600; cursor: pointer;
+  }
+  .btn-sm:hover { opacity: 0.9; }
+  .btn-sm.secondary { background: none; border: 1px solid var(--line); color: var(--ink-soft); }
+  .btn-sm.danger { background: none; border: 1px solid var(--danger); color: var(--danger); }
+  .score-select { display: flex; gap: 3px; }
+  .score-select button {
+    width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--line);
+    background: var(--paper-raised); font-size: 11px; cursor: pointer; color: var(--ink-soft);
+    font-family: ui-monospace, monospace;
+  }
+  .score-select button.active { background: var(--amber); color: #fff; border-color: var(--amber); }
+
+  /* ---- Log forms ---- */
+  .logform { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; margin: 14px 0; }
+  .logform label { display: flex; flex-direction: column; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-faint); gap: 4px; }
+  .logform input, .logform select {
+    background: var(--paper-raised); border: 1px solid var(--line); border-radius: 8px;
+    padding: 7px 9px; font-size: 13px; color: var(--ink); width: 96px; font-family: inherit;
+  }
+  .logtable { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 6px; }
+  .logtable-wrap { overflow-x: auto; }
+  .logtable th, .logtable td { text-align: left; padding: 7px 9px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .logtable th { color: var(--ink-faint); font-weight: 600; text-transform: uppercase; font-size: 10px; letter-spacing: 0.05em; }
+  .logtable td.acc-good { color: var(--done); font-weight: 700; }
+  .logtable td.acc-bad { color: var(--danger); font-weight: 700; }
+  .empty-note { color: var(--ink-faint); font-size: 13px; padding: 10px 0; }
+
+  .subhead { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); margin: 22px 0 10px; }
+  .subhead:first-child { margin-top: 0; }
+
+  footer.principle {
+    text-align: center;
+    color: var(--ink-faint);
+    font-size: 12.5px;
+    margin-top: 34px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+  }
+  footer.principle .display { font-size: 15px; color: var(--ink-soft); margin-bottom: 4px; }
+
+  @media (max-width: 520px) {
+    .strip { grid-template-columns: repeat(7, 1fr); gap: 4px; }
+    .day-chip { padding: 6px 2px 8px; }
+    .card { padding: 18px 16px 16px; }
+    .card-head { flex-direction: column; }
+    .bank-item-head { flex-wrap: wrap; }
+  }
+
+  /* ---- Widget mode ---- */
+  .widget-view { display: none; }
+  body.widget-mode { overflow: hidden; }
+  body.widget-mode .wrap { display: none; }
+  body.widget-mode .widget-view {
+    display: block;
+    padding: 14px 16px 12px;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  .widget-view .wtop { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }
+  .widget-view .wtitle { font-family: ui-serif, "Iowan Old Style", Georgia, serif; font-size: 16px; font-weight: 700; }
+  .widget-view .wstat { font-size: 11px; color: var(--ink-faint); font-family: ui-monospace, monospace; white-space: nowrap; }
+  .widget-view .wstat b { color: var(--runway-deep); font-size: 13px; }
+  .widget-view .wdate { font-size: 11.5px; color: var(--ink-faint); margin-bottom: 10px; }
+  .widget-view .wtask {
+    display: flex; align-items: flex-start; gap: 8px; padding: 6px 2px; font-size: 12.5px;
+    border-radius: 7px; cursor: pointer;
+  }
+  .widget-view .wtask:hover { background: var(--mist); }
+  .widget-view .wtask input[type="checkbox"] {
+    appearance: none; width: 16px; height: 16px; border: 1.5px solid var(--ink-faint);
+    border-radius: 5px; cursor: pointer; flex-shrink: 0; margin-top: 1px; position: relative; background: var(--paper-raised);
+  }
+  .widget-view .wtask input[type="checkbox"]:checked { background: var(--done); border-color: var(--done); }
+  .widget-view .wtask input[type="checkbox"]:checked::after {
+    content: ""; position: absolute; left: 4px; top: 0px; width: 4px; height: 8px;
+    border: solid white; border-width: 0 2px 2px 0; transform: rotate(40deg);
+  }
+  .widget-view .wmore { font-size: 10.5px; color: var(--ink-faint); margin-top: 4px; padding-left: 4px; }
+  .widget-view .wdone, .widget-view .wrest { text-align: center; font-size: 12.5px; padding: 16px 0; color: var(--ink-soft); }
+  .widget-view .wdone { color: var(--done); font-weight: 600; }
+  .widget-view .wfooter { margin-top: 10px; padding-top: 9px; border-top: 1px solid var(--line); text-align: center; }
+  .widget-view .wfooter a { color: var(--runway-deep); font-size: 11.5px; text-decoration: none; font-weight: 600; }
+  .widget-view .wfooter a:hover { text-decoration: underline; }
+</style>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand">
+      <h1>Flight Plan</h1>
+      <span class="tagline">consistency over completeness</span>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><span class="n num" id="streakStat">0</span><span class="l">Day Streak</span></div>
+      <div class="stat"><span class="n num" id="weekStat">0%</span><span class="l">This Week</span></div>
+    </div>
+  </div>
+
+  <div class="tabbar" id="tabbar">
+    <button data-tab="today" class="active">Today</button>
+    <button data-tab="dashboard">Dashboard</button>
+    <button data-tab="chinese">Chinese</button>
+    <button data-tab="english">English</button>
+    <button data-tab="vocab">Vocabulary</button>
+    <button data-tab="interview">Interview</button>
+    <button data-tab="math">Math</button>
+    <button data-tab="physics">Physics</button>
+    <button data-tab="atc">ATC</button>
+    <button data-tab="threed">3D</button>
+  </div>
+
+  <div class="panel active" id="panel-today">
+    <div class="weeknav">
+      <button class="arrow" id="prevWeek" aria-label="Previous week">&#8249;</button>
+      <div class="range" id="weekRange">&nbsp;</div>
+      <button class="arrow" id="nextWeek" aria-label="Next week">&#8250;</button>
+      <button class="today-btn" id="jumpToday">Today</button>
+    </div>
+    <div class="strip" id="strip"></div>
+    <div class="card" id="dayCard"></div>
+  </div>
+
+  <div class="panel" id="panel-dashboard"></div>
+  <div class="panel" id="panel-chinese"></div>
+  <div class="panel" id="panel-english"></div>
+  <div class="panel" id="panel-vocab"></div>
+  <div class="panel" id="panel-interview"></div>
+  <div class="panel" id="panel-math"></div>
+  <div class="panel" id="panel-physics"></div>
+  <div class="panel" id="panel-atc"></div>
+  <div class="panel" id="panel-threed"></div>
+
+  <footer class="principle">
+    <div class="display">&ldquo;Maintain core consistency &rarr; learn new skills on weekends &rarr; practice when energy is available &rarr; rest without guilt.&rdquo;</div>
+    Not every subject needs to happen every day.
+  </footer>
+
+</div>
+
+<div class="widget-view" id="widgetView"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  var STORE_KEY = "flightplan-v2";
+  var DOW = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  var DOW_SHORT = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+
+  // ================= CURRICULUM DATA =================
+
+  var CHINESE_DAYS = [
+    { d:1, w:1, title:"Greetings & Self-Introduction", mode:"lesson",
+      vocab:[["你","nǐ","you"],["好","hǎo","good"],["我","wǒ","I / me"],["是","shì","to be"],["吗","ma","question particle"],["很","hěn","very"],["也","yě","also"]],
+      blocks:[{l:"Grammar",t:"A 是 B · Statement + 吗? · 很 + adjective"},{l:"Examples",t:"你好吗? · 我很好。 · 我是学生。 · 你是学生吗? · 我也很好。"},{l:"Listening / Reading",t:"Short greeting dialogue."},{l:"Speaking",t:"Introduce yourself using 3–5 sentences."}],
+      output:"Speak without reading." },
+    { d:2, w:1, title:"Numbers & Age", mode:"lesson",
+      vocab:[["零","líng","zero"],["一","yī","one"],["二","èr","two"],["三","sān","three"],["四","sì","four"],["五","wǔ","five"],["六","liù","six"],["七","qī","seven"],["八","bā","eight"],["九","jiǔ","nine"],["十","shí","ten"],["岁","suì","years old"],["几","jǐ","how many"],["今年","jīnnián","this year"]],
+      blocks:[{l:"Grammar",t:"你几岁? · 我二十岁。 · 我今年二十岁。"},{l:"Practice",t:"Say numbers aloud."},{l:"Speaking",t:"Ask and answer age questions."}],
+      output:"Answer age-related questions naturally." },
+    { d:3, w:1, title:"Family", mode:"lesson",
+      vocab:[["爸爸","bàba","dad"],["妈妈","māma","mom"],["哥哥","gēge","older brother"],["姐姐","jiějie","older sister"],["弟弟","dìdi","younger brother"],["妹妹","mèimei","younger sister"],["家","jiā","family / home"],["有","yǒu","to have"],["没有","méiyǒu","to not have"]],
+      blocks:[{l:"Grammar",t:"有 / 没有"},{l:"Examples",t:"我有一个哥哥。 · 我没有姐姐。 · 你有弟弟吗?"},{l:"Speaking",t:"Describe your family."}],
+      output:"Speak 5 sentences about family." },
+    { d:4, w:1, title:"Country & Nationality", mode:"lesson",
+      vocab:[["中国","Zhōngguó","China"],["泰国","Tàiguó","Thailand"],["人","rén","person"],["哪","nǎ","which"],["哪里","nǎlǐ","where"],["从","cóng","from"],["来","lái","come"]],
+      blocks:[{l:"Grammar",t:"你是哪国人? · 我是泰国人。 · 你从哪里来? · 我从泰国来。"},{l:"Speaking",t:"Introduce where you are from."}],
+      output:"Answer: Where are you from? What nationality are you?" },
+    { d:5, w:1, title:"Jobs & Occupations", mode:"lesson",
+      vocab:[["工作","gōngzuò","work / job"],["公司","gōngsī","company"],["学生","xuésheng","student"],["老师","lǎoshī","teacher"],["医生","yīshēng","doctor"],["工程师","gōngchéngshī","engineer"],["服务员","fúwùyuán","waiter / service staff"]],
+      blocks:[{l:"Grammar",t:"你做什么工作? · 我是... · 我在...工作。"},{l:"Speaking",t:"Talk about your current or future job."}],
+      output:"5 sentences about work." },
+    { d:6, w:1, title:"Week 1 Review", mode:"review",
+      vocab:[],
+      blocks:[{l:"Vocabulary",t:"Review all Week 1 words."},{l:"Grammar",t:"是 · 吗 · 很 · 也 · 有 / 没有"},{l:"Practice",t:"Create at least 10 simple sentences."},{l:"Listening",t:"Short conversations using Week 1 vocabulary."}],
+      output:"Introduce yourself + family + country + work." },
+    { d:7, w:1, title:"Mini Test", mode:"test",
+      vocab:[],
+      blocks:[{l:"Vocabulary",t:"Review Week 1 vocabulary."},{l:"Grammar",t:"是 · 吗 · 有 / 没有"},{l:"Speaking task",t:"Introduce: name, age, country, nationality, family, job."}],
+      output:"Speak approximately 1 minute without reading." },
+    { d:8, w:2, title:"Dates & Days", mode:"lesson",
+      vocab:[["今天","jīntiān","today"],["明天","míngtiān","tomorrow"],["昨天","zuótiān","yesterday"],["星期","xīngqī","week"],["月","yuè","month"],["号","hào","date / day-of-month"]],
+      blocks:[{l:"Grammar",t:"今天星期几? · 今天是星期一。"},{l:"Speaking",t:"Talk about today's date."}],
+      output:"Say today's day and date aloud." },
+    { d:9, w:2, title:"Time", mode:"lesson",
+      vocab:[["点","diǎn","o'clock"],["分","fēn","minute"],["现在","xiànzài","now"],["上午","shàngwǔ","morning"],["下午","xiàwǔ","afternoon"],["晚上","wǎnshàng","evening"]],
+      blocks:[{l:"Grammar",t:"现在几点? · 我七点起床。"},{l:"Speaking",t:"Describe your daily schedule."}],
+      output:"Say 3 times from your day aloud." },
+    { d:10, w:2, title:"Daily Routine", mode:"lesson",
+      vocab:[["起床","qǐchuáng","get up"],["睡觉","shuìjiào","sleep"],["吃","chī","eat"],["喝","hē","drink"],["去","qù","go"],["来","lái","come"],["上班","shàngbān","go to work"]],
+      blocks:[{l:"Grammar",t:"Subject + Time + Verb."},{l:"Speaking",t:"Describe your daily routine."}],
+      output:"Describe your routine in 5+ sentences." },
+    { d:11, w:2, title:"Food & Drinks", mode:"lesson",
+      vocab:[["水","shuǐ","water"],["茶","chá","tea"],["咖啡","kāfēi","coffee"],["米饭","mǐfàn","rice"],["面","miàn","noodles"],["吃","chī","eat"],["喝","hē","drink"]],
+      blocks:[{l:"Grammar",t:"我喜欢... · 我不喜欢..."},{l:"Speaking",t:"Talk about food preferences."}],
+      output:"Say what you like and don't like to eat / drink." },
+    { d:12, w:2, title:"Likes & Hobbies", mode:"lesson",
+      vocab:[["喜欢","xǐhuan","like"],["看","kàn","watch / look"],["玩","wán","play"],["听","tīng","listen"],["音乐","yīnyuè","music"],["电影","diànyǐng","movie"],["游戏","yóuxì","game"]],
+      blocks:[{l:"Grammar",t:"喜欢 + noun / verb"},{l:"Speaking",t:"Talk about hobbies."}],
+      output:"Say 3 hobbies you enjoy." },
+    { d:13, w:2, title:"Week 2 Review", mode:"review",
+      vocab:[],
+      blocks:[{l:"Practice",t:"Time · Daily routine · Food · Hobbies"}],
+      output:"Describe one normal day." },
+    { d:14, w:2, title:"Mini Test", mode:"test",
+      vocab:[],
+      blocks:[{l:"Speaking",t:"What time you wake up · what you eat · what you do · what you like · what you do at night."}],
+      output:"Answer all 5 prompts aloud without reading." },
+    { d:15, w:3, title:"Places", mode:"lesson",
+      vocab:[["学校","xuéxiào","school"],["公司","gōngsī","company"],["家","jiā","home"],["商店","shāngdiàn","shop"],["医院","yīyuàn","hospital"],["机场","jīchǎng","airport"]],
+      blocks:[{l:"Grammar",t:"在 + place"},{l:"Speaking",t:"Where do you go?"}],
+      output:"Name 3 places you go regularly." },
+    { d:16, w:3, title:"Location", mode:"lesson",
+      vocab:[["这里","zhèlǐ","here"],["那里","nàlǐ","there"],["哪儿","nǎr","where"],["前面","qiánmiàn","front"],["后面","hòumiàn","behind"]],
+      blocks:[{l:"Grammar",t:"Location questions."},{l:"Speaking",t:"Describe where things are."}],
+      output:"Describe the location of 3 objects near you." },
+    { d:17, w:3, title:"Transportation", mode:"lesson",
+      vocab:[["车","chē","car"],["飞机","fēijī","airplane"],["火车","huǒchē","train"],["地铁","dìtiě","subway"],["坐","zuò","to sit / take (transport)"]],
+      blocks:[{l:"Grammar",t:"坐 + transportation"},{l:"Speaking",t:"How do you travel?"}],
+      output:"Describe how you get to work or school." },
+    { d:18, w:3, title:"Weather", mode:"lesson",
+      vocab:[["天气","tiānqì","weather"],["热","rè","hot"],["冷","lěng","cold"],["下雨","xiàyǔ","rain"],["晴天","qíngtiān","sunny day"]],
+      blocks:[{l:"Grammar",t:"今天很热。 · 天气怎么样?"},{l:"Speaking",t:"Describe today's weather."}],
+      output:"Say today's weather in 2 sentences." },
+    { d:19, w:3, title:"Describing People", mode:"lesson",
+      vocab:[["高","gāo","tall"],["矮","ǎi","short"],["大","dà","big"],["小","xiǎo","small"],["漂亮","piàoliang","pretty"],["忙","máng","busy"]],
+      blocks:[{l:"Grammar",t:"Subject + 很 + adjective."},{l:"Speaking",t:"Describe a person."}],
+      output:"Describe a friend or coworker in 3 sentences." },
+    { d:20, w:3, title:"Week 3 Review", mode:"review",
+      vocab:[],
+      blocks:[{l:"Combine",t:"Places · Transportation · Weather · People"}],
+      output:"Describe a trip or normal day." },
+    { d:21, w:3, title:"Mini Test", mode:"test",
+      vocab:[],
+      blocks:[{l:"HSK1-style",t:"Vocabulary · Sentence building · Listening · Speaking"}],
+      output:"Complete a short HSK1-style speaking task." },
+    { d:22, w:4, title:"Question Words", mode:"lesson",
+      vocab:[["什么","shénme","what"],["谁","shéi","who"],["哪","nǎ","which"],["哪里","nǎlǐ","where"],["怎么","zěnme","how"],["为什么","wèishénme","why"],["几","jǐ","how many"]],
+      blocks:[{l:"Practice",t:"Create questions and answers using each question word."}],
+      output:"Ask and answer 5 questions." },
+    { d:23, w:4, title:"Common Verbs", mode:"lesson",
+      vocab:[["想","xiǎng","want to / think"],["要","yào","want / need"],["会","huì","can (learned skill)"],["能","néng","can / able"],["去","qù","go"],["来","lái","come"],["做","zuò","do / make"]],
+      blocks:[{l:"Speaking",t:"Talk about plans."}],
+      output:"Say 3 plans using 想 / 要 / 会 / 能." },
+    { d:24, w:4, title:"Basic Sentence Patterns", mode:"review",
+      vocab:[],
+      blocks:[{l:"Practice",t:"Subject + Verb + Object · Subject + Time + Verb · Subject + 很 + Adjective · Question structures."}],
+      output:"Build one sentence per pattern." },
+    { d:25, w:4, title:"Listening & Reading Focus", mode:"review",
+      vocab:[],
+      blocks:[{l:"Goal",t:"Understand the main meaning without translating every word, using known vocabulary."}],
+      output:"Summarize a short passage or dialogue in your own words." },
+    { d:26, w:4, title:"Speaking Focus", mode:"review",
+      vocab:[],
+      blocks:[{l:"Random topics",t:"Self · Family · Work · Hobbies · Food · Daily life"}],
+      output:"Speak for 2+ minutes mixing topics." },
+    { d:27, w:4, title:"Full HSK1 Review", mode:"review",
+      vocab:[],
+      blocks:[{l:"Identify",t:"Weak vocabulary · Weak grammar · Listening problems · Speaking problems"}],
+      output:"Write down your 3 weakest areas to revisit." },
+    { d:28, w:4, title:"HSK1 Mini Mock", mode:"test",
+      vocab:[],
+      blocks:[{l:"Include",t:"Vocabulary · Grammar · Reading · Listening · Speaking self-evaluation"}],
+      output:"Complete a full HSK1-style mock and self-score it." }
+  ];
+
+  var ENGLISH_DAYS = [
+    { d:1, w:1, title:"Self Introduction", mode:"lesson", primary:"Tell me about yourself.", followup:"Which part of your background is most relevant?", deep:"What makes you different from other candidates?", toeic:"Basic sentence structure.", output:"Speak for 1–2 minutes." },
+    { d:2, w:1, title:"Education", mode:"lesson", primary:"Why did you choose your field of study?", followup:"What was the most challenging part of your studies?", deep:"How has your education prepared you for work?", toeic:"Parts of speech.", output:"Answer for 1–2 minutes." },
+    { d:3, w:1, title:"Strengths", mode:"lesson", primary:"What are your strengths?", followup:"Can you give a specific example?", deep:"How would those strengths benefit the company?", toeic:"Subject–verb agreement.", output:"Give one strength + one real example." },
+    { d:4, w:1, title:"Weaknesses", mode:"lesson", primary:"What is your greatest weakness?", followup:"How has this weakness affected you?", deep:"What specific action are you taking to improve it?", toeic:"Verb tenses.", output:"Answer honestly without giving a fake weakness." },
+    { d:5, w:1, title:"Career Goals", mode:"lesson", primary:"Where do you see yourself in five years?", followup:"What are you doing now to reach that goal?", deep:"What would you do if your career plan did not go as expected?", toeic:"Sentence structure.", output:"Explain a realistic career plan." },
+    { d:6, w:1, title:"Challenge", mode:"lesson", primary:"Tell me about a challenge you faced.", followup:"What was your specific role?", deep:"What would you do differently now?", toeic:"Error identification.", output:"Use STAR: Situation, Task, Action, Result." },
+    { d:7, w:1, title:"Mock Interview", mode:"mock", note:"Randomly select 1 general + 1 behavioral + 1 career-specific question from your Interview Bank.", toeic:"Week 1 review.", output:"Answer all 3 as a timed mock; review weak vocabulary first." },
+    { d:8, w:2, title:"Work Experience", mode:"lesson", primary:"Tell me about your work experience.", followup:"What was your biggest responsibility?", deep:"Which experience taught you the most?", toeic:"Nouns and pronouns.", output:"Answer aloud, unscripted (1–2 min)." },
+    { d:9, w:2, title:"Teamwork", mode:"lesson", primary:"Tell me about a time you worked in a team.", followup:"What was your role?", deep:"What would you do if another team member was not contributing?", toeic:"Adjectives and adverbs.", output:"Answer aloud, unscripted (1–2 min)." },
+    { d:10, w:2, title:"Mistakes", mode:"lesson", primary:"Tell me about a mistake you made.", followup:"How did you discover it?", deep:"How did you make sure it would not happen again?", toeic:"Prepositions.", output:"Answer aloud, unscripted (1–2 min)." },
+    { d:11, w:2, title:"Conflict", mode:"lesson", primary:"Tell me about a conflict you experienced.", followup:"How did you respond?", deep:"What if the other person refused to cooperate?", toeic:"Conjunctions.", output:"Answer aloud, unscripted (1–2 min)." },
+    { d:12, w:2, title:"Learning", mode:"lesson", primary:"Tell me about something you had to learn quickly.", followup:"How did you learn it?", deep:"How do you approach something completely unfamiliar?", toeic:"Reading short business messages.", output:"Answer aloud, unscripted (1–2 min)." },
+    { d:13, w:2, title:"Prioritization", mode:"lesson", primary:"How do you handle multiple tasks at the same time?", followup:"How do you decide what comes first?", deep:"What would you do if everything seemed urgent?", toeic:"Time-related expressions.", output:"Answer aloud, unscripted (1–2 min)." },
+    { d:14, w:2, title:"Behavioral Mock", mode:"mock", note:"Randomly select from: Challenge · Teamwork · Mistake · Conflict · Learning.", output:"Full behavioral mock, unscripted." },
+    { d:15, w:3, title:"Pressure", mode:"lesson", primary:"How do you handle pressure?", followup:"Give a real example.", deep:"How do you know when pressure is affecting your performance?", toeic:"Conditional sentences.", output:"Answer aloud, unscripted (1–2 min)." },
+    { d:16, w:3, title:"Serious Mistake", mode:"lesson", primary:"What would you do if you made a serious mistake?", followup:"Who would you inform?", deep:"What if admitting the mistake caused serious consequences?", toeic:"Passive voice.", output:"Answer aloud, unscripted (1–2 min)." },
+    { d:17, w:3, title:"Unclear Instructions", mode:"lesson", primary:"What would you do if you received unclear instructions?", followup:"Would you act immediately or ask for clarification?", deep:"What if no one was available to help?", toeic:"Business vocabulary.", output:"Answer aloud, unscripted (1–2 min)." },
+    { d:18, w:3, title:"Angry Customer", mode:"lesson", primary:"How would you handle an angry customer?", followup:"What would you say first?", deep:"What if the customer continued to escalate?", toeic:"Listening practice.", output:"Answer aloud, unscripted (1–2 min)." },
+    { d:19, w:3, title:"Multiple Urgent Problems", mode:"lesson", primary:"What would you do if several urgent problems happened at once?", followup:"How would you prioritize them?", deep:"What information would you need before making a decision?", toeic:"Reading comprehension.", output:"Answer aloud, unscripted (1–2 min)." },
+    { d:20, w:3, title:"Difficult Decision", mode:"lesson", primary:"Describe a difficult decision.", followup:"What factors did you consider?", deep:"What would you do if your decision turned out to be wrong?", toeic:"Mixed grammar review.", output:"Answer aloud, unscripted (1–2 min)." },
+    { d:21, w:3, title:"Situational Mock", mode:"mock", note:"Full situational interview mock, unscripted.", output:"Complete the mock and self-score." },
+    { d:22, w:4, title:"IT", mode:"lesson", career:"IT", primary:"Describe a technical problem you had to solve.", followup:"How did you identify the cause?", deep:"What would you do if your first solution failed?", toeic:"Technology vocabulary.", output:"Answer aloud, unscripted (1–2 min)." },
+    { d:23, w:4, title:"Passenger Service", mode:"lesson", career:"Passenger Service", primary:"How would you handle a passenger who is angry about a situation you cannot change?", followup:"How would you explain company policy?", deep:"When would you escalate the situation?", toeic:"Service vocabulary.", output:"Answer aloud, unscripted (1–2 min)." },
+    { d:24, w:4, title:"Cabin Crew", mode:"lesson", career:"Cabin Crew", primary:"Why do you want to become a cabin crew member?", followup:"How do you balance safety and service?", deep:"How would you handle conflict between passengers?", toeic:"Travel vocabulary.", output:"Answer aloud, unscripted (1–2 min)." },
+    { d:25, w:4, title:"ATC", mode:"lesson", career:"ATC", primary:"Why are you interested in becoming an air traffic controller?", followup:"How do you handle pressure and responsibility?", deep:"What evidence shows that you can maintain concentration under pressure?", toeic:"Aviation-related vocabulary.", output:"Answer aloud, unscripted (1–2 min)." },
+    { d:26, w:4, title:"Random Career Question", mode:"mock", note:"Randomly select a career: IT · Passenger Service · Cabin Crew · ATC.", output:"Answer the random career question, unscripted." },
+    { d:27, w:4, title:"Deep Interview Day", mode:"mock", note:"Randomly select previous questions. Answer without preparation.", output:"Unscripted deep-question drill." },
+    { d:28, w:4, title:"Full Mock Interview", mode:"mock", note:"Introduction · Behavioral · Situational · Career-specific · Deep follow-up.", output:"Complete a full mock interview end-to-end." }
+  ];
+
+  var VOCAB_SEED = [
+    ["reliable","adjective","B1","can be trusted","He's a reliable colleague who always meets deadlines.","dependable"],
+    ["achieve","verb","B1","to succeed in doing something","She achieved her goal of passing the exam.","accomplish"],
+    ["confident","adjective","B1","sure of oneself","I feel confident about the interview.","self-assured"],
+    ["opportunity","noun","B1","a chance to do something","This job is a great opportunity.","chance"],
+    ["challenge","noun","B1","a difficult task","Learning Chinese is a challenge.","difficulty"],
+    ["improve","verb","B1","to get better","I want to improve my speaking.","enhance"],
+    ["responsible","adjective","B1","having a duty over something","I was responsible for the project.","accountable"],
+    ["flexible","adjective","B1","able to adapt to change","My schedule is flexible.","adaptable"],
+    ["efficient","adjective","B1","working well without waste","We need a more efficient process.","effective"],
+    ["motivated","adjective","B1","driven to take action","She is highly motivated.","driven"],
+    ["cooperate","verb","B1","to work together","We cooperated to finish the task.","collaborate"],
+    ["punctual","adjective","B1","arriving on time","He is always punctual.","on-time"],
+    ["resilient","adjective","B2","able to recover quickly from difficulty","She stayed resilient after the setback.","tough"],
+    ["initiative","noun","B2","the ability to act independently","He took the initiative to fix it.","proactivity"],
+    ["consistent","adjective","B2","acting the same way over time","Her performance is consistent.","steady"],
+    ["adapt","verb","B2","to adjust to new conditions","I adapted quickly to the new role.","adjust"],
+    ["prioritize","verb","B2","to treat something as more important","I prioritize urgent tasks first.","rank"],
+    ["thorough","adjective","B2","complete and careful","He did a thorough review.","meticulous"],
+    ["constructive","adjective","B2","helpful and useful","Please give constructive feedback.","helpful"],
+    ["delegate","verb","B2","to give a task to someone else","A good manager delegates tasks.","assign"],
+    ["feasible","adjective","B2","possible to do","Is this plan feasible?","viable"],
+    ["versatile","adjective","B2","able to do many things well","She's a versatile employee.","adaptable"],
+    ["assertive","adjective","B2","confident and direct","Be assertive in negotiations.","confident"],
+    ["meticulous","adjective","B2","very careful with details","He is meticulous about accuracy.","precise"],
+    ["pragmatic","adjective","C1","practical rather than idealistic","We need a pragmatic solution.","practical"],
+    ["ambiguous","adjective","C1","unclear, open to interpretation","The instructions were ambiguous.","vague"],
+    ["discrepancy","noun","C1","a difference between things that should match","There's a discrepancy in the report.","inconsistency"],
+    ["nuanced","adjective","C1","showing subtle differences","She gave a nuanced answer.","subtle"],
+    ["leverage","verb","C1","to use something to maximum advantage","We should leverage our strengths.","utilize"],
+    ["mitigate","verb","C1","to make something less severe","We mitigated the risk.","reduce"],
+    ["scrutinize","verb","C1","to examine closely","They scrutinized every detail.","examine"],
+    ["coherent","adjective","C1","logical and consistent","His argument was coherent.","logical"],
+    ["discern","verb","C1","to perceive or recognize","It's hard to discern the pattern.","perceive"],
+    ["substantiate","verb","C1","to prove with evidence","Can you substantiate that claim?","verify"],
+    ["deliberate","adjective","C1","done intentionally","It was a deliberate decision.","intentional"],
+    ["candid","adjective","C1","honest and direct","She was candid about the problem.","frank"],
+    ["ubiquitous","adjective","C2","present everywhere","Smartphones are ubiquitous today.","omnipresent"],
+    ["ephemeral","adjective","C2","lasting a very short time","Trends are often ephemeral.","fleeting"],
+    ["equivocate","verb","C2","to speak ambiguously to avoid commitment","Stop equivocating and give a direct answer.","hedge"],
+    ["incisive","adjective","C2","sharp and direct in thought","Her incisive analysis impressed everyone.","sharp"],
+    ["tacit","adjective","C2","implied without being stated","There was tacit agreement.","implicit"],
+    ["circumvent","verb","C2","to find a way around a problem","We circumvented the delay.","bypass"],
+    ["conundrum","noun","C2","a difficult problem","This is a real conundrum.","puzzle"],
+    ["assiduous","adjective","C2","showing great care and effort","He was assiduous in his preparation.","diligent"],
+    ["juxtapose","verb","C2","to place side by side for comparison","The report juxtaposes the two approaches.","contrast"],
+    ["obfuscate","verb","C2","to make unclear deliberately","Don't obfuscate the real issue.","confuse"],
+    ["perfunctory","adjective","C2","done without care, routine","His apology felt perfunctory.","cursory"],
+    ["magnanimous","adjective","C2","generous, especially to a rival","She was magnanimous in victory.","generous"]
+  ];
+
+  var MATH_WEEKS = [
+    { m:1, title:"Number Sense & Basic Calculation", topics:["Addition","Subtraction","Multiplication","Division","Order of operations"], learn:["PEMDAS / BODMAS","Mental calculation techniques","Estimation","Checking answers"], practice:"10 basic calculations · 10 mixed calculations · 5 timed mental math questions", goal:"Build calculation speed and accuracy.", weekday:{mon:"Addition and subtraction.",tue:"Multiplication.",wed:"Division.",thu:"Mixed calculation.",fri:"Timed mixed quiz."} },
+    { m:1, title:"Fractions", topics:["Numerator","Denominator","Proper fractions","Improper fractions","Mixed numbers"], learn:["Simplifying fractions","Equivalent fractions","Comparing fractions"], practice:"Simplify fractions · Convert improper fractions · Compare fractions", weekday:{mon:"Simplifying fractions.",tue:"Equivalent fractions.",wed:"Comparing fractions.",thu:"Improper fractions.",fri:"Mixed fraction quiz."} },
+    { m:1, title:"Fraction Operations", learn:["Addition","Subtraction","Multiplication","Division"], practice:"10–20 questions", weekday:{mon:"Addition.",tue:"Subtraction.",wed:"Multiplication.",thu:"Division.",fri:"Mixed operations."} },
+    { m:1, title:"Decimals & Percentages", topics:["Decimal place value","Fraction ↔ Decimal","Decimal ↔ Percentage","Percentage calculations"], learn:["Find X% of a number","Percentage increase","Percentage decrease"], practice:"10 conversion questions · 10 percentage questions", weekday:{mon:"Decimals.",tue:"Fraction ↔ decimal.",wed:"Decimal ↔ percentage.",thu:"Percentage increase/decrease.",fri:"Mixed quiz."} },
+    { m:2, title:"Ratio", learn:["Ratio notation","Simplifying ratios","Comparing ratios","Ratio word problems"], practice:"10–20 questions" },
+    { m:2, title:"Proportion", learn:["Direct proportion","Inverse proportion","Cross multiplication","Word problems"], practice:"10–20 questions" },
+    { m:2, title:"Algebra Basics", learn:["Variables","Constants","Coefficients","Expressions","Like terms"], practice:"Simplify expressions" },
+    { m:2, title:"Linear Equations", learn:["Solve for x","Addition / subtraction equations","Multiplication / division equations","Multi-step equations"], practice:"10–20 equations" },
+    { m:3, title:"Word Problems", learn:["Identify known information","Identify unknown information","Translate words into equations"], practice:"Simple word problems" },
+    { m:3, title:"Rate, Distance & Time", formula:"Speed = Distance / Time", learn:["Find speed","Find distance","Find time","Unit conversion"], note:"Supports Physics and ATC preparation." },
+    { m:3, title:"Averages", learn:["Mean","Median","Mode","Range"], practice:"Data interpretation" },
+    { m:3, title:"Graphs & Data", learn:["Line graph","Bar chart","Pie chart","Tables","Basic interpretation"], practice:"Read and interpret data quickly" },
+    { m:4, title:"Powers & Roots", learn:["Exponents","Square numbers","Square roots","Scientific notation"] },
+    { m:4, title:"Functions", learn:["Input / output","Function notation","Linear functions","Reading function graphs"] },
+    { m:4, title:"Coordinate Geometry", learn:["X-axis","Y-axis","Coordinates","Distance basics","Slope introduction"] },
+    { m:4, title:"Probability", learn:["Basic probability","Probability as fraction","Percentage probability","Simple events"] },
+    { m:5, title:"Mental Math", learn:["Fast addition","Fast subtraction","Multiplication shortcuts","Division","Estimation"] },
+    { m:5, title:"Numerical Reasoning", practice:"Tables · Graphs · Percentage · Ratios · Data comparison" },
+    { m:5, title:"Pattern Recognition", practice:"Number sequences · Missing numbers · Mathematical patterns" },
+    { m:5, title:"Mixed Problem Solving", learn:["Percentage","Ratio","Speed","Average","Algebra","Graph interpretation"] }
+  ];
+
+  var PHYSICS_WEEKS = [
+    { m:1, title:"Units & Measurement", topics:["SI units","Length","Mass","Time","Temperature"], learn:["Meter (m)","Kilogram (kg)","Second (s)","Unit conversion","Scientific notation basics"], practice:"Convert cm ↔ m · Convert km ↔ m · Convert minutes ↔ seconds", weekday:{mon:"Length conversion.",tue:"Mass conversion.",wed:"Time conversion.",thu:"Mixed units.",fri:"Timed conversion quiz."} },
+    { m:1, title:"Distance, Displacement & Speed", topics:["Distance","Displacement","Speed","Average speed"], formula:"Speed = Distance / Time", learn:["Difference between distance and displacement","Scalar vs directional movement","Calculate speed"], practice:"Find speed, distance, time.", example:"A car travels 120 km in 2 hours. Find average speed." },
+    { m:1, title:"Velocity & Acceleration", topics:["Velocity","Acceleration","Change in velocity","Direction"], formula:"Acceleration = Change in Velocity / Time", practice:"Calculate acceleration · Compare positive / negative acceleration · Interpret motion situations" },
+    { m:1, title:"Motion Graphs", learn:["Distance–time graph","Speed–time graph","Slope basics","Constant speed","Acceleration"], practice:"Interpret graphs — when is the object stationary? moving fastest? when does speed increase?" },
+    { m:2, title:"Force", formula:"F = m × a", topics:["Force","Mass","Acceleration"], practice:"Calculate force, mass, acceleration" },
+    { m:2, title:"Newton's First Law", learn:["Inertia","Balanced forces","Unbalanced forces"], example:"Car braking · Passenger movement · Objects remaining at rest", practice:"Explain real-world situations" },
+    { m:2, title:"Newton's Second Law", formula:"F = m × a", practice:"Multi-step problems — changing mass, changing acceleration, comparing forces" },
+    { m:2, title:"Newton's Third Law", learn:["Action and reaction"], example:"Walking · Swimming · Rocket movement", practice:"Identify action-reaction pairs" },
+    { m:3, title:"Work", formula:"Work = Force × Distance", learn:["Force","Displacement","Work"], practice:"Calculate work" },
+    { m:3, title:"Energy", learn:["Kinetic Energy","Potential Energy","Energy conversion"], formula:"KE = ½ × m × v² · PE = m × g × h", practice:"Calculate energy" },
+    { m:3, title:"Power", formula:"Power = Work / Time", learn:["Energy transfer rate","Compare power"], practice:"Calculation problems" },
+    { m:3, title:"Conservation of Energy", learn:["Energy transformation","Conservation principle"], example:"Falling objects · Roller coaster · Pendulum", practice:"Trace energy changes" },
+    { m:4, title:"Momentum", formula:"p = m × v", learn:["Mass","Velocity","Momentum"], practice:"Calculate and compare momentum" },
+    { m:4, title:"Collisions", learn:["Momentum before","Momentum after","Conservation basics"], practice:"Simple collision problems" },
+    { m:4, title:"Waves", learn:["Amplitude","Frequency","Wavelength","Wave speed"], formula:"Wave Speed = Frequency × Wavelength" },
+    { m:4, title:"Sound", learn:["Sound waves","Frequency","Pitch","Volume"], practice:"Concept questions" },
+    { m:5, title:"Electric Charge", learn:["Positive charge","Negative charge","Attraction","Repulsion"] },
+    { m:5, title:"Current", learn:["Electric current","Amperes","Basic circuits"] },
+    { m:5, title:"Voltage & Resistance", formula:"V = I × R", learn:["Voltage","Current","Resistance","Ohm's Law"], practice:"Find V, I, and R" },
+    { m:5, title:"Circuits", learn:["Series circuits","Parallel circuits","Circuit diagrams"], practice:"Predict how changes affect circuits" }
+  ];
+
+  var MISTAKE_TYPES = ["Concept error","Calculation error","Formula error","Unit error","Misread question","Time pressure"];
+  var DOW_KEY = { 1:"mon", 2:"tue", 3:"wed", 4:"thu", 5:"fri" };
+
+  var ATC_SKILLS = {
+    1: { name:"Mental Math", min:"10", practice:["Addition","Subtraction","Multiplication","Division","Percentage"], focus:"Accuracy before speed." },
+    2: { name:"Memory", min:"10", practice:["Number sequences","Letter sequences","Information recall"] },
+    3: { name:"Logic & Patterns", min:"10–15", practice:["Number patterns","Symbol patterns","Rule detection"] },
+    4: { name:"Spatial Awareness", min:"10–15", practice:["Direction","Position","Rotation","Relative movement"] },
+    5: { name:"Attention & Prioritization", min:"10", practice:["Find differences","Detect incorrect information","Prioritize tasks"] }
+  };
+
+  var THREED_WEEKS = [
+    { m:1, learn:["Interface","Navigation","Object Mode","Move","Rotate","Scale"], task:"Create: cube, sphere, cylinder, simple objects.", project:"Create 3–5 simple household objects from primitives." },
+    { m:1, learn:["Edit Mode","Vertex","Edge","Face","Extrude","Inset"], task:"Model a simple chair.", project:"Create a different chair independently." },
+    { m:1, learn:["Loop Cut","Bevel","Mirror Modifier"], task:"Model a symmetrical object.", project:"Create a detailed prop." },
+    { m:1, learn:["Array Modifier","Subdivision Surface","Basic scene organization"], task:"Apply modifiers to existing models.", project:"Create a small room." },
+    { m:2, learn:["Hard surface basics"], task:"Practice hard-surface shapes.", project:"Create a monitor." },
+    { m:2, learn:["Furniture techniques"], task:"Practice furniture forms.", project:"Create a bed." },
+    { m:2, learn:["Props"], task:"Practice small prop modeling.", project:"Create a keyboard, lamp, or decoration." },
+    { m:2, learn:["Scene assembly"], task:"Arrange previous assets.", project:"Create a complete bedroom scene." },
+    { m:3, learn:["UV basics — seams, unwrap"], task:"Unwrap a simple object.", project:"Unwrap last week's bedroom assets." },
+    { m:3, learn:["UV practice — islands, packing"], task:"Optimize UV layouts.", project:"Pack UVs for 2–3 assets." },
+    { m:3, learn:["Materials — base color, roughness, metallic, normal maps"], task:"Apply materials to an asset.", project:"Texture skin, fabric, metal, or wood." },
+    { m:3, learn:["Full pipeline review"], task:"Model → UV → Material on 3 assets.", project:"Complete 3 assets end-to-end." },
+    { m:4, learn:["Head proportions"], task:"Block out a head shape.", project:"Refine head proportions." },
+    { m:4, learn:["Face"], task:"Model facial features.", project:"Refine facial topology." },
+    { m:4, learn:["Body proportions"], task:"Block out a body shape.", project:"Refine body proportions." },
+    { m:4, learn:["Combine head + body"], task:"Merge into one base mesh.", project:"Complete a character base mesh." },
+    { m:5, learn:["Hair"], task:"Model or card basic hair.", project:"Add hair to the base mesh." },
+    { m:5, learn:["Clothes"], task:"Model simple clothing.", project:"Dress the character." },
+    { m:5, learn:["Accessories"], task:"Model small accessories.", project:"Add accessories to the character." },
+    { m:5, learn:["Final detailing"], task:"Polish silhouette and details.", project:"Complete one static character." },
+    { m:6, learn:["Armature"], task:"Build a basic skeleton.", project:"Rig the static character." },
+    { m:6, learn:["Weight painting"], task:"Paint deformation weights.", project:"Fix weight-paint problem areas." },
+    { m:6, learn:["Basic poses"], task:"Pose the rigged character.", project:"Create 2–3 poses." },
+    { m:6, learn:["Idle animation basics"], task:"Key basic idle motion.", project:"Create a 1–3 second idle animation." }
+  ];
+
+  // Interview bank, derived from English lesson days.
+  var INTERVIEW_QUESTIONS = [];
+  ENGLISH_DAYS.forEach(function(day){
+    if (day.mode !== "lesson") return;
+    INTERVIEW_QUESTIONS.push({ id:"d"+day.d+"-primary", text:day.primary, category:day.title, career:day.career||null, difficulty:"easy" });
+    INTERVIEW_QUESTIONS.push({ id:"d"+day.d+"-followup", text:day.followup, category:day.title, career:day.career||null, difficulty:"medium" });
+    INTERVIEW_QUESTIONS.push({ id:"d"+day.d+"-deep", text:day.deep, category:day.title, career:day.career||null, difficulty:"hard" });
+  });
+
+  // ================= DATE HELPERS =================
+  function fmt(d) {
+    var y = d.getFullYear(), m = String(d.getMonth()+1).padStart(2,"0"), day = String(d.getDate()).padStart(2,"0");
+    return y + "-" + m + "-" + day;
+  }
+  function parseD(s) { var p = s.split("-"); return new Date(+p[0], +p[1]-1, +p[2]); }
+  function addDays(d, n) { var r = new Date(d); r.setDate(r.getDate()+n); return r; }
+  function startOfWeek(d) { var day = d.getDay(); var diff = day === 0 ? -6 : 1 - day; return addDays(d, diff); }
+
+  var todayD = new Date();
+  var todayStr = fmt(todayD);
+  var BASE_URL = "https://maneekoooluca.github.io/flight-plan/";
+  var isWidget = new URLSearchParams(location.search).get("widget") === "1" ||
+    (window.innerWidth <= 360 && window.innerHeight <= 360);
+  if (isWidget) { document.body.classList.add("widget-mode"); document.title = "Flight Plan Widget"; }
+
+  // ================= STATE =================
+  var state = load();
+  function load() {
+    var s = null;
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (raw) s = JSON.parse(raw);
+    } catch (e) {}
+    if (!s) s = { startDate: fmt(startOfWeek(todayD)), days: {} };
+    if (!s.days) s.days = {};
+    if (!s.vocabState) s.vocabState = {};
+    if (!s.interviewState) s.interviewState = {};
+    if (!s.mathLog) s.mathLog = [];
+    if (!s.physicsLog) s.physicsLog = [];
+    if (!s.atcLog) s.atcLog = [];
+    if (!s.threedState) s.threedState = {};
+    return s;
+  }
+  function save() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+  function dayState(dateStr) {
+    if (!state.days[dateStr]) state.days[dateStr] = { dayType: "good", rest: false, checks: {}, reflection: {} };
+    if (!state.days[dateStr].reflection) state.days[dateStr].reflection = {};
+    return state.days[dateStr];
+  }
+
+  function weekNumberFor(dateStr) {
+    var start = parseD(state.startDate);
+    var d = parseD(dateStr);
+    var diffDays = Math.round((d - start) / 86400000);
+    var wn = Math.floor(diffDays / 7) + 1;
+    return wn < 1 ? 1 : wn;
+  }
+
+  function weekdayIndexFor(dateStr) {
+    var start = parseD(state.startDate);
+    var d = parseD(dateStr);
+    if (d < start) return 1;
+    var count = 0;
+    var cur = new Date(start);
+    while (cur <= d) {
+      var dow = cur.getDay();
+      if (dow >= 1 && dow <= 5) count++;
+      cur = addDays(cur, 1);
+    }
+    return count < 1 ? 1 : count;
+  }
+
+  function cyclePos(idx, len) {
+    var zero = idx - 1;
+    var cycle = Math.floor(zero / len) + 1;
+    var pos = (zero % len);
+    return { pos: pos, cycle: cycle };
+  }
+
+  // ================= VOCAB PICKING =================
+  function vocabRank(word) {
+    var vs = state.vocabState[word];
+    if (!vs) return 0;
+    var order = { "new":0, "review":1, "learning":2, "mastered":3 };
+    return order[vs.status] !== undefined ? order[vs.status] : 0;
+  }
+  function daysBetween(a, b) { return Math.round((parseD(b) - parseD(a)) / 86400000); }
+
+  function ensureVocabToday(dateStr) {
+    var ds = dayState(dateStr);
+    if (ds.vocabToday && ds.vocabToday.length) return ds.vocabToday;
+    function eligible(levels) {
+      return VOCAB_SEED
+        .filter(function(v){ return levels.indexOf(v[2]) !== -1; })
+        .filter(function(v){
+          var vs = state.vocabState[v[0]];
+          if (vs && vs.lastPicked && daysBetween(vs.lastPicked, dateStr) < 3) return false;
+          return true;
+        })
+        .sort(function(a,b){ return vocabRank(a[0]) - vocabRank(b[0]); });
+    }
+    var poolA = eligible(["B1","B2"]);
+    var poolC1 = eligible(["C1"]);
+    var pickA = poolA[0] || VOCAB_SEED.filter(function(v){ return v[2]==="B1"||v[2]==="B2"; })[0];
+    var pickC1 = poolC1[0] || VOCAB_SEED.filter(function(v){ return v[2]==="C1"; })[0];
+    var picks = [pickA, pickC1].filter(Boolean);
+    if (weekdayIndexFor(dateStr) % 2 === 0) {
+      var poolC2 = eligible(["C2"]);
+      var pickC2 = poolC2[0] || VOCAB_SEED.filter(function(v){ return v[2]==="C2"; })[0];
+      if (pickC2) picks.push(pickC2);
+    }
+    var words = picks.map(function(p){ return p[0]; });
+    words.forEach(function(w){
+      if (!state.vocabState[w]) state.vocabState[w] = { status:"new", practiceCount:0, lastPracticed:null };
+      state.vocabState[w].lastPicked = dateStr;
+    });
+    ds.vocabToday = words;
+    save();
+    return words;
+  }
+  function vocabByWord(word) { return VOCAB_SEED.filter(function(v){ return v[0]===word; })[0]; }
+  function markVocabPracticed(word) {
+    if (!state.vocabState[word]) state.vocabState[word] = { status:"new", practiceCount:0, lastPracticed:null };
+    var vs = state.vocabState[word];
+    vs.practiceCount = (vs.practiceCount||0) + 1;
+    vs.lastPracticed = todayStr;
+    if (vs.practiceCount >= 5) vs.status = "mastered";
+    else if (vs.practiceCount >= 2) vs.status = "learning";
+    else if (vs.status !== "mastered") vs.status = "learning";
+    save();
+  }
+
+  // ================= TODAY TAB — PLAN BUILDER =================
+  function buildPlan(dateStr) {
+    var d = parseD(dateStr);
+    var dow = d.getDay();
+    var ds = dayState(dateStr);
+    var wn = weekNumberFor(dateStr);
+    var tired = ds.dayType === "tired";
+    var sections = [];
+    var meta = { weekNumber: wn };
+
+    if (dow >= 1 && dow <= 5) {
+      var wi = weekdayIndexFor(dateStr);
+      var cp = cyclePos(wi, 28);
+      var cn = CHINESE_DAYS[cp.pos];
+      var en = ENGLISH_DAYS[cp.pos];
+      meta.chineseDay = cn; meta.englishDay = en; meta.cycle = cp.cycle;
+
+      var cnTasks = [];
+      if (cn.vocab.length) cnTasks.push({ id:"cn-vocab", label:"Learn new vocabulary (" + cn.vocab.length + " words)", required:true, min:"15" });
+      cn.blocks.forEach(function(b,i){ cnTasks.push({ id:"cn-b"+i, label:b.l + " — " + b.t, required: !tired, min:null }); });
+      cnTasks.push({ id:"cn-output", label:"Output — " + cn.output, required:true, min:null });
+      sections.push({ title:"Chinese · Day " + cn.d + (cp.cycle>1?" (cycle "+cp.cycle+")":"") + " — " + cn.title, tasks:cnTasks });
+
+      var vocabWords = ensureVocabToday(dateStr);
+      var enTasks = [];
+      if (en.mode === "lesson") {
+        enTasks.push({ id:"en-primary", label:"Primary — " + en.primary, required:true, min:"15" });
+        enTasks.push({ id:"en-followup", label:"Follow-up — " + en.followup, required: !tired, min:null });
+        enTasks.push({ id:"en-deep", label:"Deep — " + en.deep, required: !tired, min:"15" });
+      } else {
+        enTasks.push({ id:"en-mock", label:en.title + " — " + en.note, required:true, min:null });
+      }
+      enTasks.push({ id:"en-vocab", label:"Random vocabulary — " + vocabWords.join(", "), required: !tired, min:"10" });
+      enTasks.push({ id:"en-toeic", label:"TOEIC — " + en.toeic, required: !tired, min:"10" });
+      enTasks.push({ id:"en-output", label:"Output — " + en.output, required:true, min:null });
+      var enSection = { title:"English · Day " + en.d + (cp.cycle>1?" (cycle "+cp.cycle+")":""), tasks:enTasks };
+      if (en.career) enSection.banner = "Career focus: " + en.career + ".";
+      sections.push(enSection);
+
+      var optTasks = [];
+      var mcp = cyclePos(wn, MATH_WEEKS.length);
+      var pcp = cyclePos(wn, PHYSICS_WEEKS.length);
+      var mw0 = MATH_WEEKS[mcp.pos], pw0 = PHYSICS_WEEKS[pcp.pos];
+      var mDayText = mw0.weekday && DOW_KEY[dow] ? mw0.weekday[DOW_KEY[dow]] : ("Practice: " + mw0.title + ".");
+      var pDayText = pw0.weekday && DOW_KEY[dow] ? pw0.weekday[DOW_KEY[dow]] : ("Practice: " + pw0.title + ".");
+      optTasks.push({ id:"opt-math", label:"Math practice — " + mw0.title, sub:mDayText + " (2 min review · solve · 3–5 min check mistakes)", required:false, min:"10–30" });
+      optTasks.push({ id:"opt-physics", label:"Physics practice — " + pw0.title, sub:pDayText + " (2 min review · solve · 3–5 min check mistakes)", required:false, min:"10–30" });
+      var atc = ATC_SKILLS[dow];
+      if (atc) optTasks.push({ id:"opt-atc", label:"ATC micro-practice — " + atc.name, required:false, min:atc.min });
+      sections.push({ title:"Optional, if energy allows", optional:true, tasks:optTasks });
+
+    } else if (dow === 6) {
+      var mcp2 = cyclePos(wn, MATH_WEEKS.length);
+      var mw = MATH_WEEKS[mcp2.pos];
+      var mLearnText = (mw.topics ? mw.topics.join(" · ") + " — " : "") + mw.learn.join(" · ") + (mw.formula ? " — " + mw.formula : "");
+      sections.push({
+        title:"Math · 60 min — Week " + (mcp2.pos+1) + ": " + mw.title + (mcp2.cycle>1?" (cycle "+mcp2.cycle+")":""),
+        tasks:[
+          { id:"math-review", label:"Review previous topic", required:true, min:"10" },
+          { id:"math-learn", label:"Learn: " + mLearnText, required:true, min:"25" },
+          { id:"math-practice", label:"Practice — " + (mw.practice||"exercises"), required:true, min:"20" },
+          { id:"math-summary", label:"Mistake summary", required:true, min:"5" }
+        ]
+      });
+      var tcp = cyclePos(wn, THREED_WEEKS.length);
+      var tw = THREED_WEEKS[tcp.pos];
+      sections.push({
+        title:"3D Modeling · 1.5–2h — Week " + (tcp.pos+1) + (tcp.cycle>1?" (cycle "+tcp.cycle+")":"") + ": " + tw.learn.join(", "),
+        tasks:[
+          { id:"3d-learn", label:"Learn a technique — " + tw.learn.join(", "), required:true, min:"30–45" },
+          { id:"3d-apply", label:"Apply — " + tw.task, required:true, min:"30–60" },
+          { id:"3d-experiment", label:"Improve or experiment freely", required:false, min:"remaining" }
+        ]
+      });
+    } else {
+      var pcp2 = cyclePos(wn, PHYSICS_WEEKS.length);
+      var pw = PHYSICS_WEEKS[pcp2.pos];
+      var pLearnText = (pw.topics ? pw.topics.join(" · ") + " — " : "") + (pw.learn?pw.learn.join(" · "):"") + (pw.formula?" — " + pw.formula:"") + (pw.example?" (e.g. " + pw.example + ")":"");
+      sections.push({
+        title:"Physics · 60 min — Week " + (pcp2.pos+1) + ": " + pw.title + (pcp2.cycle>1?" (cycle "+pcp2.cycle+")":""),
+        tasks:[
+          { id:"phy-review", label:"Review previous topic", required:true, min:"10" },
+          { id:"phy-learn", label:"Learn: " + pLearnText, required:true, min:"25" },
+          { id:"phy-practice", label:"Practice — " + (pw.practice||"exercises"), required:true, min:"20" },
+          { id:"phy-summary", label:"Mistake summary", required:true, min:"5" }
+        ]
+      });
+      var tcp2 = cyclePos(wn, THREED_WEEKS.length);
+      var tw2 = THREED_WEEKS[tcp2.pos];
+      sections.push({
+        title:"3D Modeling · 1–2h — apply Saturday's technique",
+        tasks:[
+          { id:"3d-project", label:"Project — " + tw2.project, required:true, min:"60–120" }
+        ]
+      });
+    }
+
+    return { dow: dow, sections: sections, meta: meta, dateStr: dateStr };
+  }
+
+  function dayStatus(dateStr) {
+    var ds = state.days[dateStr];
+    if (!ds) return "empty";
+    if (ds.rest) return "rest";
+    var plan = buildPlan(dateStr);
+    var anyRequired = false, anyChecked = false, allDone = true;
+    plan.sections.forEach(function(sec){
+      sec.tasks.forEach(function(t){
+        if (t.required) {
+          anyRequired = true;
+          if (ds.checks[t.id]) anyChecked = true; else allDone = false;
+        }
+      });
+    });
+    if (!anyRequired) return "empty";
+    if (allDone) return "done";
+    if (anyChecked) return "partial";
+    return "empty";
+  }
+
+  function computeStreak() {
+    var streak = 0, cursor = todayD, first = true;
+    while (true) {
+      var ds = fmt(cursor);
+      var status = dayStatus(ds);
+      if (first && status === "empty") { first = false; cursor = addDays(cursor, -1); continue; }
+      first = false;
+      if (status === "done" || status === "rest") { streak++; cursor = addDays(cursor, -1); }
+      else break;
+      if (streak > 3650) break;
+    }
+    return streak;
+  }
+  function computeWeekPct(weekStartD) {
+    var total = 0, done = 0;
+    for (var i = 0; i < 7; i++) {
+      var dd = addDays(weekStartD, i);
+      if (dd > todayD) continue;
+      total++;
+      if (dayStatus(fmt(dd)) === "done" || dayStatus(fmt(dd)) === "rest") done++;
+    }
+    return total === 0 ? 0 : Math.round((done/total)*100);
+  }
+
+  // ================= TODAY TAB — RENDER =================
+  var viewWeekStart = startOfWeek(todayD);
+  var selectedDate = todayStr;
+
+  function renderStrip() {
+    var strip = document.getElementById("strip");
+    strip.innerHTML = "";
+    for (var i = 0; i < 7; i++) {
+      var d = addDays(viewWeekStart, i);
+      var ds = fmt(d);
+      var chip = document.createElement("div");
+      chip.className = "day-chip";
+      if (ds === selectedDate) chip.className += " selected";
+      if (ds === todayStr) chip.className += " is-today";
+      var status = dayStatus(ds);
+      chip.innerHTML = '<span class="dow">' + DOW_SHORT[d.getDay()] + '</span>' +
+        '<span class="dnum">' + d.getDate() + '</span>' +
+        '<span class="dots"><span class="dot ' + (status !== "empty" ? status : "") + '"></span></span>';
+      chip.addEventListener("click", (function(ds){ return function(){ selectedDate = ds; renderToday(); }; })(ds));
+      strip.appendChild(chip);
+    }
+    var rangeEnd = addDays(viewWeekStart, 6);
+    document.getElementById("weekRange").textContent =
+      viewWeekStart.toLocaleDateString(undefined, { month:"short", day:"numeric" }) + " – " +
+      rangeEnd.toLocaleDateString(undefined, { month:"short", day:"numeric", year:"numeric" });
+  }
+
+  function renderStats() {
+    document.getElementById("streakStat").textContent = computeStreak();
+    document.getElementById("weekStat").textContent = computeWeekPct(startOfWeek(todayD)) + "%";
+  }
+
+  function scaleRow(name, value, onPick) {
+    var out = '<div class="scale" data-scale="' + name + '">';
+    for (var i = 1; i <= 5; i++) {
+      out += '<button data-v="' + i + '" class="' + (value === i ? "active" : "") + '">' + i + '</button>';
+    }
+    out += '</div>';
+    return out;
+  }
+
+  function renderCard() {
+    var card = document.getElementById("dayCard");
+    var plan = buildPlan(selectedDate);
+    var ds = dayState(selectedDate);
+    var d = parseD(selectedDate);
+    var label = d.toLocaleDateString(undefined, { weekday:"long", month:"long", day:"numeric" });
+
+    var html = '<div class="card-head">' +
+      '<div><h2>' + label + '</h2><div class="sub">Week ' + plan.meta.weekNumber + ' of your plan' + (selectedDate === todayStr ? " · Today" : "") + '</div></div>';
+
+    if (plan.dow >= 1 && plan.dow <= 5) {
+      html += '<div class="daytype-toggle" role="group" aria-label="Day type">' +
+        '<button data-type="good" class="' + (ds.dayType === "good" && !ds.rest ? "active" : "") + '">Good day</button>' +
+        '<button data-type="tired" class="' + (ds.dayType === "tired" && !ds.rest ? "active" : "") + '">Tired day</button>' +
+        '<button data-type="rest" class="' + (ds.rest ? "active" : "") + '">Rest day</button>' +
+        '</div>';
+    } else {
+      html += '<div class="daytype-toggle" role="group" aria-label="Day type">' +
+        '<button data-type="rest" class="' + (ds.rest ? "active" : "") + '">Rest day</button>' +
+        '</div>';
+    }
+    html += '</div>';
+
+    if (ds.rest) {
+      html += '<div class="rest-banner"><b>Full rest.</b> No required study today — gaming, movies, and downtime are the plan. This still counts toward your streak.</div>';
+    } else {
+      var totalReq = 0, doneReq = 0;
+      plan.sections.forEach(function(sec){ sec.tasks.forEach(function(t){ if (t.required) { totalReq++; if (ds.checks[t.id]) doneReq++; } }); });
+      var pct = totalReq ? Math.round((doneReq/totalReq)*100) : 0;
+      html += '<div class="progress-ring-wrap"><svg width="34" height="34" viewBox="0 0 34 34">' +
+        '<circle cx="17" cy="17" r="14" fill="none" stroke="var(--line)" stroke-width="4"/>' +
+        '<circle cx="17" cy="17" r="14" fill="none" stroke="var(--done)" stroke-width="4" stroke-linecap="round" ' +
+        'stroke-dasharray="' + (2*Math.PI*14).toFixed(1) + '" stroke-dashoffset="' + (2*Math.PI*14*(1-pct/100)).toFixed(1) + '" transform="rotate(-90 17 17)"/></svg>' +
+        '<span class="plabel">Required tasks &nbsp;<b>' + doneReq + ' / ' + totalReq + '</b></span></div>';
+
+      if (plan.meta.chineseDay) {
+        html += '<div class="vocab-chip-row">' + plan.meta.chineseDay.vocab.map(function(v){
+          return '<span class="vocab-chip"><b>' + v[0] + '</b> ' + v[1] + ' <span class="vl">' + v[2] + '</span></span>';
+        }).join("") + '</div>';
+      }
+
+      plan.sections.forEach(function(sec){
+        html += '<div class="section"><div class="section-title' + (sec.optional ? " optional" : "") + '"><span>' + sec.title + '</span><span class="line"></span></div>';
+        if (sec.banner) html += '<div class="info-banner">' + sec.banner + '</div>';
+        sec.tasks.forEach(function(t){
+          var checked = !!ds.checks[t.id];
+          html += '<label class="task' + (checked ? " done" : "") + '">' +
+            '<input type="checkbox" data-task="' + t.id + '" ' + (checked ? "checked" : "") + '/>' +
+            '<span class="tlabel">' + t.label + (!t.required ? '<span class="topt-badge">optional</span>' : '') + (t.sub ? '<span class="tsub">' + t.sub + '</span>' : '') + '</span>' +
+            (t.min ? '<span class="tmin">' + t.min + ' min</span>' : '') +
+            '</label>';
+        });
+        html += '</div>';
+      });
+
+      html += '<div class="freetime-note">🎮 Free time — gaming, movies, series, and social media stay available after required tasks.</div>';
+
+      var refl = ds.reflection || {};
+      html += '<div class="reflect">' +
+        '<div class="reflect-title">Reflection</div>' +
+        '<div class="reflect-row"><span class="rlabel">Energy</span>' + scaleRow("energy", refl.energy||0) + '</div>' +
+        '<div class="reflect-row"><span class="rlabel">Study quality</span>' + scaleRow("quality", refl.quality||0) + '</div>' +
+        '<textarea id="reflNotes" placeholder="Notes...">' + (refl.notes||"") + '</textarea>' +
+        '<textarea id="reflAdjust" placeholder="Tomorrow adjustment...">' + (refl.adjustment||"") + '</textarea>' +
+        '</div>';
+    }
+
+    card.innerHTML = html;
+
+    card.querySelectorAll(".daytype-toggle button").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var type = btn.getAttribute("data-type");
+        var dsx = dayState(selectedDate);
+        if (type === "rest") { dsx.rest = !dsx.rest; }
+        else { dsx.rest = false; dsx.dayType = type; }
+        save(); renderToday();
+      });
+    });
+    card.querySelectorAll('input[type="checkbox"][data-task]').forEach(function(cb){
+      cb.addEventListener("change", function(){
+        var dsx = dayState(selectedDate);
+        dsx.checks[cb.getAttribute("data-task")] = cb.checked;
+        save(); renderToday();
+      });
+    });
+    card.querySelectorAll(".scale").forEach(function(sc){
+      var name = sc.getAttribute("data-scale");
+      sc.querySelectorAll("button").forEach(function(b){
+        b.addEventListener("click", function(){
+          var dsx = dayState(selectedDate);
+          if (!dsx.reflection) dsx.reflection = {};
+          var v = +b.getAttribute("data-v");
+          dsx.reflection[name] = dsx.reflection[name] === v ? 0 : v;
+          save(); renderCard();
+        });
+      });
+    });
+    var rn = card.querySelector("#reflNotes");
+    if (rn) rn.addEventListener("change", function(){ var dsx = dayState(selectedDate); if (!dsx.reflection) dsx.reflection={}; dsx.reflection.notes = rn.value; save(); });
+    var ra = card.querySelector("#reflAdjust");
+    if (ra) ra.addEventListener("change", function(){ var dsx = dayState(selectedDate); if (!dsx.reflection) dsx.reflection={}; dsx.reflection.adjustment = ra.value; save(); });
+  }
+
+  function renderToday() {
+    renderStrip();
+    renderStats();
+    renderCard();
+  }
+
+  document.getElementById("prevWeek").addEventListener("click", function(){ viewWeekStart = addDays(viewWeekStart, -7); renderStrip(); });
+  document.getElementById("nextWeek").addEventListener("click", function(){ viewWeekStart = addDays(viewWeekStart, 7); renderStrip(); });
+  document.getElementById("jumpToday").addEventListener("click", function(){ viewWeekStart = startOfWeek(todayD); selectedDate = todayStr; renderToday(); });
+
+  // ================= DASHBOARD =================
+  function renderDashboard() {
+    var wi = weekdayIndexFor(todayStr <= state.startDate ? state.startDate : (todayD.getDay()>=1&&todayD.getDay()<=5 ? todayStr : (function(){ var c=new Date(todayD); while(c.getDay()===0||c.getDay()===6) c=addDays(c,-1); return fmt(c); })()));
+    var cnCp = cyclePos(wi, 28), enCp = cyclePos(wi, 28);
+    var wn = weekNumberFor(todayStr);
+    var mCp = cyclePos(wn, MATH_WEEKS.length), pCp = cyclePos(wn, PHYSICS_WEEKS.length), tCp = cyclePos(wn, THREED_WEEKS.length);
+
+    var vocabCounts = { "new":0, "learning":0, "mastered":0, "review":0 };
+    VOCAB_SEED.forEach(function(v){
+      var vs = state.vocabState[v[0]];
+      var status = vs ? vs.status : "new";
+      vocabCounts[status] = (vocabCounts[status]||0) + 1;
+    });
+
+    var ivAnswered = 0;
+    INTERVIEW_QUESTIONS.forEach(function(q){ if (state.interviewState[q.id] && state.interviewState[q.id].answered) ivAnswered++; });
+
+    var threedDone = 0;
+    THREED_WEEKS.forEach(function(w,i){ if (state.threedState[i] && state.threedState[i].completed) threedDone++; });
+
+    function logAccuracy(log) {
+      var c = 0, ic = 0;
+      log.forEach(function(l){ c += (+l.correct||0); ic += (+l.incorrect||0); });
+      var total = c + ic;
+      return total ? Math.round((c/total)*100) : null;
+    }
+    var mathAcc = logAccuracy(state.mathLog);
+    var physAcc = logAccuracy(state.physicsLog);
+
+    var weak = [];
+    Object.keys(state.vocabState).forEach(function(w){
+      var vs = state.vocabState[w];
+      if (vs.lastPracticed && daysBetween(vs.lastPracticed, todayStr) > 14 && vs.status !== "mastered") weak.push({ tag:"Vocabulary", text:w + " — not practiced in " + daysBetween(vs.lastPracticed, todayStr) + " days" });
+    });
+    Object.keys(state.interviewState).forEach(function(id){
+      if (state.interviewState[id].needsReview) {
+        var q = INTERVIEW_QUESTIONS.filter(function(x){ return x.id===id; })[0];
+        if (q) weak.push({ tag:"Interview", text:q.text });
+      }
+    });
+    if (mathAcc !== null && mathAcc < 70) weak.push({ tag:"Math", text:"Overall accuracy " + mathAcc + "% — revisit recent topics" });
+    if (physAcc !== null && physAcc < 70) weak.push({ tag:"Physics", text:"Overall accuracy " + physAcc + "% — revisit recent topics" });
+
+    var html = '<div class="dash-grid">' +
+      tile("Chinese", "Day " + CHINESE_DAYS[cnCp.pos].d + " / 28", CHINESE_DAYS[cnCp.pos].title, Math.round(((cnCp.pos+1)/28)*100)) +
+      tile("English", "Day " + ENGLISH_DAYS[enCp.pos].d + " / 28", ENGLISH_DAYS[enCp.pos].title, Math.round(((enCp.pos+1)/28)*100)) +
+      tile("Math", "Week " + (mCp.pos+1) + " / " + MATH_WEEKS.length, MATH_WEEKS[mCp.pos].title + (mathAcc!==null?" · " + mathAcc + "% acc":""), Math.round(((mCp.pos+1)/MATH_WEEKS.length)*100)) +
+      tile("Physics", "Week " + (pCp.pos+1) + " / " + PHYSICS_WEEKS.length, PHYSICS_WEEKS[pCp.pos].title + (physAcc!==null?" · " + physAcc + "% acc":""), Math.round(((pCp.pos+1)/PHYSICS_WEEKS.length)*100)) +
+      tile("3D Roadmap", threedDone + " / 24 weeks", "Currently on week " + (tCp.pos+1), Math.round((threedDone/24)*100)) +
+      tile("Interview Bank", ivAnswered + " / " + INTERVIEW_QUESTIONS.length, "questions practiced", Math.round((ivAnswered/INTERVIEW_QUESTIONS.length)*100)) +
+      '</div>';
+
+    html += '<div class="subhead">Vocabulary bank</div><div class="dash-grid">' +
+      miniStat("New", vocabCounts.new) + miniStat("Learning", vocabCounts.learning) + miniStat("Mastered", vocabCounts.mastered) + miniStat("Review needed", vocabCounts.review) +
+      '</div>';
+
+    html += '<div class="subhead">Needs review</div><div class="card">';
+    if (weak.length) {
+      html += '<ul class="weak-list">' + weak.slice(0,12).map(function(w){ return '<li><span>' + w.text + '</span><span class="wtag">' + w.tag + '</span></li>'; }).join("") + '</ul>';
+    } else {
+      html += '<div class="empty-note">Nothing flagged yet — keep logging practice to surface weak areas here.</div>';
+    }
+    html += '</div>';
+
+    document.getElementById("panel-dashboard").innerHTML = html;
+
+    function tile(title, val, sub, pct) {
+      return '<div class="dash-tile"><div class="dtitle">' + title + '</div><div class="dval">' + val + '</div><div class="dsub">' + sub + '</div>' +
+        '<div class="pbar"><div style="width:' + Math.min(100,Math.max(0,pct)) + '%"></div></div></div>';
+    }
+    function miniStat(label, n) {
+      return '<div class="dash-tile"><div class="dtitle">' + label + '</div><div class="dval">' + n + '</div></div>';
+    }
+  }
+
+  // ================= CHINESE / ENGLISH CURRICULUM BROWSERS =================
+  function renderCurriculum(panelId, days, kind) {
+    var wi = (function(){ var c=new Date(todayD); while(c.getDay()===0||c.getDay()===6) c=addDays(c,-1); return weekdayIndexFor(fmt(c)); })();
+    var cp = cyclePos(wi, 28);
+    var html = '';
+    var byWeek = {};
+    days.forEach(function(day){ (byWeek[day.w] = byWeek[day.w] || []).push(day); });
+    Object.keys(byWeek).forEach(function(wkNum){
+      html += '<div class="subhead">Week ' + wkNum + '</div>';
+      byWeek[wkNum].forEach(function(day){
+        var isCurrent = (day.d - 1) === cp.pos;
+        html += '<div class="day-card' + (isCurrent?" current":"") + '" data-day="' + day.d + '" data-kind="' + kind + '">' +
+          '<div class="day-card-head"><span class="dbadge">Day ' + day.d + '</span><span class="dtitlex">' + day.title + (day.career?' · '+day.career:'') + (isCurrent?' <span style="color:var(--runway-deep);font-weight:700">· today\'s day</span>':'') + '</span><span class="chev">&#8250;</span></div>' +
+          '<div class="day-card-body">' + (kind === "cn" ? renderChineseBody(day) : renderEnglishBody(day)) + '</div>' +
+          '</div>';
+      });
+    });
+    document.getElementById(panelId).innerHTML = html;
+    document.querySelectorAll('#' + panelId + ' .day-card').forEach(function(card){
+      card.querySelector(".day-card-head").addEventListener("click", function(){ card.classList.toggle("open"); });
+    });
+  }
+
+  function renderChineseBody(day) {
+    var out = '';
+    if (day.vocab.length) {
+      out += '<div class="dl-row"><div class="dl-label">Vocabulary</div><div class="vocab-chip-row">' +
+        day.vocab.map(function(v){ return '<span class="vocab-chip"><b>' + v[0] + '</b> ' + v[1] + ' — ' + v[2] + '</span>'; }).join("") + '</div></div>';
+    }
+    day.blocks.forEach(function(b){
+      out += '<div class="dl-row"><div class="dl-label">' + b.l + '</div><div>' + b.t + '</div></div>';
+    });
+    out += '<div class="dl-out"><div class="dl-label">Output</div><div>' + day.output + '</div></div>';
+    return out;
+  }
+  function renderEnglishBody(day) {
+    var out = '';
+    if (day.mode === "lesson") {
+      out += '<div class="dl-row"><div class="dl-label">Primary</div><div>' + day.primary + '</div></div>';
+      out += '<div class="dl-row"><div class="dl-label">Follow-up</div><div>' + day.followup + '</div></div>';
+      out += '<div class="dl-row"><div class="dl-label">Deep</div><div>' + day.deep + '</div></div>';
+      out += '<div class="dl-row"><div class="dl-label">Random vocabulary</div><div>2–3 words, auto-selected from your Vocabulary Bank.</div></div>';
+      out += '<div class="dl-row"><div class="dl-label">TOEIC</div><div>' + day.toeic + '</div></div>';
+    } else {
+      out += '<div class="dl-row"><div class="dl-label">Mock format</div><div>' + day.note + '</div></div>';
+      if (day.toeic) out += '<div class="dl-row"><div class="dl-label">TOEIC</div><div>' + day.toeic + '</div></div>';
+    }
+    out += '<div class="dl-out"><div class="dl-label">Output</div><div>' + day.output + '</div></div>';
+    return out;
+  }
+
+  // ================= VOCABULARY BANK =================
+  var vocabFilter = { level: "all", status: "all" };
+  function renderVocab() {
+    var html = '<div class="bank-toolbar">' +
+      '<select id="vfLevel"><option value="all">All levels</option><option value="B1">B1</option><option value="B2">B2</option><option value="C1">C1</option><option value="C2">C2</option></select>' +
+      '<select id="vfStatus"><option value="all">All statuses</option><option value="new">New</option><option value="learning">Learning</option><option value="mastered">Mastered</option><option value="review">Review needed</option></select>' +
+      '</div><div id="vocabList"></div>';
+    document.getElementById("panel-vocab").innerHTML = html;
+    document.getElementById("vfLevel").value = vocabFilter.level;
+    document.getElementById("vfStatus").value = vocabFilter.status;
+    document.getElementById("vfLevel").addEventListener("change", function(){ vocabFilter.level = this.value; renderVocabList(); });
+    document.getElementById("vfStatus").addEventListener("change", function(){ vocabFilter.status = this.value; renderVocabList(); });
+    renderVocabList();
+  }
+  function renderVocabList() {
+    var list = VOCAB_SEED.filter(function(v){
+      if (vocabFilter.level !== "all" && v[2] !== vocabFilter.level) return false;
+      var vs = state.vocabState[v[0]] || { status:"new", practiceCount:0, lastPracticed:null };
+      if (vocabFilter.status !== "all" && vs.status !== vocabFilter.status) return false;
+      return true;
+    });
+    var html = list.map(function(v){
+      var word = v[0], pos = v[1], level = v[2], meaning = v[3], example = v[4], syn = v[5];
+      var vs = state.vocabState[word] || { status:"new", practiceCount:0, lastPracticed:null };
+      return '<div class="bank-item" data-word="' + word + '">' +
+        '<div class="bank-item-head">' +
+          '<div><span class="word">' + word + '</span><span class="pos">' + pos + '</span></div>' +
+          '<div class="bank-item-tags"><span class="pill lvl-' + level.toLowerCase() + '">' + level + '</span><span class="pill st-' + vs.status + '">' + vs.status + '</span><span class="chev">&#8250;</span></div>' +
+        '</div>' +
+        '<div class="bank-item-body">' +
+          '<div class="brow"><b>Meaning:</b> ' + meaning + '</div>' +
+          '<div class="brow"><b>Example:</b> ' + example + '</div>' +
+          '<div class="brow"><b>Synonym:</b> ' + syn + '</div>' +
+          '<div class="brow"><b>Practiced:</b> ' + (vs.practiceCount||0) + ' times' + (vs.lastPracticed ? " · last on " + vs.lastPracticed : "") + '</div>' +
+          '<div class="bank-actions">' +
+            '<button class="btn-sm" data-act="practice">Mark practiced today</button>' +
+            '<button class="btn-sm secondary" data-act="review">Flag review needed</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join("") || '<div class="empty-note">No words match this filter.</div>';
+    document.getElementById("vocabList").innerHTML = html;
+    document.querySelectorAll("#vocabList .bank-item").forEach(function(item){
+      item.querySelector(".bank-item-head").addEventListener("click", function(){ item.classList.toggle("open"); });
+      var pb = item.querySelector('[data-act="practice"]');
+      if (pb) pb.addEventListener("click", function(e){ e.stopPropagation(); markVocabPracticed(item.getAttribute("data-word")); renderVocabList(); renderDashboard(); });
+      var rb = item.querySelector('[data-act="review"]');
+      if (rb) rb.addEventListener("click", function(e){
+        e.stopPropagation();
+        var w = item.getAttribute("data-word");
+        if (!state.vocabState[w]) state.vocabState[w] = { status:"new", practiceCount:0, lastPracticed:null };
+        state.vocabState[w].status = "review";
+        save(); renderVocabList(); renderDashboard();
+      });
+    });
+  }
+
+  // ================= INTERVIEW BANK =================
+  var ivFilter = { difficulty:"all", career:"all" };
+  function renderInterview() {
+    var html = '<div class="bank-toolbar">' +
+      '<select id="ivDiff"><option value="all">All difficulty</option><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option></select>' +
+      '<select id="ivCareer"><option value="all">All careers</option><option value="IT">IT</option><option value="Passenger Service">Passenger Service</option><option value="Cabin Crew">Cabin Crew</option><option value="ATC">ATC</option></select>' +
+      '</div><div id="ivList"></div>';
+    document.getElementById("panel-interview").innerHTML = html;
+    document.getElementById("ivDiff").value = ivFilter.difficulty;
+    document.getElementById("ivCareer").value = ivFilter.career;
+    document.getElementById("ivDiff").addEventListener("change", function(){ ivFilter.difficulty = this.value; renderInterviewList(); });
+    document.getElementById("ivCareer").addEventListener("change", function(){ ivFilter.career = this.value; renderInterviewList(); });
+    renderInterviewList();
+  }
+  function renderInterviewList() {
+    var list = INTERVIEW_QUESTIONS.filter(function(q){
+      if (ivFilter.difficulty !== "all" && q.difficulty !== ivFilter.difficulty) return false;
+      if (ivFilter.career !== "all" && q.career !== ivFilter.career) return false;
+      return true;
+    });
+    var html = list.map(function(q){
+      var qs = state.interviewState[q.id] || { answered:false, lastAnswered:null, score:0, needsReview:false };
+      return '<div class="bank-item" data-qid="' + q.id + '">' +
+        '<div class="bank-item-head">' +
+          '<div class="qtext">' + q.text + '</div>' +
+          '<div class="bank-item-tags"><span class="pill diff-' + q.difficulty + '">' + q.difficulty + '</span>' + (qs.answered ? '<span class="pill st-mastered">answered</span>' : '') + (qs.needsReview ? '<span class="pill st-review">review</span>' : '') + '<span class="chev">&#8250;</span></div>' +
+        '</div>' +
+        '<div class="bank-item-body">' +
+          '<div class="brow"><b>Category:</b> ' + q.category + (q.career ? ' · ' + q.career : '') + '</div>' +
+          '<div class="brow"><b>Answered:</b> ' + (qs.lastAnswered ? qs.lastAnswered : "not yet") + '</div>' +
+          '<div class="brow"><b>Self-score:</b> <span class="score-select" data-qid="' + q.id + '">' +
+            [1,2,3,4,5].map(function(n){ return '<button data-v="' + n + '" class="' + (qs.score===n?"active":"") + '">' + n + '</button>'; }).join("") +
+          '</span></div>' +
+          '<div class="bank-actions">' +
+            '<button class="btn-sm" data-act="answer">Mark answered today</button>' +
+            '<button class="btn-sm secondary" data-act="review">Toggle needs-review</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join("") || '<div class="empty-note">No questions match this filter.</div>';
+    document.getElementById("ivList").innerHTML = html;
+    document.querySelectorAll("#ivList .bank-item").forEach(function(item){
+      var qid = item.getAttribute("data-qid");
+      item.querySelector(".bank-item-head").addEventListener("click", function(){ item.classList.toggle("open"); });
+      var ab = item.querySelector('[data-act="answer"]');
+      if (ab) ab.addEventListener("click", function(e){
+        e.stopPropagation();
+        if (!state.interviewState[qid]) state.interviewState[qid] = { answered:false, lastAnswered:null, score:0, needsReview:false };
+        state.interviewState[qid].answered = true;
+        state.interviewState[qid].lastAnswered = todayStr;
+        save(); renderInterviewList(); renderDashboard();
+      });
+      var rb = item.querySelector('[data-act="review"]');
+      if (rb) rb.addEventListener("click", function(e){
+        e.stopPropagation();
+        if (!state.interviewState[qid]) state.interviewState[qid] = { answered:false, lastAnswered:null, score:0, needsReview:false };
+        state.interviewState[qid].needsReview = !state.interviewState[qid].needsReview;
+        save(); renderInterviewList(); renderDashboard();
+      });
+      item.querySelectorAll(".score-select button").forEach(function(b){
+        b.addEventListener("click", function(e){
+          e.stopPropagation();
+          if (!state.interviewState[qid]) state.interviewState[qid] = { answered:false, lastAnswered:null, score:0, needsReview:false };
+          state.interviewState[qid].score = +b.getAttribute("data-v");
+          save(); renderInterviewList();
+        });
+      });
+    });
+  }
+
+  // ================= MATH / PHYSICS LOG PANELS =================
+  function renderTopicPanel(panelId, weeks, log, subjectLabel) {
+    var wn = weekNumberFor(todayStr);
+    var cp = cyclePos(wn, weeks.length);
+    var byMonth = {};
+    weeks.forEach(function(w,i){ (byMonth[w.m] = byMonth[w.m] || []).push({ w:w, idx:i }); });
+    var html = '';
+    Object.keys(byMonth).forEach(function(m){
+      html += '<div class="subhead">Month ' + m + '</div>';
+      byMonth[m].forEach(function(item){
+        var w = item.w, i = item.idx;
+        var isCurrent = i === cp.pos;
+        html += '<div class="day-card' + (isCurrent?" current":"") + '">' +
+          '<div class="day-card-head"><span class="dbadge">Week ' + (i+1) + '</span><span class="dtitlex">' + w.title + (isCurrent?' <span style="color:var(--runway-deep);font-weight:700">· this week</span>':'') + '</span><span class="chev">&#8250;</span></div>' +
+          '<div class="day-card-body">' +
+            (w.topics ? '<div class="dl-row"><div class="dl-label">Topics</div><div>' + w.topics.join(" · ") + '</div></div>' : '') +
+            (w.learn ? '<div class="dl-row"><div class="dl-label">Learn</div><div>' + w.learn.join(" · ") + '</div></div>' : '') +
+            (w.formula ? '<div class="dl-row"><div class="dl-label">Formula</div><div>' + w.formula + '</div></div>' : '') +
+            (w.practice ? '<div class="dl-row"><div class="dl-label">Practice</div><div>' + w.practice + '</div></div>' : '') +
+            (w.example ? '<div class="dl-row"><div class="dl-label">Example</div><div>' + w.example + '</div></div>' : '') +
+            (w.goal ? '<div class="dl-row"><div class="dl-label">Goal</div><div>' + w.goal + '</div></div>' : '') +
+            (w.note ? '<div class="dl-row"><div class="dl-label">Note</div><div>' + w.note + '</div></div>' : '') +
+            (w.weekday ? '<div class="dl-row"><div class="dl-label">Weekday practice</div><div>Mon: ' + w.weekday.mon + ' · Tue: ' + w.weekday.tue + ' · Wed: ' + w.weekday.wed + ' · Thu: ' + w.weekday.thu + ' · Fri: ' + w.weekday.fri + '</div></div>' : '') +
+          '</div>' +
+        '</div>';
+      });
+    });
+
+    html += '<div class="subhead">Log practice</div>' +
+      '<div class="logform">' +
+        '<label>Week<select id="logWeek">' + weeks.map(function(w,i){ return '<option value="'+i+'">Week '+(i+1)+' — '+w.title+'</option>'; }).join("") + '</select></label>' +
+        '<label>Correct<input type="number" id="logCorrect" min="0" value="0"></label>' +
+        '<label>Incorrect<input type="number" id="logIncorrect" min="0" value="0"></label>' +
+        '<label>Time (min)<input type="number" id="logTime" min="0" value="15"></label>' +
+        '<label>Mistake type<select id="logMistake"><option value="">—</option>' + MISTAKE_TYPES.map(function(mt){ return '<option>'+mt+'</option>'; }).join("") + '</select></label>' +
+        '<label>Notes<input type="text" id="logNotes" placeholder="weak areas..."></label>' +
+        '<button class="btn-sm" id="logSubmit">Add log</button>' +
+      '</div>';
+    html += '<div id="mistakeSummary"></div>';
+    html += '<div class="logtable-wrap"><table class="logtable"><thead><tr><th>Date</th><th>Week</th><th>Attempted</th><th>Correct</th><th>Incorrect</th><th>Accuracy</th><th>Time</th><th>Mistake type</th><th>Notes</th></tr></thead><tbody id="logRows"></tbody></table></div>';
+
+    document.getElementById(panelId).innerHTML = html;
+    document.querySelectorAll('#' + panelId + ' .day-card').forEach(function(card){
+      card.querySelector(".day-card-head").addEventListener("click", function(){ card.classList.toggle("open"); });
+    });
+    document.getElementById("logWeek").value = cp.pos;
+
+    function renderRows() {
+      var rows = log.slice().reverse().map(function(l){
+        var attempted = (+l.correct||0) + (+l.incorrect||0);
+        var acc = attempted ? Math.round((l.correct/attempted)*100) : 0;
+        var accClass = attempted ? (acc >= 70 ? "acc-good" : "acc-bad") : "";
+        return '<tr><td>' + l.date + '</td><td>Week ' + (+l.week+1) + '</td><td>' + attempted + '</td><td>' + l.correct + '</td><td>' + l.incorrect + '</td><td class="' + accClass + '">' + (attempted?acc+"%":"–") + '</td><td>' + (l.time||0) + ' min</td><td>' + (l.mistake||"–") + '</td><td>' + (l.notes||"") + '</td></tr>';
+      }).join("");
+      document.getElementById("logRows").innerHTML = rows || '<tr><td colspan="9" class="empty-note">No practice logged yet.</td></tr>';
+
+      var counts = {};
+      log.forEach(function(l){ if (l.mistake) counts[l.mistake] = (counts[l.mistake]||0) + 1; });
+      var top = Object.keys(counts).sort(function(a,b){ return counts[b]-counts[a]; })[0];
+      document.getElementById("mistakeSummary").innerHTML = top
+        ? '<div class="info-banner amber">Most common mistake so far: <b>' + top + '</b> (' + counts[top] + 'x). Review that first.</div>'
+        : '';
+    }
+    renderRows();
+    document.getElementById("logSubmit").addEventListener("click", function(){
+      log.push({
+        date: todayStr,
+        week: document.getElementById("logWeek").value,
+        correct: +document.getElementById("logCorrect").value || 0,
+        incorrect: +document.getElementById("logIncorrect").value || 0,
+        time: +document.getElementById("logTime").value || 0,
+        mistake: document.getElementById("logMistake").value,
+        notes: document.getElementById("logNotes").value
+      });
+      save(); renderRows(); renderDashboard();
+      document.getElementById("logCorrect").value = 0;
+      document.getElementById("logIncorrect").value = 0;
+      document.getElementById("logNotes").value = "";
+    });
+  }
+
+  // ================= ATC PANEL =================
+  function renderAtc() {
+    var dow = todayD.getDay();
+    var html = Object.keys(ATC_SKILLS).map(function(k){
+      var s = ATC_SKILLS[k];
+      var isToday = (+k === dow);
+      return '<div class="day-card' + (isToday?" current":"") + '">' +
+        '<div class="day-card-head"><span class="dbadge">' + DOW[k] + '</span><span class="dtitlex">' + s.name + (isToday?' <span style="color:var(--runway-deep);font-weight:700">· today</span>':'') + '</span><span class="chev">&#8250;</span></div>' +
+        '<div class="day-card-body">' +
+          '<div class="dl-row"><div class="dl-label">Duration</div><div>' + s.min + ' minutes</div></div>' +
+          '<div class="dl-row"><div class="dl-label">Practice</div><div>' + s.practice.join(" · ") + '</div></div>' +
+          (s.focus ? '<div class="dl-row"><div class="dl-label">Focus</div><div>' + s.focus + '</div></div>' : '') +
+        '</div>' +
+      '</div>';
+    }).join("");
+
+    html += '<div class="subhead">Log a session</div>' +
+      '<div class="logform">' +
+        '<label>Skill<select id="atcSkill">' + Object.keys(ATC_SKILLS).map(function(k){ return '<option value="'+k+'">'+ATC_SKILLS[k].name+'</option>'; }).join("") + '</select></label>' +
+        '<label>Score<input type="number" id="atcScore" min="0" value="0"></label>' +
+        '<label>Accuracy %<input type="number" id="atcAcc" min="0" max="100" value="0"></label>' +
+        '<label>Time (min)<input type="number" id="atcTime" min="0" value="10"></label>' +
+        '<label>Difficulty<select id="atcDiff"><option>Easy</option><option>Medium</option><option>Hard</option></select></label>' +
+        '<button class="btn-sm" id="atcSubmit">Add log</button>' +
+      '</div>';
+    html += '<div class="logtable-wrap"><table class="logtable"><thead><tr><th>Date</th><th>Skill</th><th>Score</th><th>Accuracy</th><th>Time</th><th>Difficulty</th></tr></thead><tbody id="atcRows"></tbody></table></div>';
+
+    document.getElementById("panel-atc").innerHTML = html;
+    document.querySelectorAll('#panel-atc .day-card').forEach(function(card){
+      card.querySelector(".day-card-head").addEventListener("click", function(){ card.classList.toggle("open"); });
+    });
+
+    function renderRows() {
+      var rows = state.atcLog.slice().reverse().map(function(l){
+        var accClass = l.accuracy >= 70 ? "acc-good" : "acc-bad";
+        return '<tr><td>' + l.date + '</td><td>' + ATC_SKILLS[l.skill].name + '</td><td>' + l.score + '</td><td class="' + accClass + '">' + l.accuracy + '%</td><td>' + l.time + ' min</td><td>' + l.difficulty + '</td></tr>';
+      }).join("");
+      document.getElementById("atcRows").innerHTML = rows || '<tr><td colspan="6" class="empty-note">No sessions logged yet.</td></tr>';
+    }
+    renderRows();
+    document.getElementById("atcSubmit").addEventListener("click", function(){
+      state.atcLog.push({
+        date: todayStr,
+        skill: document.getElementById("atcSkill").value,
+        score: +document.getElementById("atcScore").value || 0,
+        accuracy: +document.getElementById("atcAcc").value || 0,
+        time: +document.getElementById("atcTime").value || 0,
+        difficulty: document.getElementById("atcDiff").value
+      });
+      save(); renderRows(); renderDashboard();
+    });
+  }
+
+  // ================= 3D ROADMAP =================
+  function renderThreed() {
+    var wn = weekNumberFor(todayStr);
+    var cp = cyclePos(wn, THREED_WEEKS.length);
+    var byMonth = {};
+    THREED_WEEKS.forEach(function(w,i){ (byMonth[w.m] = byMonth[w.m] || []).push({ w:w, idx:i }); });
+    var html = '';
+    Object.keys(byMonth).forEach(function(m){
+      html += '<div class="subhead">Month ' + m + '</div>';
+      byMonth[m].forEach(function(item){
+        var i = item.idx, w = item.w;
+        var isCurrent = i === cp.pos;
+        var completed = state.threedState[i] && state.threedState[i].completed;
+        html += '<div class="day-card' + (isCurrent?" current":"") + '">' +
+          '<div class="day-card-head"><span class="dbadge">Week ' + (i+1) + '</span><span class="dtitlex">' + w.learn.join(", ") + (isCurrent?' <span style="color:var(--runway-deep);font-weight:700">· this week</span>':'') + '</span><span class="chev">&#8250;</span></div>' +
+          '<div class="day-card-body">' +
+            '<div class="dl-row"><div class="dl-label">Saturday — Learn</div><div>' + w.learn.join(" · ") + '</div></div>' +
+            '<div class="dl-row"><div class="dl-label">Saturday — Task</div><div>' + w.task + '</div></div>' +
+            '<div class="dl-out"><div class="dl-label">Sunday — Project</div><div>' + w.project + '</div></div>' +
+            '<div class="bank-actions"><label style="display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink-soft);cursor:pointer;"><input type="checkbox" data-3d="' + i + '" ' + (completed?"checked":"") + ' style="width:16px;height:16px;"> Mark week complete</label></div>' +
+          '</div>' +
+        '</div>';
+      });
+    });
+    document.getElementById("panel-threed").innerHTML = html;
+    document.querySelectorAll('#panel-threed .day-card').forEach(function(card){
+      card.querySelector(".day-card-head").addEventListener("click", function(){ card.classList.toggle("open"); });
+    });
+    document.querySelectorAll('#panel-threed [data-3d]').forEach(function(cb){
+      cb.addEventListener("click", function(e){ e.stopPropagation(); });
+      cb.addEventListener("change", function(){
+        var i = cb.getAttribute("data-3d");
+        state.threedState[i] = { completed: cb.checked };
+        save(); renderDashboard();
+      });
+    });
+  }
+
+  // ================= WIDGET MODE =================
+  function renderWidgetView() {
+    var el = document.getElementById("widgetView");
+    var ds = dayState(todayStr);
+    var label = todayD.toLocaleDateString(undefined, { weekday:"short", month:"short", day:"numeric" });
+    var html = '<div class="wtop"><span class="wtitle">&#129517; Flight Plan</span><span class="wstat"><b>' + computeStreak() + '</b> day streak</span></div>' +
+      '<div class="wdate">' + label + '</div>';
+
+    if (ds.rest) {
+      html += '<div class="wrest">Resting today &mdash; no required tasks.</div>';
+    } else {
+      var plan = buildPlan(todayStr);
+      var reqSections = plan.sections.filter(function(s){ return !s.optional; });
+      var firstPerSection = [];
+      reqSections.forEach(function(sec){
+        var t = sec.tasks.filter(function(x){ return x.required && !ds.checks[x.id]; })[0];
+        if (t) firstPerSection.push(t);
+      });
+      var allPending = [];
+      reqSections.forEach(function(sec){ sec.tasks.forEach(function(t){ if (t.required && !ds.checks[t.id]) allPending.push(t); }); });
+      var pending = firstPerSection.concat(allPending.filter(function(t){ return firstPerSection.indexOf(t) === -1; }));
+      if (!pending.length) {
+        html += '<div class="wdone">&#10003; All required tasks done today</div>';
+      } else {
+        pending.slice(0,4).forEach(function(t){
+          html += '<label class="wtask"><input type="checkbox" data-wtask="' + t.id + '"><span>' + t.label + '</span></label>';
+        });
+        if (pending.length > 4) html += '<div class="wmore">+ ' + (pending.length-4) + ' more&hellip;</div>';
+      }
+    }
+    html += '<div class="wfooter"><a href="' + BASE_URL + '" target="_blank" rel="noopener">Open full plan &rarr;</a></div>';
+    el.innerHTML = html;
+    el.querySelectorAll('[data-wtask]').forEach(function(cb){
+      cb.addEventListener("change", function(){
+        var dsx = dayState(todayStr);
+        dsx.checks[cb.getAttribute("data-wtask")] = cb.checked;
+        save();
+        renderWidgetView();
+      });
+    });
+  }
+
+  window.addEventListener("storage", function(e){
+    if (e.key !== STORE_KEY) return;
+    state = load();
+    if (isWidget) renderWidgetView(); else renderToday();
+  });
+
+  // ================= TAB SWITCHING =================
+  var renderedOnce = {};
+  function activateTab(name) {
+    document.querySelectorAll(".tabbar button").forEach(function(b){ b.classList.toggle("active", b.getAttribute("data-tab") === name); });
+    document.querySelectorAll(".panel").forEach(function(p){ p.classList.toggle("active", p.id === "panel-" + name); });
+    if (name === "dashboard") renderDashboard();
+    if (name === "chinese") renderCurriculum("panel-chinese", CHINESE_DAYS, "cn");
+    if (name === "english") renderCurriculum("panel-english", ENGLISH_DAYS, "en");
+    if (name === "vocab") renderVocab();
+    if (name === "interview") renderInterview();
+    if (name === "math") renderTopicPanel("panel-math", MATH_WEEKS, state.mathLog, "Math");
+    if (name === "physics") renderTopicPanel("panel-physics", PHYSICS_WEEKS, state.physicsLog, "Physics");
+    if (name === "atc") renderAtc();
+    if (name === "threed") renderThreed();
+  }
+  document.querySelectorAll(".tabbar button").forEach(function(btn){
+    btn.addEventListener("click", function(){ activateTab(btn.getAttribute("data-tab")); });
+  });
+
+  if (isWidget) renderWidgetView(); else renderToday();
+})();
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("sw.js").catch(function () {});
+  });
+}
+</script>
+</body>
+</html>
