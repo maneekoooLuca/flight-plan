@@ -1,5 +1,5 @@
-const CACHE = "flight-plan-v1";
-const ASSETS = ["./", "./index.html", "./manifest.json", "./icons/icon-192.png", "./icons/icon-512.png"];
+const CACHE = "flight-plan-v2";
+const ASSETS = ["./", "./index.html", "./manifest.json", "./icons/icon-192.png?v=2", "./icons/icon-512.png?v=2"];
 
 self.addEventListener("install", function (event) {
   event.waitUntil(caches.open(CACHE).then(function (cache) { return cache.addAll(ASSETS); }));
