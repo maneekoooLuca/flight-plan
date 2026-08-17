@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2026-08-17T12:06:12.672Z",
+  "date": "2026-08-17",
+  "dayOfWeek": "Monday",
+  "weekNumber": 1,
+  "chinese": {
+    "day": 1,
+    "cycle": 1,
+    "title": "Greetings & Self-Introduction"
+  },
+  "english": {
+    "day": 1,
+    "cycle": 1,
+    "title": "Self Introduction",
+    "primary": "Tell me about yourself.",
+    "note": null,
+    "career": null
+  },
+  "optionalMath": {
+    "week": 1,
+    "title": "Number Sense & Basic Calculation"
+  },
+  "optionalPhysics": {
+    "week": 1,
+    "title": "Units & Measurement"
+  },
+  "atc": {
+    "skill": "Mental Math"
+  }
+}
