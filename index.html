@@ -1161,25 +1161,27 @@
       if (ds.threedIdx === undefined) ds.threedIdx = state.cursors.threed;
     }
 
+    // Rest protects your streak but does NOT skip the pending lesson forward -
+    // only actually finishing the required tasks advances the cursor.
     var plan = ds.rest ? null : buildPlan(dateStr);
 
     if (dow >= 1 && dow <= 5) {
       if (!ds.weekdayAdvanced) {
-        var doneWeekday = ds.rest || isGroupComplete(ds, plan, "cn-") && isGroupComplete(ds, plan, "en-");
+        var doneWeekday = !ds.rest && isGroupComplete(ds, plan, "cn-") && isGroupComplete(ds, plan, "en-");
         if (doneWeekday) { state.cursors.weekday++; ds.weekdayAdvanced = true; }
       }
     } else if (dow === 6) {
       if (!ds.mathAdvanced) {
-        var doneMath = ds.rest || isGroupComplete(ds, plan, "math-");
+        var doneMath = !ds.rest && isGroupComplete(ds, plan, "math-");
         if (doneMath) { state.cursors.math++; ds.mathAdvanced = true; }
       }
     } else {
       if (!ds.physicsAdvanced) {
-        var donePhysics = ds.rest || isGroupComplete(ds, plan, "phy-");
+        var donePhysics = !ds.rest && isGroupComplete(ds, plan, "phy-");
         if (donePhysics) { state.cursors.physics++; ds.physicsAdvanced = true; }
       }
       if (!ds.threedAdvanced) {
-        var done3d = ds.rest || isGroupComplete(ds, plan, "3d-");
+        var done3d = !ds.rest && isGroupComplete(ds, plan, "3d-");
         if (done3d) { state.cursors.threed++; ds.threedAdvanced = true; }
       }
     }
