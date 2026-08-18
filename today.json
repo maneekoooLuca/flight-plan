@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-08-17T17:33:33.771Z",
-  "date": "2026-08-17",
-  "dayOfWeek": "Monday",
+  "generatedAt": "2026-08-18T17:34:09.113Z",
+  "date": "2026-08-18",
+  "dayOfWeek": "Tuesday",
   "weekNumber": 1,
   "chinese": {
-    "day": 1,
+    "day": 2,
     "cycle": 1,
-    "title": "Greetings & Self-Introduction"
+    "title": "Numbers & Age"
   },
   "english": {
-    "day": 1,
+    "day": 2,
     "cycle": 1,
-    "title": "Self Introduction",
-    "primary": "Tell me about yourself.",
+    "title": "Education",
+    "primary": "Why did you choose your field of study?",
     "note": null,
     "career": null
   },
@@ -25,6 +25,6 @@
     "title": "Units & Measurement"
   },
   "atc": {
-    "skill": "Mental Math"
+    "skill": "Memory"
   }
 }
