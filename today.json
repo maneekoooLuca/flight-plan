@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-08-18T17:34:09.113Z",
-  "date": "2026-08-18",
-  "dayOfWeek": "Tuesday",
+  "generatedAt": "2026-08-19T17:32:35.171Z",
+  "date": "2026-08-19",
+  "dayOfWeek": "Wednesday",
   "weekNumber": 1,
   "chinese": {
-    "day": 2,
+    "day": 3,
     "cycle": 1,
-    "title": "Numbers & Age"
+    "title": "Family"
   },
   "english": {
-    "day": 2,
+    "day": 3,
     "cycle": 1,
-    "title": "Education",
-    "primary": "Why did you choose your field of study?",
+    "title": "Strengths",
+    "primary": "What are your strengths?",
     "note": null,
     "career": null
   },
@@ -25,6 +25,6 @@
     "title": "Units & Measurement"
   },
   "atc": {
-    "skill": "Memory"
+    "skill": "Logic & Patterns"
   }
 }
