@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-08-20T17:36:01.428Z",
-  "date": "2026-08-20",
-  "dayOfWeek": "Thursday",
+  "generatedAt": "2026-08-21T17:35:18.021Z",
+  "date": "2026-08-21",
+  "dayOfWeek": "Friday",
   "weekNumber": 1,
   "chinese": {
-    "day": 4,
+    "day": 5,
     "cycle": 1,
-    "title": "Country & Nationality"
+    "title": "Jobs & Occupations"
   },
   "english": {
-    "day": 4,
+    "day": 5,
     "cycle": 1,
-    "title": "Weaknesses",
-    "primary": "What is your greatest weakness?",
+    "title": "Career Goals",
+    "primary": "Where do you see yourself in five years?",
     "note": null,
     "career": null
   },
@@ -25,6 +25,6 @@
     "title": "Units & Measurement"
   },
   "atc": {
-    "skill": "Spatial Awareness"
+    "skill": "Attention & Prioritization"
   }
 }
