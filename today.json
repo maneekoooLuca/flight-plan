@@ -1,30 +1,17 @@
 {
-  "generatedAt": "2026-08-21T17:35:18.021Z",
-  "date": "2026-08-21",
-  "dayOfWeek": "Friday",
+  "generatedAt": "2026-08-22T17:26:55.529Z",
+  "date": "2026-08-22",
+  "dayOfWeek": "Saturday",
   "weekNumber": 1,
-  "chinese": {
-    "day": 5,
-    "cycle": 1,
-    "title": "Jobs & Occupations"
-  },
-  "english": {
-    "day": 5,
-    "cycle": 1,
-    "title": "Career Goals",
-    "primary": "Where do you see yourself in five years?",
-    "note": null,
-    "career": null
-  },
-  "optionalMath": {
+  "math": {
     "week": 1,
+    "cycle": 1,
     "title": "Number Sense & Basic Calculation"
   },
-  "optionalPhysics": {
+  "threed": {
     "week": 1,
-    "title": "Units & Measurement"
-  },
-  "atc": {
-    "skill": "Attention & Prioritization"
+    "cycle": 1,
+    "learn": "Interface, Navigation, Object Mode, Move, Rotate, Scale",
+    "phase": "Saturday: learn"
   }
 }
