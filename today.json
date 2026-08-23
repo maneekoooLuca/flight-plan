@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-08-22T17:26:55.529Z",
-  "date": "2026-08-22",
-  "dayOfWeek": "Saturday",
+  "generatedAt": "2026-08-23T17:26:28.091Z",
+  "date": "2026-08-23",
+  "dayOfWeek": "Sunday",
   "weekNumber": 1,
-  "math": {
+  "physics": {
     "week": 1,
     "cycle": 1,
-    "title": "Number Sense & Basic Calculation"
+    "title": "Units & Measurement"
   },
   "threed": {
     "week": 1,
     "cycle": 1,
     "learn": "Interface, Navigation, Object Mode, Move, Rotate, Scale",
-    "phase": "Saturday: learn"
+    "phase": "Sunday: apply/project"
   }
 }
