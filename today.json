@@ -1,17 +1,30 @@
 {
-  "generatedAt": "2026-08-23T17:26:28.091Z",
-  "date": "2026-08-23",
-  "dayOfWeek": "Sunday",
-  "weekNumber": 1,
-  "physics": {
-    "week": 1,
+  "generatedAt": "2026-08-24T17:36:28.089Z",
+  "date": "2026-08-24",
+  "dayOfWeek": "Monday",
+  "weekNumber": 2,
+  "chinese": {
+    "day": 6,
     "cycle": 1,
-    "title": "Units & Measurement"
+    "title": "Week 1 Review"
   },
-  "threed": {
-    "week": 1,
+  "english": {
+    "day": 6,
     "cycle": 1,
-    "learn": "Interface, Navigation, Object Mode, Move, Rotate, Scale",
-    "phase": "Sunday: apply/project"
+    "title": "Challenge",
+    "primary": "Tell me about a challenge you faced.",
+    "note": null,
+    "career": null
+  },
+  "optionalMath": {
+    "week": 2,
+    "title": "Fractions"
+  },
+  "optionalPhysics": {
+    "week": 2,
+    "title": "Distance, Displacement & Speed"
+  },
+  "atc": {
+    "skill": "Mental Math"
   }
 }
