@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-08-24T17:36:28.089Z",
-  "date": "2026-08-24",
-  "dayOfWeek": "Monday",
+  "generatedAt": "2026-08-25T17:36:53.981Z",
+  "date": "2026-08-25",
+  "dayOfWeek": "Tuesday",
   "weekNumber": 2,
   "chinese": {
-    "day": 6,
+    "day": 7,
     "cycle": 1,
-    "title": "Week 1 Review"
+    "title": "Mini Test"
   },
   "english": {
-    "day": 6,
+    "day": 7,
     "cycle": 1,
-    "title": "Challenge",
-    "primary": "Tell me about a challenge you faced.",
-    "note": null,
+    "title": "Mock Interview",
+    "primary": null,
+    "note": "Randomly select 1 general + 1 behavioral + 1 career-specific question.",
     "career": null
   },
   "optionalMath": {
@@ -25,6 +25,6 @@
     "title": "Distance, Displacement & Speed"
   },
   "atc": {
-    "skill": "Mental Math"
+    "skill": "Memory"
   }
 }
