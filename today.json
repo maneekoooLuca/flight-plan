@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-08-26T19:09:44.559Z",
-  "date": "2026-08-26",
-  "dayOfWeek": "Wednesday",
+  "generatedAt": "2026-08-28T01:24:08.694Z",
+  "date": "2026-08-28",
+  "dayOfWeek": "Friday",
   "weekNumber": 2,
   "chinese": {
-    "day": 8,
+    "day": 10,
     "cycle": 1,
-    "title": "Dates & Days"
+    "title": "Daily Routine"
   },
   "english": {
-    "day": 8,
+    "day": 10,
     "cycle": 1,
-    "title": "Work Experience",
-    "primary": "Tell me about your work experience.",
+    "title": "Mistakes",
+    "primary": "Tell me about a mistake you made.",
     "note": null,
     "career": null
   },
@@ -25,6 +25,6 @@
     "title": "Distance, Displacement & Speed"
   },
   "atc": {
-    "skill": "Logic & Patterns"
+    "skill": "Attention & Prioritization"
   }
 }
