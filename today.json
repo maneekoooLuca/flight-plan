@@ -1,30 +1,17 @@
 {
-  "generatedAt": "2026-08-28T01:24:08.694Z",
-  "date": "2026-08-28",
-  "dayOfWeek": "Friday",
+  "generatedAt": "2026-08-29T00:55:30.751Z",
+  "date": "2026-08-29",
+  "dayOfWeek": "Saturday",
   "weekNumber": 2,
-  "chinese": {
-    "day": 10,
-    "cycle": 1,
-    "title": "Daily Routine"
-  },
-  "english": {
-    "day": 10,
-    "cycle": 1,
-    "title": "Mistakes",
-    "primary": "Tell me about a mistake you made.",
-    "note": null,
-    "career": null
-  },
-  "optionalMath": {
+  "math": {
     "week": 2,
+    "cycle": 1,
     "title": "Fractions"
   },
-  "optionalPhysics": {
+  "threed": {
     "week": 2,
-    "title": "Distance, Displacement & Speed"
-  },
-  "atc": {
-    "skill": "Attention & Prioritization"
+    "cycle": 1,
+    "learn": "Edit Mode, Vertex, Edge, Face, Extrude, Inset",
+    "phase": "Saturday: learn"
   }
 }
