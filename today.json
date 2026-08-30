@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-08-29T19:39:21.129Z",
-  "date": "2026-08-29",
-  "dayOfWeek": "Saturday",
+  "generatedAt": "2026-08-30T19:42:22.757Z",
+  "date": "2026-08-30",
+  "dayOfWeek": "Sunday",
   "weekNumber": 2,
-  "math": {
+  "physics": {
     "week": 2,
     "cycle": 1,
-    "title": "Fractions"
+    "title": "Distance, Displacement & Speed"
   },
   "threed": {
     "week": 2,
     "cycle": 1,
     "learn": "Edit Mode, Vertex, Edge, Face, Extrude, Inset",
-    "phase": "Saturday: learn"
+    "phase": "Sunday: apply/project"
   }
 }
