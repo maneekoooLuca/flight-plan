@@ -1,17 +1,30 @@
 {
-  "generatedAt": "2026-08-30T19:42:22.757Z",
-  "date": "2026-08-30",
-  "dayOfWeek": "Sunday",
-  "weekNumber": 2,
-  "physics": {
-    "week": 2,
+  "generatedAt": "2026-08-31T21:51:12.046Z",
+  "date": "2026-08-31",
+  "dayOfWeek": "Monday",
+  "weekNumber": 3,
+  "chinese": {
+    "day": 11,
     "cycle": 1,
-    "title": "Distance, Displacement & Speed"
+    "title": "Food & Drinks"
   },
-  "threed": {
-    "week": 2,
+  "english": {
+    "day": 11,
     "cycle": 1,
-    "learn": "Edit Mode, Vertex, Edge, Face, Extrude, Inset",
-    "phase": "Sunday: apply/project"
+    "title": "Conflict",
+    "primary": "Tell me about a conflict you experienced.",
+    "note": null,
+    "career": null
+  },
+  "optionalMath": {
+    "week": 3,
+    "title": "Fraction Operations"
+  },
+  "optionalPhysics": {
+    "week": 3,
+    "title": "Velocity & Acceleration"
+  },
+  "atc": {
+    "skill": "Mental Math"
   }
 }
