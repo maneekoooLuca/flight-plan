@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-08-31T21:51:12.046Z",
-  "date": "2026-08-31",
-  "dayOfWeek": "Monday",
+  "generatedAt": "2026-09-01T19:49:05.290Z",
+  "date": "2026-09-01",
+  "dayOfWeek": "Tuesday",
   "weekNumber": 3,
   "chinese": {
-    "day": 11,
+    "day": 12,
     "cycle": 1,
-    "title": "Food & Drinks"
+    "title": "Likes & Hobbies"
   },
   "english": {
-    "day": 11,
+    "day": 12,
     "cycle": 1,
-    "title": "Conflict",
-    "primary": "Tell me about a conflict you experienced.",
+    "title": "Learning",
+    "primary": "Tell me about something you had to learn quickly.",
     "note": null,
     "career": null
   },
@@ -25,6 +25,6 @@
     "title": "Velocity & Acceleration"
   },
   "atc": {
-    "skill": "Mental Math"
+    "skill": "Memory"
   }
 }
