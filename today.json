@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-09-01T19:49:05.290Z",
-  "date": "2026-09-01",
-  "dayOfWeek": "Tuesday",
+  "generatedAt": "2026-09-02T19:40:20.987Z",
+  "date": "2026-09-02",
+  "dayOfWeek": "Wednesday",
   "weekNumber": 3,
   "chinese": {
-    "day": 12,
+    "day": 13,
     "cycle": 1,
-    "title": "Likes & Hobbies"
+    "title": "Week 2 Review"
   },
   "english": {
-    "day": 12,
+    "day": 13,
     "cycle": 1,
-    "title": "Learning",
-    "primary": "Tell me about something you had to learn quickly.",
+    "title": "Prioritization",
+    "primary": "How do you handle multiple tasks at the same time?",
     "note": null,
     "career": null
   },
@@ -25,6 +25,6 @@
     "title": "Velocity & Acceleration"
   },
   "atc": {
-    "skill": "Memory"
+    "skill": "Logic & Patterns"
   }
 }
