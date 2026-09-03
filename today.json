@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-02T19:40:20.987Z",
-  "date": "2026-09-02",
-  "dayOfWeek": "Wednesday",
+  "generatedAt": "2026-09-03T19:42:04.131Z",
+  "date": "2026-09-03",
+  "dayOfWeek": "Thursday",
   "weekNumber": 3,
   "chinese": {
-    "day": 13,
+    "day": 14,
     "cycle": 1,
-    "title": "Week 2 Review"
+    "title": "Mini Test"
   },
   "english": {
-    "day": 13,
+    "day": 14,
     "cycle": 1,
-    "title": "Prioritization",
-    "primary": "How do you handle multiple tasks at the same time?",
-    "note": null,
+    "title": "Behavioral Mock",
+    "primary": null,
+    "note": "Randomly select from: Challenge, Teamwork, Mistake, Conflict, Learning.",
     "career": null
   },
   "optionalMath": {
@@ -25,6 +25,6 @@
     "title": "Velocity & Acceleration"
   },
   "atc": {
-    "skill": "Logic & Patterns"
+    "skill": "Spatial Awareness"
   }
 }
