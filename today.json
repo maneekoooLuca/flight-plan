@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-03T19:42:04.131Z",
-  "date": "2026-09-03",
-  "dayOfWeek": "Thursday",
+  "generatedAt": "2026-09-04T19:22:28.946Z",
+  "date": "2026-09-04",
+  "dayOfWeek": "Friday",
   "weekNumber": 3,
   "chinese": {
-    "day": 14,
+    "day": 15,
     "cycle": 1,
-    "title": "Mini Test"
+    "title": "Places"
   },
   "english": {
-    "day": 14,
+    "day": 15,
     "cycle": 1,
-    "title": "Behavioral Mock",
-    "primary": null,
-    "note": "Randomly select from: Challenge, Teamwork, Mistake, Conflict, Learning.",
+    "title": "Pressure",
+    "primary": "How do you handle pressure?",
+    "note": null,
     "career": null
   },
   "optionalMath": {
@@ -25,6 +25,6 @@
     "title": "Velocity & Acceleration"
   },
   "atc": {
-    "skill": "Spatial Awareness"
+    "skill": "Attention & Prioritization"
   }
 }
