@@ -1,30 +1,17 @@
 {
-  "generatedAt": "2026-09-04T19:22:28.946Z",
-  "date": "2026-09-04",
-  "dayOfWeek": "Friday",
+  "generatedAt": "2026-09-05T18:56:15.526Z",
+  "date": "2026-09-05",
+  "dayOfWeek": "Saturday",
   "weekNumber": 3,
-  "chinese": {
-    "day": 15,
-    "cycle": 1,
-    "title": "Places"
-  },
-  "english": {
-    "day": 15,
-    "cycle": 1,
-    "title": "Pressure",
-    "primary": "How do you handle pressure?",
-    "note": null,
-    "career": null
-  },
-  "optionalMath": {
+  "math": {
     "week": 3,
+    "cycle": 1,
     "title": "Fraction Operations"
   },
-  "optionalPhysics": {
+  "threed": {
     "week": 3,
-    "title": "Velocity & Acceleration"
-  },
-  "atc": {
-    "skill": "Attention & Prioritization"
+    "cycle": 1,
+    "learn": "Loop Cut, Bevel, Mirror Modifier",
+    "phase": "Saturday: learn"
   }
 }
