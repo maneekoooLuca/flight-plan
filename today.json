@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-09-05T18:56:15.526Z",
-  "date": "2026-09-05",
-  "dayOfWeek": "Saturday",
+  "generatedAt": "2026-09-06T18:59:37.418Z",
+  "date": "2026-09-06",
+  "dayOfWeek": "Sunday",
   "weekNumber": 3,
-  "math": {
+  "physics": {
     "week": 3,
     "cycle": 1,
-    "title": "Fraction Operations"
+    "title": "Velocity & Acceleration"
   },
   "threed": {
     "week": 3,
     "cycle": 1,
     "learn": "Loop Cut, Bevel, Mirror Modifier",
-    "phase": "Saturday: learn"
+    "phase": "Sunday: apply/project"
   }
 }
