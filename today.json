@@ -1,17 +1,30 @@
 {
-  "generatedAt": "2026-09-06T18:59:37.418Z",
-  "date": "2026-09-06",
-  "dayOfWeek": "Sunday",
-  "weekNumber": 3,
-  "physics": {
-    "week": 3,
+  "generatedAt": "2026-09-07T20:26:07.997Z",
+  "date": "2026-09-07",
+  "dayOfWeek": "Monday",
+  "weekNumber": 4,
+  "chinese": {
+    "day": 16,
     "cycle": 1,
-    "title": "Velocity & Acceleration"
+    "title": "Location"
   },
-  "threed": {
-    "week": 3,
+  "english": {
+    "day": 16,
     "cycle": 1,
-    "learn": "Loop Cut, Bevel, Mirror Modifier",
-    "phase": "Sunday: apply/project"
+    "title": "Serious Mistake",
+    "primary": "What would you do if you made a serious mistake?",
+    "note": null,
+    "career": null
+  },
+  "optionalMath": {
+    "week": 4,
+    "title": "Decimals & Percentages"
+  },
+  "optionalPhysics": {
+    "week": 4,
+    "title": "Motion Graphs"
+  },
+  "atc": {
+    "skill": "Mental Math"
   }
 }
