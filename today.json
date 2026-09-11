@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-09-10T19:30:25.021Z",
-  "date": "2026-09-10",
-  "dayOfWeek": "Thursday",
+  "generatedAt": "2026-09-11T19:31:02.852Z",
+  "date": "2026-09-11",
+  "dayOfWeek": "Friday",
   "weekNumber": 4,
   "chinese": {
-    "day": 19,
+    "day": 20,
     "cycle": 1,
-    "title": "Describing People"
+    "title": "Week 3 Review"
   },
   "english": {
-    "day": 19,
+    "day": 20,
     "cycle": 1,
-    "title": "Multiple Urgent Problems",
-    "primary": "What would you do if several urgent problems happened at once?",
+    "title": "Difficult Decision",
+    "primary": "Describe a difficult decision.",
     "note": null,
     "career": null
   },
@@ -25,6 +25,6 @@
     "title": "Motion Graphs"
   },
   "atc": {
-    "skill": "Spatial Awareness"
+    "skill": "Attention & Prioritization"
   }
 }
