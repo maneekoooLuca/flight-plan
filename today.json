@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-09-12T19:06:26.994Z",
-  "date": "2026-09-12",
-  "dayOfWeek": "Saturday",
+  "generatedAt": "2026-09-13T19:16:43.807Z",
+  "date": "2026-09-13",
+  "dayOfWeek": "Sunday",
   "weekNumber": 4,
-  "math": {
+  "physics": {
     "week": 4,
     "cycle": 1,
-    "title": "Decimals & Percentages"
+    "title": "Motion Graphs"
   },
   "threed": {
     "week": 4,
     "cycle": 1,
     "learn": "Array Modifier, Subdivision Surface, Scene organization",
-    "phase": "Saturday: learn"
+    "phase": "Sunday: apply/project"
   }
 }
