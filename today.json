@@ -1,17 +1,30 @@
 {
-  "generatedAt": "2026-09-13T19:16:43.807Z",
-  "date": "2026-09-13",
-  "dayOfWeek": "Sunday",
-  "weekNumber": 4,
-  "physics": {
-    "week": 4,
+  "generatedAt": "2026-09-14T20:51:37.569Z",
+  "date": "2026-09-14",
+  "dayOfWeek": "Monday",
+  "weekNumber": 5,
+  "chinese": {
+    "day": 21,
     "cycle": 1,
-    "title": "Motion Graphs"
+    "title": "Mini Test"
   },
-  "threed": {
-    "week": 4,
+  "english": {
+    "day": 21,
     "cycle": 1,
-    "learn": "Array Modifier, Subdivision Surface, Scene organization",
-    "phase": "Sunday: apply/project"
+    "title": "Situational Mock",
+    "primary": null,
+    "note": "Full situational interview mock, unscripted.",
+    "career": null
+  },
+  "optionalMath": {
+    "week": 5,
+    "title": "Ratio"
+  },
+  "optionalPhysics": {
+    "week": 5,
+    "title": "Force"
+  },
+  "atc": {
+    "skill": "Mental Math"
   }
 }
