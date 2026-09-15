@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-09-14T20:51:37.569Z",
-  "date": "2026-09-14",
-  "dayOfWeek": "Monday",
+  "generatedAt": "2026-09-15T20:06:20.896Z",
+  "date": "2026-09-15",
+  "dayOfWeek": "Tuesday",
   "weekNumber": 5,
   "chinese": {
-    "day": 21,
+    "day": 22,
     "cycle": 1,
-    "title": "Mini Test"
+    "title": "Question Words"
   },
   "english": {
-    "day": 21,
+    "day": 22,
     "cycle": 1,
-    "title": "Situational Mock",
-    "primary": null,
-    "note": "Full situational interview mock, unscripted.",
-    "career": null
+    "title": "IT",
+    "primary": "Describe a technical problem you had to solve.",
+    "note": null,
+    "career": "IT"
   },
   "optionalMath": {
     "week": 5,
@@ -25,6 +25,6 @@
     "title": "Force"
   },
   "atc": {
-    "skill": "Mental Math"
+    "skill": "Memory"
   }
 }
