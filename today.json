@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-09-15T20:06:20.896Z",
-  "date": "2026-09-15",
-  "dayOfWeek": "Tuesday",
+  "generatedAt": "2026-09-16T19:57:09.425Z",
+  "date": "2026-09-16",
+  "dayOfWeek": "Wednesday",
   "weekNumber": 5,
   "chinese": {
-    "day": 22,
+    "day": 23,
     "cycle": 1,
-    "title": "Question Words"
+    "title": "Common Verbs"
   },
   "english": {
-    "day": 22,
+    "day": 23,
     "cycle": 1,
-    "title": "IT",
-    "primary": "Describe a technical problem you had to solve.",
+    "title": "Passenger Service",
+    "primary": "How would you handle a passenger who is angry about a situation you cannot change?",
     "note": null,
-    "career": "IT"
+    "career": "Passenger Service"
   },
   "optionalMath": {
     "week": 5,
@@ -25,6 +25,6 @@
     "title": "Force"
   },
   "atc": {
-    "skill": "Memory"
+    "skill": "Logic & Patterns"
   }
 }
