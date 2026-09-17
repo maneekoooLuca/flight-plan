@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-09-16T19:57:09.425Z",
-  "date": "2026-09-16",
-  "dayOfWeek": "Wednesday",
+  "generatedAt": "2026-09-17T20:08:25.889Z",
+  "date": "2026-09-17",
+  "dayOfWeek": "Thursday",
   "weekNumber": 5,
   "chinese": {
-    "day": 23,
+    "day": 24,
     "cycle": 1,
-    "title": "Common Verbs"
+    "title": "Basic Sentence Patterns"
   },
   "english": {
-    "day": 23,
+    "day": 24,
     "cycle": 1,
-    "title": "Passenger Service",
-    "primary": "How would you handle a passenger who is angry about a situation you cannot change?",
+    "title": "Cabin Crew",
+    "primary": "Why do you want to become a cabin crew member?",
     "note": null,
-    "career": "Passenger Service"
+    "career": "Cabin Crew"
   },
   "optionalMath": {
     "week": 5,
@@ -25,6 +25,6 @@
     "title": "Force"
   },
   "atc": {
-    "skill": "Logic & Patterns"
+    "skill": "Spatial Awareness"
   }
 }
