@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-09-17T20:08:25.889Z",
-  "date": "2026-09-17",
-  "dayOfWeek": "Thursday",
+  "generatedAt": "2026-09-18T19:29:38.045Z",
+  "date": "2026-09-18",
+  "dayOfWeek": "Friday",
   "weekNumber": 5,
   "chinese": {
-    "day": 24,
+    "day": 25,
     "cycle": 1,
-    "title": "Basic Sentence Patterns"
+    "title": "Listening & Reading Focus"
   },
   "english": {
-    "day": 24,
+    "day": 25,
     "cycle": 1,
-    "title": "Cabin Crew",
-    "primary": "Why do you want to become a cabin crew member?",
+    "title": "ATC",
+    "primary": "Why are you interested in becoming an air traffic controller?",
     "note": null,
-    "career": "Cabin Crew"
+    "career": "ATC"
   },
   "optionalMath": {
     "week": 5,
@@ -25,6 +25,6 @@
     "title": "Force"
   },
   "atc": {
-    "skill": "Spatial Awareness"
+    "skill": "Attention & Prioritization"
   }
 }
