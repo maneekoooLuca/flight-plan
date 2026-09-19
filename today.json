@@ -1,30 +1,17 @@
 {
-  "generatedAt": "2026-09-18T19:29:38.045Z",
-  "date": "2026-09-18",
-  "dayOfWeek": "Friday",
+  "generatedAt": "2026-09-19T19:15:37.351Z",
+  "date": "2026-09-19",
+  "dayOfWeek": "Saturday",
   "weekNumber": 5,
-  "chinese": {
-    "day": 25,
-    "cycle": 1,
-    "title": "Listening & Reading Focus"
-  },
-  "english": {
-    "day": 25,
-    "cycle": 1,
-    "title": "ATC",
-    "primary": "Why are you interested in becoming an air traffic controller?",
-    "note": null,
-    "career": "ATC"
-  },
-  "optionalMath": {
+  "math": {
     "week": 5,
+    "cycle": 1,
     "title": "Ratio"
   },
-  "optionalPhysics": {
+  "threed": {
     "week": 5,
-    "title": "Force"
-  },
-  "atc": {
-    "skill": "Attention & Prioritization"
+    "cycle": 1,
+    "learn": "Hard surface basics",
+    "phase": "Saturday: learn"
   }
 }
