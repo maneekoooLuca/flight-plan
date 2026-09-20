@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-09-19T19:15:37.351Z",
-  "date": "2026-09-19",
-  "dayOfWeek": "Saturday",
+  "generatedAt": "2026-09-20T19:19:36.195Z",
+  "date": "2026-09-20",
+  "dayOfWeek": "Sunday",
   "weekNumber": 5,
-  "math": {
+  "physics": {
     "week": 5,
     "cycle": 1,
-    "title": "Ratio"
+    "title": "Force"
   },
   "threed": {
     "week": 5,
     "cycle": 1,
     "learn": "Hard surface basics",
-    "phase": "Saturday: learn"
+    "phase": "Sunday: apply/project"
   }
 }
