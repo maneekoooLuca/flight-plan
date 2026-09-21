@@ -1,17 +1,30 @@
 {
-  "generatedAt": "2026-09-20T19:19:36.195Z",
-  "date": "2026-09-20",
-  "dayOfWeek": "Sunday",
-  "weekNumber": 5,
-  "physics": {
-    "week": 5,
+  "generatedAt": "2026-09-21T20:56:05.169Z",
+  "date": "2026-09-21",
+  "dayOfWeek": "Monday",
+  "weekNumber": 6,
+  "chinese": {
+    "day": 26,
     "cycle": 1,
-    "title": "Force"
+    "title": "Speaking Focus"
   },
-  "threed": {
-    "week": 5,
+  "english": {
+    "day": 26,
     "cycle": 1,
-    "learn": "Hard surface basics",
-    "phase": "Sunday: apply/project"
+    "title": "Random Career Question",
+    "primary": null,
+    "note": "Randomly select a career: IT, Passenger Service, Cabin Crew, ATC.",
+    "career": null
+  },
+  "optionalMath": {
+    "week": 6,
+    "title": "Proportion"
+  },
+  "optionalPhysics": {
+    "week": 6,
+    "title": "Newton's First Law"
+  },
+  "atc": {
+    "skill": "Mental Math"
   }
 }
