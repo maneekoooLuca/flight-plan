@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-22T20:05:02.382Z",
-  "date": "2026-09-22",
-  "dayOfWeek": "Tuesday",
+  "generatedAt": "2026-09-23T20:07:21.807Z",
+  "date": "2026-09-23",
+  "dayOfWeek": "Wednesday",
   "weekNumber": 6,
   "chinese": {
-    "day": 27,
+    "day": 28,
     "cycle": 1,
-    "title": "Full HSK1 Review"
+    "title": "HSK1 Mini Mock"
   },
   "english": {
-    "day": 27,
+    "day": 28,
     "cycle": 1,
-    "title": "Deep Interview Day",
+    "title": "Full Mock Interview",
     "primary": null,
-    "note": "Randomly select previous questions. Answer without preparation.",
+    "note": "Introduction, Behavioral, Situational, Career-specific, Deep follow-up.",
     "career": null
   },
   "optionalMath": {
@@ -25,6 +25,6 @@
     "title": "Newton's First Law"
   },
   "atc": {
-    "skill": "Memory"
+    "skill": "Logic & Patterns"
   }
 }
