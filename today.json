@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-09-24T20:20:22.826Z",
-  "date": "2026-09-24",
-  "dayOfWeek": "Thursday",
+  "generatedAt": "2026-09-25T20:21:05.030Z",
+  "date": "2026-09-25",
+  "dayOfWeek": "Friday",
   "weekNumber": 6,
   "chinese": {
-    "day": 1,
+    "day": 2,
     "cycle": 2,
-    "title": "Greetings & Self-Introduction"
+    "title": "Numbers & Age"
   },
   "english": {
-    "day": 1,
+    "day": 2,
     "cycle": 2,
-    "title": "Self Introduction",
-    "primary": "Tell me about yourself.",
+    "title": "Education",
+    "primary": "Why did you choose your field of study?",
     "note": null,
     "career": null
   },
@@ -25,6 +25,6 @@
     "title": "Newton's First Law"
   },
   "atc": {
-    "skill": "Spatial Awareness"
+    "skill": "Attention & Prioritization"
   }
 }
