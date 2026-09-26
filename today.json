@@ -1,30 +1,17 @@
 {
-  "generatedAt": "2026-09-25T20:21:05.030Z",
-  "date": "2026-09-25",
-  "dayOfWeek": "Friday",
+  "generatedAt": "2026-09-26T19:39:18.757Z",
+  "date": "2026-09-26",
+  "dayOfWeek": "Saturday",
   "weekNumber": 6,
-  "chinese": {
-    "day": 2,
-    "cycle": 2,
-    "title": "Numbers & Age"
-  },
-  "english": {
-    "day": 2,
-    "cycle": 2,
-    "title": "Education",
-    "primary": "Why did you choose your field of study?",
-    "note": null,
-    "career": null
-  },
-  "optionalMath": {
+  "math": {
     "week": 6,
+    "cycle": 1,
     "title": "Proportion"
   },
-  "optionalPhysics": {
+  "threed": {
     "week": 6,
-    "title": "Newton's First Law"
-  },
-  "atc": {
-    "skill": "Attention & Prioritization"
+    "cycle": 1,
+    "learn": "Furniture techniques",
+    "phase": "Saturday: learn"
   }
 }
