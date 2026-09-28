@@ -1,17 +1,30 @@
 {
-  "generatedAt": "2026-09-27T20:00:01.626Z",
-  "date": "2026-09-27",
-  "dayOfWeek": "Sunday",
-  "weekNumber": 6,
-  "physics": {
-    "week": 6,
-    "cycle": 1,
-    "title": "Newton's First Law"
+  "generatedAt": "2026-09-28T22:28:57.966Z",
+  "date": "2026-09-28",
+  "dayOfWeek": "Monday",
+  "weekNumber": 7,
+  "chinese": {
+    "day": 3,
+    "cycle": 2,
+    "title": "Family"
   },
-  "threed": {
-    "week": 6,
-    "cycle": 1,
-    "learn": "Furniture techniques",
-    "phase": "Sunday: apply/project"
+  "english": {
+    "day": 3,
+    "cycle": 2,
+    "title": "Strengths",
+    "primary": "What are your strengths?",
+    "note": null,
+    "career": null
+  },
+  "optionalMath": {
+    "week": 7,
+    "title": "Algebra Basics"
+  },
+  "optionalPhysics": {
+    "week": 7,
+    "title": "Newton's Second Law"
+  },
+  "atc": {
+    "skill": "Mental Math"
   }
 }
