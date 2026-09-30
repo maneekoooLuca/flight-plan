@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-09-29T21:19:35.145Z",
-  "date": "2026-09-29",
-  "dayOfWeek": "Tuesday",
+  "generatedAt": "2026-09-30T21:21:18.890Z",
+  "date": "2026-09-30",
+  "dayOfWeek": "Wednesday",
   "weekNumber": 7,
   "chinese": {
-    "day": 4,
+    "day": 5,
     "cycle": 2,
-    "title": "Country & Nationality"
+    "title": "Jobs & Occupations"
   },
   "english": {
-    "day": 4,
+    "day": 5,
     "cycle": 2,
-    "title": "Weaknesses",
-    "primary": "What is your greatest weakness?",
+    "title": "Career Goals",
+    "primary": "Where do you see yourself in five years?",
     "note": null,
     "career": null
   },
@@ -25,6 +25,6 @@
     "title": "Newton's Second Law"
   },
   "atc": {
-    "skill": "Memory"
+    "skill": "Logic & Patterns"
   }
 }
