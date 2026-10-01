@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-09-30T21:21:18.890Z",
-  "date": "2026-09-30",
-  "dayOfWeek": "Wednesday",
+  "generatedAt": "2026-10-01T21:43:09.510Z",
+  "date": "2026-10-01",
+  "dayOfWeek": "Thursday",
   "weekNumber": 7,
   "chinese": {
-    "day": 5,
+    "day": 6,
     "cycle": 2,
-    "title": "Jobs & Occupations"
+    "title": "Week 1 Review"
   },
   "english": {
-    "day": 5,
+    "day": 6,
     "cycle": 2,
-    "title": "Career Goals",
-    "primary": "Where do you see yourself in five years?",
+    "title": "Challenge",
+    "primary": "Tell me about a challenge you faced.",
     "note": null,
     "career": null
   },
@@ -25,6 +25,6 @@
     "title": "Newton's Second Law"
   },
   "atc": {
-    "skill": "Logic & Patterns"
+    "skill": "Spatial Awareness"
   }
 }
