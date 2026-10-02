@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-10-01T21:43:09.510Z",
-  "date": "2026-10-01",
-  "dayOfWeek": "Thursday",
+  "generatedAt": "2026-10-02T21:14:31.254Z",
+  "date": "2026-10-02",
+  "dayOfWeek": "Friday",
   "weekNumber": 7,
   "chinese": {
-    "day": 6,
+    "day": 7,
     "cycle": 2,
-    "title": "Week 1 Review"
+    "title": "Mini Test"
   },
   "english": {
-    "day": 6,
+    "day": 7,
     "cycle": 2,
-    "title": "Challenge",
-    "primary": "Tell me about a challenge you faced.",
-    "note": null,
+    "title": "Mock Interview",
+    "primary": null,
+    "note": "Randomly select 1 general + 1 behavioral + 1 career-specific question.",
     "career": null
   },
   "optionalMath": {
@@ -25,6 +25,6 @@
     "title": "Newton's Second Law"
   },
   "atc": {
-    "skill": "Spatial Awareness"
+    "skill": "Attention & Prioritization"
   }
 }
