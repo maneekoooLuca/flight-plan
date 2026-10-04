@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-10-03T19:44:45.010Z",
-  "date": "2026-10-03",
-  "dayOfWeek": "Saturday",
+  "generatedAt": "2026-10-04T20:00:52.642Z",
+  "date": "2026-10-04",
+  "dayOfWeek": "Sunday",
   "weekNumber": 7,
-  "math": {
+  "physics": {
     "week": 7,
     "cycle": 1,
-    "title": "Algebra Basics"
+    "title": "Newton's Second Law"
   },
   "threed": {
     "week": 7,
     "cycle": 1,
     "learn": "Props",
-    "phase": "Saturday: learn"
+    "phase": "Sunday: apply/project"
   }
 }
