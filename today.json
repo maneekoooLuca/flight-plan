@@ -1,17 +1,30 @@
 {
-  "generatedAt": "2026-10-04T20:00:52.642Z",
-  "date": "2026-10-04",
-  "dayOfWeek": "Sunday",
-  "weekNumber": 7,
-  "physics": {
-    "week": 7,
-    "cycle": 1,
-    "title": "Newton's Second Law"
+  "generatedAt": "2026-10-05T23:05:58.237Z",
+  "date": "2026-10-05",
+  "dayOfWeek": "Monday",
+  "weekNumber": 8,
+  "chinese": {
+    "day": 8,
+    "cycle": 2,
+    "title": "Dates & Days"
   },
-  "threed": {
-    "week": 7,
-    "cycle": 1,
-    "learn": "Props",
-    "phase": "Sunday: apply/project"
+  "english": {
+    "day": 8,
+    "cycle": 2,
+    "title": "Work Experience",
+    "primary": "Tell me about your work experience.",
+    "note": null,
+    "career": null
+  },
+  "optionalMath": {
+    "week": 8,
+    "title": "Linear Equations"
+  },
+  "optionalPhysics": {
+    "week": 8,
+    "title": "Newton's Third Law"
+  },
+  "atc": {
+    "skill": "Mental Math"
   }
 }
