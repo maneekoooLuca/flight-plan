@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-10-06T21:32:46.489Z",
-  "date": "2026-10-06",
-  "dayOfWeek": "Tuesday",
+  "generatedAt": "2026-10-07T21:53:22.207Z",
+  "date": "2026-10-07",
+  "dayOfWeek": "Wednesday",
   "weekNumber": 8,
   "chinese": {
-    "day": 9,
+    "day": 10,
     "cycle": 2,
-    "title": "Time"
+    "title": "Daily Routine"
   },
   "english": {
-    "day": 9,
+    "day": 10,
     "cycle": 2,
-    "title": "Teamwork",
-    "primary": "Tell me about a time you worked in a team.",
+    "title": "Mistakes",
+    "primary": "Tell me about a mistake you made.",
     "note": null,
     "career": null
   },
@@ -25,6 +25,6 @@
     "title": "Newton's Third Law"
   },
   "atc": {
-    "skill": "Memory"
+    "skill": "Logic & Patterns"
   }
 }
