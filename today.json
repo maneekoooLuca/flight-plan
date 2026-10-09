@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-10-08T21:57:20.395Z",
-  "date": "2026-10-08",
-  "dayOfWeek": "Thursday",
+  "generatedAt": "2026-10-09T21:33:16.816Z",
+  "date": "2026-10-09",
+  "dayOfWeek": "Friday",
   "weekNumber": 8,
   "chinese": {
-    "day": 11,
+    "day": 12,
     "cycle": 2,
-    "title": "Food & Drinks"
+    "title": "Likes & Hobbies"
   },
   "english": {
-    "day": 11,
+    "day": 12,
     "cycle": 2,
-    "title": "Conflict",
-    "primary": "Tell me about a conflict you experienced.",
+    "title": "Learning",
+    "primary": "Tell me about something you had to learn quickly.",
     "note": null,
     "career": null
   },
@@ -25,6 +25,6 @@
     "title": "Newton's Third Law"
   },
   "atc": {
-    "skill": "Spatial Awareness"
+    "skill": "Attention & Prioritization"
   }
 }
