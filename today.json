@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-10-10T20:32:16.610Z",
-  "date": "2026-10-10",
-  "dayOfWeek": "Saturday",
+  "generatedAt": "2026-10-11T20:51:54.513Z",
+  "date": "2026-10-11",
+  "dayOfWeek": "Sunday",
   "weekNumber": 8,
-  "math": {
+  "physics": {
     "week": 8,
     "cycle": 1,
-    "title": "Linear Equations"
+    "title": "Newton's Third Law"
   },
   "threed": {
     "week": 8,
     "cycle": 1,
     "learn": "Scene assembly",
-    "phase": "Saturday: learn"
+    "phase": "Sunday: apply/project"
   }
 }
