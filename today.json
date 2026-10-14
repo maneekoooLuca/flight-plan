@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-10-13T21:46:53.689Z",
-  "date": "2026-10-13",
-  "dayOfWeek": "Tuesday",
+  "generatedAt": "2026-10-14T20:32:29.229Z",
+  "date": "2026-10-14",
+  "dayOfWeek": "Wednesday",
   "weekNumber": 9,
   "chinese": {
-    "day": 14,
+    "day": 15,
     "cycle": 2,
-    "title": "Mini Test"
+    "title": "Places"
   },
   "english": {
-    "day": 14,
+    "day": 15,
     "cycle": 2,
-    "title": "Behavioral Mock",
-    "primary": null,
-    "note": "Randomly select from: Challenge, Teamwork, Mistake, Conflict, Learning.",
+    "title": "Pressure",
+    "primary": "How do you handle pressure?",
+    "note": null,
     "career": null
   },
   "optionalMath": {
@@ -25,6 +25,6 @@
     "title": "Work"
   },
   "atc": {
-    "skill": "Memory"
+    "skill": "Logic & Patterns"
   }
 }
