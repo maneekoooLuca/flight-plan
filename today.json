@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-10-14T20:32:29.229Z",
-  "date": "2026-10-14",
-  "dayOfWeek": "Wednesday",
+  "generatedAt": "2026-10-15T20:14:25.483Z",
+  "date": "2026-10-15",
+  "dayOfWeek": "Thursday",
   "weekNumber": 9,
   "chinese": {
-    "day": 15,
+    "day": 16,
     "cycle": 2,
-    "title": "Places"
+    "title": "Location"
   },
   "english": {
-    "day": 15,
+    "day": 16,
     "cycle": 2,
-    "title": "Pressure",
-    "primary": "How do you handle pressure?",
+    "title": "Serious Mistake",
+    "primary": "What would you do if you made a serious mistake?",
     "note": null,
     "career": null
   },
@@ -25,6 +25,6 @@
     "title": "Work"
   },
   "atc": {
-    "skill": "Logic & Patterns"
+    "skill": "Spatial Awareness"
   }
 }
