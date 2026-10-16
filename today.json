@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-10-15T20:14:25.483Z",
-  "date": "2026-10-15",
-  "dayOfWeek": "Thursday",
+  "generatedAt": "2026-10-16T19:51:34.045Z",
+  "date": "2026-10-16",
+  "dayOfWeek": "Friday",
   "weekNumber": 9,
   "chinese": {
-    "day": 16,
+    "day": 17,
     "cycle": 2,
-    "title": "Location"
+    "title": "Transportation"
   },
   "english": {
-    "day": 16,
+    "day": 17,
     "cycle": 2,
-    "title": "Serious Mistake",
-    "primary": "What would you do if you made a serious mistake?",
+    "title": "Unclear Instructions",
+    "primary": "What would you do if you received unclear instructions?",
     "note": null,
     "career": null
   },
@@ -25,6 +25,6 @@
     "title": "Work"
   },
   "atc": {
-    "skill": "Spatial Awareness"
+    "skill": "Attention & Prioritization"
   }
 }
