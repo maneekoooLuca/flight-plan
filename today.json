@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-10-17T19:10:25.259Z",
-  "date": "2026-10-17",
-  "dayOfWeek": "Saturday",
+  "generatedAt": "2026-10-18T19:21:03.039Z",
+  "date": "2026-10-18",
+  "dayOfWeek": "Sunday",
   "weekNumber": 9,
-  "math": {
+  "physics": {
     "week": 9,
     "cycle": 1,
-    "title": "Word Problems"
+    "title": "Work"
   },
   "threed": {
     "week": 9,
     "cycle": 1,
     "learn": "UV basics — seams, unwrap",
-    "phase": "Saturday: learn"
+    "phase": "Sunday: apply/project"
   }
 }
