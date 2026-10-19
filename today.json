@@ -1,17 +1,30 @@
 {
-  "generatedAt": "2026-10-18T19:21:03.039Z",
-  "date": "2026-10-18",
-  "dayOfWeek": "Sunday",
-  "weekNumber": 9,
-  "physics": {
-    "week": 9,
-    "cycle": 1,
-    "title": "Work"
+  "generatedAt": "2026-10-19T21:23:47.696Z",
+  "date": "2026-10-19",
+  "dayOfWeek": "Monday",
+  "weekNumber": 10,
+  "chinese": {
+    "day": 18,
+    "cycle": 2,
+    "title": "Weather"
   },
-  "threed": {
-    "week": 9,
-    "cycle": 1,
-    "learn": "UV basics — seams, unwrap",
-    "phase": "Sunday: apply/project"
+  "english": {
+    "day": 18,
+    "cycle": 2,
+    "title": "Angry Customer",
+    "primary": "How would you handle an angry customer?",
+    "note": null,
+    "career": null
+  },
+  "optionalMath": {
+    "week": 10,
+    "title": "Rate, Distance & Time"
+  },
+  "optionalPhysics": {
+    "week": 10,
+    "title": "Energy"
+  },
+  "atc": {
+    "skill": "Mental Math"
   }
 }
