@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-10-19T21:23:47.696Z",
-  "date": "2026-10-19",
-  "dayOfWeek": "Monday",
+  "generatedAt": "2026-10-20T20:23:53.923Z",
+  "date": "2026-10-20",
+  "dayOfWeek": "Tuesday",
   "weekNumber": 10,
   "chinese": {
-    "day": 18,
+    "day": 19,
     "cycle": 2,
-    "title": "Weather"
+    "title": "Describing People"
   },
   "english": {
-    "day": 18,
+    "day": 19,
     "cycle": 2,
-    "title": "Angry Customer",
-    "primary": "How would you handle an angry customer?",
+    "title": "Multiple Urgent Problems",
+    "primary": "What would you do if several urgent problems happened at once?",
     "note": null,
     "career": null
   },
@@ -25,6 +25,6 @@
     "title": "Energy"
   },
   "atc": {
-    "skill": "Mental Math"
+    "skill": "Memory"
   }
 }
