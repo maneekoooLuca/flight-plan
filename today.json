@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-10-20T20:23:53.923Z",
-  "date": "2026-10-20",
-  "dayOfWeek": "Tuesday",
+  "generatedAt": "2026-10-21T20:30:02.610Z",
+  "date": "2026-10-21",
+  "dayOfWeek": "Wednesday",
   "weekNumber": 10,
   "chinese": {
-    "day": 19,
+    "day": 20,
     "cycle": 2,
-    "title": "Describing People"
+    "title": "Week 3 Review"
   },
   "english": {
-    "day": 19,
+    "day": 20,
     "cycle": 2,
-    "title": "Multiple Urgent Problems",
-    "primary": "What would you do if several urgent problems happened at once?",
+    "title": "Difficult Decision",
+    "primary": "Describe a difficult decision.",
     "note": null,
     "career": null
   },
@@ -25,6 +25,6 @@
     "title": "Energy"
   },
   "atc": {
-    "skill": "Memory"
+    "skill": "Logic & Patterns"
   }
 }
