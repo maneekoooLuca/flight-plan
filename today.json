@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-10-21T20:30:02.610Z",
-  "date": "2026-10-21",
-  "dayOfWeek": "Wednesday",
+  "generatedAt": "2026-10-22T20:27:41.068Z",
+  "date": "2026-10-22",
+  "dayOfWeek": "Thursday",
   "weekNumber": 10,
   "chinese": {
-    "day": 20,
+    "day": 21,
     "cycle": 2,
-    "title": "Week 3 Review"
+    "title": "Mini Test"
   },
   "english": {
-    "day": 20,
+    "day": 21,
     "cycle": 2,
-    "title": "Difficult Decision",
-    "primary": "Describe a difficult decision.",
-    "note": null,
+    "title": "Situational Mock",
+    "primary": null,
+    "note": "Full situational interview mock, unscripted.",
     "career": null
   },
   "optionalMath": {
@@ -25,6 +25,6 @@
     "title": "Energy"
   },
   "atc": {
-    "skill": "Logic & Patterns"
+    "skill": "Spatial Awareness"
   }
 }
