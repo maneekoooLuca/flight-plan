@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-10-22T20:27:41.068Z",
-  "date": "2026-10-22",
-  "dayOfWeek": "Thursday",
+  "generatedAt": "2026-10-23T20:16:22.453Z",
+  "date": "2026-10-23",
+  "dayOfWeek": "Friday",
   "weekNumber": 10,
   "chinese": {
-    "day": 21,
+    "day": 22,
     "cycle": 2,
-    "title": "Mini Test"
+    "title": "Question Words"
   },
   "english": {
-    "day": 21,
+    "day": 22,
     "cycle": 2,
-    "title": "Situational Mock",
-    "primary": null,
-    "note": "Full situational interview mock, unscripted.",
-    "career": null
+    "title": "IT",
+    "primary": "Describe a technical problem you had to solve.",
+    "note": null,
+    "career": "IT"
   },
   "optionalMath": {
     "week": 10,
@@ -25,6 +25,6 @@
     "title": "Energy"
   },
   "atc": {
-    "skill": "Spatial Awareness"
+    "skill": "Attention & Prioritization"
   }
 }
