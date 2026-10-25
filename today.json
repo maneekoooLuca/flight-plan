@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-10-24T19:22:11.613Z",
-  "date": "2026-10-24",
-  "dayOfWeek": "Saturday",
+  "generatedAt": "2026-10-25T19:29:46.064Z",
+  "date": "2026-10-25",
+  "dayOfWeek": "Sunday",
   "weekNumber": 10,
-  "math": {
+  "physics": {
     "week": 10,
     "cycle": 1,
-    "title": "Rate, Distance & Time"
+    "title": "Energy"
   },
   "threed": {
     "week": 10,
     "cycle": 1,
     "learn": "UV practice — islands, packing",
-    "phase": "Saturday: learn"
+    "phase": "Sunday: apply/project"
   }
 }
