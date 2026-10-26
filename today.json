@@ -1,17 +1,30 @@
 {
-  "generatedAt": "2026-10-25T19:29:46.064Z",
-  "date": "2026-10-25",
-  "dayOfWeek": "Sunday",
-  "weekNumber": 10,
-  "physics": {
-    "week": 10,
-    "cycle": 1,
-    "title": "Energy"
+  "generatedAt": "2026-10-26T21:31:23.114Z",
+  "date": "2026-10-26",
+  "dayOfWeek": "Monday",
+  "weekNumber": 11,
+  "chinese": {
+    "day": 23,
+    "cycle": 2,
+    "title": "Common Verbs"
   },
-  "threed": {
-    "week": 10,
-    "cycle": 1,
-    "learn": "UV practice — islands, packing",
-    "phase": "Sunday: apply/project"
+  "english": {
+    "day": 23,
+    "cycle": 2,
+    "title": "Passenger Service",
+    "primary": "How would you handle a passenger who is angry about a situation you cannot change?",
+    "note": null,
+    "career": "Passenger Service"
+  },
+  "optionalMath": {
+    "week": 11,
+    "title": "Averages"
+  },
+  "optionalPhysics": {
+    "week": 11,
+    "title": "Power"
+  },
+  "atc": {
+    "skill": "Mental Math"
   }
 }
