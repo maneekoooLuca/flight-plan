@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-10-28T21:34:49.564Z",
-  "date": "2026-10-28",
-  "dayOfWeek": "Wednesday",
+  "generatedAt": "2026-10-29T21:42:22.383Z",
+  "date": "2026-10-29",
+  "dayOfWeek": "Thursday",
   "weekNumber": 11,
   "chinese": {
-    "day": 25,
+    "day": 26,
     "cycle": 2,
-    "title": "Listening & Reading Focus"
+    "title": "Speaking Focus"
   },
   "english": {
-    "day": 25,
+    "day": 26,
     "cycle": 2,
-    "title": "ATC",
-    "primary": "Why are you interested in becoming an air traffic controller?",
-    "note": null,
-    "career": "ATC"
+    "title": "Random Career Question",
+    "primary": null,
+    "note": "Randomly select a career: IT, Passenger Service, Cabin Crew, ATC.",
+    "career": null
   },
   "optionalMath": {
     "week": 11,
@@ -25,6 +25,6 @@
     "title": "Power"
   },
   "atc": {
-    "skill": "Logic & Patterns"
+    "skill": "Spatial Awareness"
   }
 }
