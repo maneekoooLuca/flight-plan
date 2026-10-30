@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-10-29T21:42:22.383Z",
-  "date": "2026-10-29",
-  "dayOfWeek": "Thursday",
+  "generatedAt": "2026-10-30T21:25:13.540Z",
+  "date": "2026-10-30",
+  "dayOfWeek": "Friday",
   "weekNumber": 11,
   "chinese": {
-    "day": 26,
+    "day": 27,
     "cycle": 2,
-    "title": "Speaking Focus"
+    "title": "Full HSK1 Review"
   },
   "english": {
-    "day": 26,
+    "day": 27,
     "cycle": 2,
-    "title": "Random Career Question",
+    "title": "Deep Interview Day",
     "primary": null,
-    "note": "Randomly select a career: IT, Passenger Service, Cabin Crew, ATC.",
+    "note": "Randomly select previous questions. Answer without preparation.",
     "career": null
   },
   "optionalMath": {
@@ -25,6 +25,6 @@
     "title": "Power"
   },
   "atc": {
-    "skill": "Spatial Awareness"
+    "skill": "Attention & Prioritization"
   }
 }
