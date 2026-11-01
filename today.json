@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-10-31T20:25:28.262Z",
-  "date": "2026-10-31",
-  "dayOfWeek": "Saturday",
+  "generatedAt": "2026-11-01T21:03:24.093Z",
+  "date": "2026-11-01",
+  "dayOfWeek": "Sunday",
   "weekNumber": 11,
-  "math": {
+  "physics": {
     "week": 11,
     "cycle": 1,
-    "title": "Averages"
+    "title": "Power"
   },
   "threed": {
     "week": 11,
     "cycle": 1,
     "learn": "Materials — color, roughness, metallic, normal maps",
-    "phase": "Saturday: learn"
+    "phase": "Sunday: apply/project"
   }
 }
