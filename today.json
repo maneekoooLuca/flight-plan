@@ -1,17 +1,30 @@
 {
-  "generatedAt": "2026-11-01T21:03:24.093Z",
-  "date": "2026-11-01",
-  "dayOfWeek": "Sunday",
-  "weekNumber": 11,
-  "physics": {
-    "week": 11,
-    "cycle": 1,
-    "title": "Power"
+  "generatedAt": "2026-11-02T23:49:38.200Z",
+  "date": "2026-11-02",
+  "dayOfWeek": "Monday",
+  "weekNumber": 12,
+  "chinese": {
+    "day": 28,
+    "cycle": 2,
+    "title": "HSK1 Mini Mock"
   },
-  "threed": {
-    "week": 11,
-    "cycle": 1,
-    "learn": "Materials — color, roughness, metallic, normal maps",
-    "phase": "Sunday: apply/project"
+  "english": {
+    "day": 28,
+    "cycle": 2,
+    "title": "Full Mock Interview",
+    "primary": null,
+    "note": "Introduction, Behavioral, Situational, Career-specific, Deep follow-up.",
+    "career": null
+  },
+  "optionalMath": {
+    "week": 12,
+    "title": "Graphs & Data"
+  },
+  "optionalPhysics": {
+    "week": 12,
+    "title": "Conservation of Energy"
+  },
+  "atc": {
+    "skill": "Mental Math"
   }
 }
