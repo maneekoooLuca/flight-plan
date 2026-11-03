@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-11-02T23:49:38.200Z",
-  "date": "2026-11-02",
-  "dayOfWeek": "Monday",
+  "generatedAt": "2026-11-03T22:15:13.694Z",
+  "date": "2026-11-03",
+  "dayOfWeek": "Tuesday",
   "weekNumber": 12,
   "chinese": {
-    "day": 28,
-    "cycle": 2,
-    "title": "HSK1 Mini Mock"
+    "day": 1,
+    "cycle": 3,
+    "title": "Greetings & Self-Introduction"
   },
   "english": {
-    "day": 28,
-    "cycle": 2,
-    "title": "Full Mock Interview",
-    "primary": null,
-    "note": "Introduction, Behavioral, Situational, Career-specific, Deep follow-up.",
+    "day": 1,
+    "cycle": 3,
+    "title": "Self Introduction",
+    "primary": "Tell me about yourself.",
+    "note": null,
     "career": null
   },
   "optionalMath": {
@@ -25,6 +25,6 @@
     "title": "Conservation of Energy"
   },
   "atc": {
-    "skill": "Mental Math"
+    "skill": "Memory"
   }
 }
