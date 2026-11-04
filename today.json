@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-11-03T22:15:13.694Z",
-  "date": "2026-11-03",
-  "dayOfWeek": "Tuesday",
+  "generatedAt": "2026-11-04T22:30:11.323Z",
+  "date": "2026-11-04",
+  "dayOfWeek": "Wednesday",
   "weekNumber": 12,
   "chinese": {
-    "day": 1,
+    "day": 2,
     "cycle": 3,
-    "title": "Greetings & Self-Introduction"
+    "title": "Numbers & Age"
   },
   "english": {
-    "day": 1,
+    "day": 2,
     "cycle": 3,
-    "title": "Self Introduction",
-    "primary": "Tell me about yourself.",
+    "title": "Education",
+    "primary": "Why did you choose your field of study?",
     "note": null,
     "career": null
   },
@@ -25,6 +25,6 @@
     "title": "Conservation of Energy"
   },
   "atc": {
-    "skill": "Memory"
+    "skill": "Logic & Patterns"
   }
 }
