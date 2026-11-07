@@ -1,30 +1,17 @@
 {
-  "generatedAt": "2026-11-06T21:59:34.375Z",
-  "date": "2026-11-06",
-  "dayOfWeek": "Friday",
+  "generatedAt": "2026-11-07T20:45:33.272Z",
+  "date": "2026-11-07",
+  "dayOfWeek": "Saturday",
   "weekNumber": 12,
-  "chinese": {
-    "day": 4,
-    "cycle": 3,
-    "title": "Country & Nationality"
-  },
-  "english": {
-    "day": 4,
-    "cycle": 3,
-    "title": "Weaknesses",
-    "primary": "What is your greatest weakness?",
-    "note": null,
-    "career": null
-  },
-  "optionalMath": {
+  "math": {
     "week": 12,
+    "cycle": 1,
     "title": "Graphs & Data"
   },
-  "optionalPhysics": {
+  "threed": {
     "week": 12,
-    "title": "Conservation of Energy"
-  },
-  "atc": {
-    "skill": "Attention & Prioritization"
+    "cycle": 1,
+    "learn": "Full pipeline review",
+    "phase": "Saturday: learn"
   }
 }
