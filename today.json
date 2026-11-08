@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-11-07T20:45:33.272Z",
-  "date": "2026-11-07",
-  "dayOfWeek": "Saturday",
+  "generatedAt": "2026-11-08T21:01:12.934Z",
+  "date": "2026-11-08",
+  "dayOfWeek": "Sunday",
   "weekNumber": 12,
-  "math": {
+  "physics": {
     "week": 12,
     "cycle": 1,
-    "title": "Graphs & Data"
+    "title": "Conservation of Energy"
   },
   "threed": {
     "week": 12,
     "cycle": 1,
     "learn": "Full pipeline review",
-    "phase": "Saturday: learn"
+    "phase": "Sunday: apply/project"
   }
 }
