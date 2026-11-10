@@ -1,17 +1,30 @@
 {
-  "generatedAt": "2026-11-08T21:01:12.934Z",
-  "date": "2026-11-08",
-  "dayOfWeek": "Sunday",
-  "weekNumber": 12,
-  "physics": {
-    "week": 12,
-    "cycle": 1,
-    "title": "Conservation of Energy"
+  "generatedAt": "2026-11-10T00:37:37.018Z",
+  "date": "2026-11-10",
+  "dayOfWeek": "Tuesday",
+  "weekNumber": 13,
+  "chinese": {
+    "day": 6,
+    "cycle": 3,
+    "title": "Week 1 Review"
   },
-  "threed": {
-    "week": 12,
-    "cycle": 1,
-    "learn": "Full pipeline review",
-    "phase": "Sunday: apply/project"
+  "english": {
+    "day": 6,
+    "cycle": 3,
+    "title": "Challenge",
+    "primary": "Tell me about a challenge you faced.",
+    "note": null,
+    "career": null
+  },
+  "optionalMath": {
+    "week": 13,
+    "title": "Powers & Roots"
+  },
+  "optionalPhysics": {
+    "week": 13,
+    "title": "Momentum"
+  },
+  "atc": {
+    "skill": "Memory"
   }
 }
