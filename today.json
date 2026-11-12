@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-11-11T23:23:27.076Z",
-  "date": "2026-11-11",
-  "dayOfWeek": "Wednesday",
+  "generatedAt": "2026-11-12T22:39:44.075Z",
+  "date": "2026-11-12",
+  "dayOfWeek": "Thursday",
   "weekNumber": 13,
   "chinese": {
-    "day": 7,
+    "day": 8,
     "cycle": 3,
-    "title": "Mini Test"
+    "title": "Dates & Days"
   },
   "english": {
-    "day": 7,
+    "day": 8,
     "cycle": 3,
-    "title": "Mock Interview",
-    "primary": null,
-    "note": "Randomly select 1 general + 1 behavioral + 1 career-specific question.",
+    "title": "Work Experience",
+    "primary": "Tell me about your work experience.",
+    "note": null,
     "career": null
   },
   "optionalMath": {
@@ -25,6 +25,6 @@
     "title": "Momentum"
   },
   "atc": {
-    "skill": "Logic & Patterns"
+    "skill": "Spatial Awareness"
   }
 }
