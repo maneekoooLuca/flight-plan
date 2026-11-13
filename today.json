@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-11-12T22:39:44.075Z",
-  "date": "2026-11-12",
-  "dayOfWeek": "Thursday",
+  "generatedAt": "2026-11-13T22:27:17.291Z",
+  "date": "2026-11-13",
+  "dayOfWeek": "Friday",
   "weekNumber": 13,
   "chinese": {
-    "day": 8,
+    "day": 9,
     "cycle": 3,
-    "title": "Dates & Days"
+    "title": "Time"
   },
   "english": {
-    "day": 8,
+    "day": 9,
     "cycle": 3,
-    "title": "Work Experience",
-    "primary": "Tell me about your work experience.",
+    "title": "Teamwork",
+    "primary": "Tell me about a time you worked in a team.",
     "note": null,
     "career": null
   },
@@ -25,6 +25,6 @@
     "title": "Momentum"
   },
   "atc": {
-    "skill": "Spatial Awareness"
+    "skill": "Attention & Prioritization"
   }
 }
