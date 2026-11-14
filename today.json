@@ -1,30 +1,17 @@
 {
-  "generatedAt": "2026-11-13T22:27:17.291Z",
-  "date": "2026-11-13",
-  "dayOfWeek": "Friday",
+  "generatedAt": "2026-11-14T21:15:55.306Z",
+  "date": "2026-11-14",
+  "dayOfWeek": "Saturday",
   "weekNumber": 13,
-  "chinese": {
-    "day": 9,
-    "cycle": 3,
-    "title": "Time"
-  },
-  "english": {
-    "day": 9,
-    "cycle": 3,
-    "title": "Teamwork",
-    "primary": "Tell me about a time you worked in a team.",
-    "note": null,
-    "career": null
-  },
-  "optionalMath": {
+  "math": {
     "week": 13,
+    "cycle": 1,
     "title": "Powers & Roots"
   },
-  "optionalPhysics": {
+  "threed": {
     "week": 13,
-    "title": "Momentum"
-  },
-  "atc": {
-    "skill": "Attention & Prioritization"
+    "cycle": 1,
+    "learn": "Head proportions",
+    "phase": "Saturday: learn"
   }
 }
