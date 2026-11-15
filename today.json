@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-11-14T21:15:55.306Z",
-  "date": "2026-11-14",
-  "dayOfWeek": "Saturday",
+  "generatedAt": "2026-11-15T21:37:13.107Z",
+  "date": "2026-11-15",
+  "dayOfWeek": "Sunday",
   "weekNumber": 13,
-  "math": {
+  "physics": {
     "week": 13,
     "cycle": 1,
-    "title": "Powers & Roots"
+    "title": "Momentum"
   },
   "threed": {
     "week": 13,
     "cycle": 1,
     "learn": "Head proportions",
-    "phase": "Saturday: learn"
+    "phase": "Sunday: apply/project"
   }
 }
