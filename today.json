@@ -1,17 +1,30 @@
 {
-  "generatedAt": "2026-11-15T21:37:13.107Z",
-  "date": "2026-11-15",
-  "dayOfWeek": "Sunday",
-  "weekNumber": 13,
-  "physics": {
-    "week": 13,
-    "cycle": 1,
-    "title": "Momentum"
+  "generatedAt": "2026-11-17T00:42:26.727Z",
+  "date": "2026-11-17",
+  "dayOfWeek": "Tuesday",
+  "weekNumber": 14,
+  "chinese": {
+    "day": 11,
+    "cycle": 3,
+    "title": "Food & Drinks"
   },
-  "threed": {
-    "week": 13,
-    "cycle": 1,
-    "learn": "Head proportions",
-    "phase": "Sunday: apply/project"
+  "english": {
+    "day": 11,
+    "cycle": 3,
+    "title": "Conflict",
+    "primary": "Tell me about a conflict you experienced.",
+    "note": null,
+    "career": null
+  },
+  "optionalMath": {
+    "week": 14,
+    "title": "Functions"
+  },
+  "optionalPhysics": {
+    "week": 14,
+    "title": "Collisions"
+  },
+  "atc": {
+    "skill": "Memory"
   }
 }
