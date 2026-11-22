@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-11-21T22:06:17.088Z",
-  "date": "2026-11-21",
-  "dayOfWeek": "Saturday",
+  "generatedAt": "2026-11-22T22:21:51.703Z",
+  "date": "2026-11-22",
+  "dayOfWeek": "Sunday",
   "weekNumber": 14,
-  "math": {
+  "physics": {
     "week": 14,
     "cycle": 1,
-    "title": "Functions"
+    "title": "Collisions"
   },
   "threed": {
     "week": 14,
     "cycle": 1,
     "learn": "Face",
-    "phase": "Saturday: learn"
+    "phase": "Sunday: apply/project"
   }
 }
