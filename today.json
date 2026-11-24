@@ -1,17 +1,30 @@
 {
-  "generatedAt": "2026-11-22T22:21:51.703Z",
-  "date": "2026-11-22",
-  "dayOfWeek": "Sunday",
-  "weekNumber": 14,
-  "physics": {
-    "week": 14,
-    "cycle": 1,
-    "title": "Collisions"
+  "generatedAt": "2026-11-24T03:13:42.705Z",
+  "date": "2026-11-24",
+  "dayOfWeek": "Tuesday",
+  "weekNumber": 15,
+  "chinese": {
+    "day": 16,
+    "cycle": 3,
+    "title": "Location"
   },
-  "threed": {
-    "week": 14,
-    "cycle": 1,
-    "learn": "Face",
-    "phase": "Sunday: apply/project"
+  "english": {
+    "day": 16,
+    "cycle": 3,
+    "title": "Serious Mistake",
+    "primary": "What would you do if you made a serious mistake?",
+    "note": null,
+    "career": null
+  },
+  "optionalMath": {
+    "week": 15,
+    "title": "Coordinate Geometry"
+  },
+  "optionalPhysics": {
+    "week": 15,
+    "title": "Waves"
+  },
+  "atc": {
+    "skill": "Memory"
   }
 }
