@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-11-24T03:13:42.705Z",
-  "date": "2026-11-24",
-  "dayOfWeek": "Tuesday",
+  "generatedAt": "2026-11-25T01:18:53.504Z",
+  "date": "2026-11-25",
+  "dayOfWeek": "Wednesday",
   "weekNumber": 15,
   "chinese": {
-    "day": 16,
+    "day": 17,
     "cycle": 3,
-    "title": "Location"
+    "title": "Transportation"
   },
   "english": {
-    "day": 16,
+    "day": 17,
     "cycle": 3,
-    "title": "Serious Mistake",
-    "primary": "What would you do if you made a serious mistake?",
+    "title": "Unclear Instructions",
+    "primary": "What would you do if you received unclear instructions?",
     "note": null,
     "career": null
   },
@@ -25,6 +25,6 @@
     "title": "Waves"
   },
   "atc": {
-    "skill": "Memory"
+    "skill": "Logic & Patterns"
   }
 }
