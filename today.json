@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-11-25T01:18:53.504Z",
-  "date": "2026-11-25",
-  "dayOfWeek": "Wednesday",
+  "generatedAt": "2026-11-26T00:53:40.139Z",
+  "date": "2026-11-26",
+  "dayOfWeek": "Thursday",
   "weekNumber": 15,
   "chinese": {
-    "day": 17,
+    "day": 18,
     "cycle": 3,
-    "title": "Transportation"
+    "title": "Weather"
   },
   "english": {
-    "day": 17,
+    "day": 18,
     "cycle": 3,
-    "title": "Unclear Instructions",
-    "primary": "What would you do if you received unclear instructions?",
+    "title": "Angry Customer",
+    "primary": "How would you handle an angry customer?",
     "note": null,
     "career": null
   },
@@ -25,6 +25,6 @@
     "title": "Waves"
   },
   "atc": {
-    "skill": "Logic & Patterns"
+    "skill": "Spatial Awareness"
   }
 }
