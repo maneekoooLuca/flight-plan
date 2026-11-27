@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-11-26T00:53:40.139Z",
-  "date": "2026-11-26",
-  "dayOfWeek": "Thursday",
+  "generatedAt": "2026-11-27T00:58:26.293Z",
+  "date": "2026-11-27",
+  "dayOfWeek": "Friday",
   "weekNumber": 15,
   "chinese": {
-    "day": 18,
+    "day": 19,
     "cycle": 3,
-    "title": "Weather"
+    "title": "Describing People"
   },
   "english": {
-    "day": 18,
+    "day": 19,
     "cycle": 3,
-    "title": "Angry Customer",
-    "primary": "How would you handle an angry customer?",
+    "title": "Multiple Urgent Problems",
+    "primary": "What would you do if several urgent problems happened at once?",
     "note": null,
     "career": null
   },
@@ -25,6 +25,6 @@
     "title": "Waves"
   },
   "atc": {
-    "skill": "Spatial Awareness"
+    "skill": "Attention & Prioritization"
   }
 }
